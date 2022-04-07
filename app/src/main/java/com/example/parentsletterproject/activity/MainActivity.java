@@ -1,8 +1,10 @@
-package com.example.parentsletterproject;
+package com.example.parentsletterproject.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.parentsletterproject.R;
 
 public class MainActivity extends AppCompatActivity {
 
