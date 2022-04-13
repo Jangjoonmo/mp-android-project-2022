@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ParentsLetterProject"
         tools:targetApi="31">
         <activity
+            android:name=".TeacherClassManagementActivity"
+            android:exported="false" />
+        <activity
             android:name=".ParentsAttendanceActivity"
             android:exported="false" />
         <activity
