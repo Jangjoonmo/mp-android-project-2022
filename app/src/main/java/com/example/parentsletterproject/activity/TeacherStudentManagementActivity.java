@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.parentsletterproject.R;
 
-public class TeacherHomeActivity extends AppCompatActivity {
+public class TeacherStudentManagementActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teacher_home);
+        setContentView(R.layout.activity_teacher_student_management);
     }
 }

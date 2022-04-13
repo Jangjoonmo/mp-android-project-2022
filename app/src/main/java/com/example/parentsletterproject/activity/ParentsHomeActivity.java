@@ -1,4 +1,16 @@
 package com.example.parentsletterproject.activity;
 
-public class ParentsHomeActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+import com.example.parentsletterproject.R;
+
+public class ParentsHomeActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_parents_home);
+    }
 }
