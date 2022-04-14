@@ -7,8 +7,8 @@
     tools:context=".activity.TeacherManagementListActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="413dp"
+        android:layout_height="680dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,6 +25,6 @@
             android:id="@+id/StudentManagementButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="학생 관리" />
+            android:text="원생 관리" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
