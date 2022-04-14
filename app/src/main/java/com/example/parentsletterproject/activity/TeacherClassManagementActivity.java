@@ -35,7 +35,7 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
 
                 AlertDialog.Builder ad = new AlertDialog.Builder(TeacherClassManagementActivity.this);
                 ad.setTitle("반 조회");
-                ad.setMessage("조회할 원생의 이름을 입력하세요");
+                ad.setMessage("조회할 반의 이름을 입력하세요");
 
                 final EditText et = new EditText(TeacherClassManagementActivity.this);
                 ad.setView(et);
