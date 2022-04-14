@@ -77,7 +77,6 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                     }
-
                 });
 
                 ad.setNegativeButton("취소", (dialogInterface, i) -> dialogInterface.dismiss());
