@@ -3,22 +3,23 @@ package com.example.parentsletterproject.activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.example.parentsletterproject.R;
+import com.example.parentsletterproject.action.ListViewAdapter;
 
 public class TeacherClassManagementActivity extends AppCompatActivity {
 
-    private Spinner spinner;
-    private Button searchButton;
     private Button addButton;
     private Button delButton;
+    private ListView listView;
+    private ListViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,93 +27,74 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_class_management);
 
-        // 반 조회
-        searchButton = (Button)findViewById(R.id.search_class_button);
-        searchButton.setOnClickListener(new View.OnClickListener() {
+        // 반 추가
+        addButton = (Button) findViewById(R.id.add_student_button);
+        addButton.setOnClickListener(v -> {
 
-            @Override
-            public void onClick(View v) {
+            AlertDialog.Builder ad = new AlertDialog.Builder(TeacherClassManagementActivity.this);
+            LayoutInflater inflater = getLayoutInflater();
+            View view = inflater.inflate(R.layout.add_class, null);
+            ad.setView(view);
 
-                AlertDialog.Builder ad = new AlertDialog.Builder(TeacherClassManagementActivity.this);
-                ad.setTitle("반 조회");
-                ad.setMessage("조회할 반의 이름을 입력하세요");
+            final Button submit = (Button) view.findViewById(R.id.add_class_submit);
+            final EditText className = (EditText) view.findViewById(R.id.edittext_add_class_name);
+            final EditText teacherInCharge = (EditText) view.findViewById(R.id.edittext_add_class_teacher_in_charge);
 
-                final EditText et = new EditText(TeacherClassManagementActivity.this);
-                ad.setView(et);
+            final AlertDialog dialog = ad.create();
+            submit.setOnClickListener(new View.OnClickListener() {
 
-                ad.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String resultClassName = className.getText().toString();
+                    String resultTeacherInCharge = teacherInCharge.getText().toString();
 
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                    dialog.dismiss();
+                }
+            });
 
-                        String result = et.getText().toString();
-                        Log.e(result, result);
-                        dialogInterface.dismiss();
+            dialog.show();
 
-                    }
-                });
-
-                ad.setNegativeButton("취소", ((dialogInterface, i) -> dialogInterface.dismiss()));
-
-                ad.show();
-            }
         });
 
-        addButton = (Button)findViewById(R.id.add_class_button);
-        addButton.setOnClickListener(new View.OnClickListener() {
+        // 반 삭제
+        delButton = (Button)findViewById(R.id.del_student_button);
+        delButton.setOnClickListener(view -> {
 
-            @Override
-            public void onClick(View view) {
+            AlertDialog.Builder ad = new AlertDialog.Builder(TeacherClassManagementActivity.this);
+            ad.setTitle("반 삭제");
+            ad.setMessage("삭제할 반을 선택하세요");
 
-                AlertDialog.Builder ad = new AlertDialog.Builder(TeacherClassManagementActivity.this);
-                ad.setTitle("반 추가");
-                ad.setMessage("추가할 반을 선택하세요");
+            final Spinner spinner = new Spinner(TeacherClassManagementActivity.this);
+            ad.setView(spinner);
 
-                final Spinner spinner = new Spinner(TeacherClassManagementActivity.this);
-                ad.setView(spinner);
+            ad.setPositiveButton("확인", (dialogInterface, i) -> {
 
-                ad.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            });
 
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+            ad.setNegativeButton("취소", (dialogInterface, i) -> dialogInterface.dismiss());
 
-                    }
-                });
+            ad.show();
 
-                ad.setNegativeButton("취소", (dialogInterface, i) -> dialogInterface.dismiss());
-
-                ad.show();
-
-            }
         });
 
-        delButton = (Button)findViewById(R.id.del_class_button);
-        delButton.setOnClickListener(new View.OnClickListener() {
+        // 반 목록
+        adapter = new ListViewAdapter();
 
-            @Override
-            public void onClick(View view) {
+        listView = (ListView) findViewById(R.id.listview_class);
+        listView.setAdapter(adapter);
 
-                AlertDialog.Builder ad = new AlertDialog.Builder(TeacherClassManagementActivity.this);
-                ad.setTitle("반 삭제");
-                ad.setMessage("삭제할 반을 선택하세요");
+        adapter.addItem("나무반", "배승원");
+        adapter.addItem("하늘반", "조수아");
+        adapter.addItem("바다반", "장준모");
+        adapter.addItem("나무반", "배승원");
+        adapter.addItem("하늘반", "조수아");
+        adapter.addItem("바다반", "장준모");
+        adapter.addItem("나무반", "배승원");
+        adapter.addItem("하늘반", "조수아");
+        adapter.addItem("바다반", "장준모");
+        adapter.addItem("나무반", "배승원");
+        adapter.addItem("하늘반", "조수아");
+        adapter.addItem("바다반", "장준모");
 
-                final Spinner spinner = new Spinner(TeacherClassManagementActivity.this);
-                ad.setView(spinner);
-
-                ad.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-
-                });
-
-                ad.setNegativeButton("취소", (dialogInterface, i) -> dialogInterface.dismiss());
-
-                ad.show();
-
-            }
-        });
     }
 }

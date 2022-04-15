@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">가정통신문</string>
-    <string name="search_button">조회</string>
+    <string name="app_name">가정통신문 Demo</string>
+    <string name="search">검색</string>
     <string name="add_button">추가</string>
     <string name="del_button">삭제</string>
+    <string name="add_class">반 추가</string>
 </resources>
