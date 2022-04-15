@@ -2,30 +2,68 @@ package com.example.parentsletterproject.activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.example.parentsletterproject.R;
-import com.example.parentsletterproject.action.ListViewAdapter;
+import com.example.parentsletterproject.action.ClassAdapter;
+import com.example.parentsletterproject.server.ClassroomList;
+import com.example.parentsletterproject.server.RetrofitClient;
+import com.example.parentsletterproject.server.RetrofitInterface;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TeacherClassManagementActivity extends AppCompatActivity {
 
+    private RetrofitClient retrofitClient;
+    private RetrofitInterface retrofitInterface;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter classAdapter;
     private Button addButton;
     private Button delButton;
-    private ListView listView;
-    private ListViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_class_management);
+
+        recyclerView = findViewById(R.id.RecyclerView);
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        // 자꾸 recyclerview No adapter attached; skipping layout 에러 로그가 떠서 콜백 함수 전에 setAdapter 해주었음
+        classAdapter = new ClassAdapter(new ArrayList<>());
+        recyclerView.setAdapter(classAdapter);
+
+        retrofitClient = RetrofitClient.getInstance();
+        retrofitInterface = RetrofitClient.getRetrofitInterface();
+        retrofitInterface.getClassroomList().enqueue(new Callback<List<ClassroomList>>() {
+            @Override
+            public void onResponse(Call<List<ClassroomList>> call, Response<List<ClassroomList>> response) {
+                classAdapter = new ClassAdapter(response.body());
+                recyclerView.setAdapter(classAdapter);
+                Log.d("Retrofit", "Succeed!");
+            }
+
+            @Override
+            public void onFailure(Call<List<ClassroomList>> call, Throwable t) {
+                Log.e("Retrofit", "Fail!");
+            }
+        });
 
         // 반 추가
         addButton = (Button) findViewById(R.id.add_student_button);
@@ -76,25 +114,6 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
             ad.show();
 
         });
-
-        // 반 목록
-        adapter = new ListViewAdapter();
-
-        listView = (ListView) findViewById(R.id.listview_class);
-        listView.setAdapter(adapter);
-
-        adapter.addItem("나무반", "배승원");
-        adapter.addItem("하늘반", "조수아");
-        adapter.addItem("바다반", "장준모");
-        adapter.addItem("나무반", "배승원");
-        adapter.addItem("하늘반", "조수아");
-        adapter.addItem("바다반", "장준모");
-        adapter.addItem("나무반", "배승원");
-        adapter.addItem("하늘반", "조수아");
-        adapter.addItem("바다반", "장준모");
-        adapter.addItem("나무반", "배승원");
-        adapter.addItem("하늘반", "조수아");
-        adapter.addItem("바다반", "장준모");
 
     }
 }
