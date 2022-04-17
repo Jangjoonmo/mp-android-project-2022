@@ -1,5 +1,6 @@
 package com.example.parentsletterproject.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -41,30 +42,6 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_class_management);
 
-        recyclerView = findViewById(R.id.RecyclerView);
-        LinearLayoutManager layoutManager
-                = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-        // 자꾸 recyclerview No adapter attached; skipping layout 에러 로그가 떠서 콜백 함수 전에 setAdapter 해주었음
-        classAdapter = new ClassAdapter(new ArrayList<>());
-        recyclerView.setAdapter(classAdapter);
-
-        retrofitClient = RetrofitClient.getInstance();
-        retrofitInterface = RetrofitClient.getRetrofitInterface();
-        retrofitInterface.getClassroomList().enqueue(new Callback<List<ClassroomList>>() {
-            @Override
-            public void onResponse(Call<List<ClassroomList>> call, Response<List<ClassroomList>> response) {
-                classAdapter = new ClassAdapter(response.body());
-                recyclerView.setAdapter(classAdapter);
-                Log.d("Retrofit", "Succeed!");
-            }
-
-            @Override
-            public void onFailure(Call<List<ClassroomList>> call, Throwable t) {
-                Log.e("Retrofit", "Fail!");
-            }
-        });
-
         // 반 추가
         addButton = (Button) findViewById(R.id.add_student_button);
         addButton.setOnClickListener(v -> {
@@ -85,6 +62,9 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     String resultClassName = className.getText().toString();
                     String resultTeacherInCharge = teacherInCharge.getText().toString();
+
+
+
 
                     dialog.dismiss();
                 }
@@ -113,6 +93,32 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
 
             ad.show();
 
+        });
+
+        // 반 조회
+        recyclerView = findViewById(R.id.RecyclerView);
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        // recyclerview No adapter attached; skipping layout 에러 로그가 떠서 콜백 함수 전에 setAdapter
+        classAdapter = new ClassAdapter(new ArrayList<>());
+        recyclerView.setAdapter(classAdapter);
+
+        retrofitClient = RetrofitClient.getInstance();
+        retrofitInterface = RetrofitClient.getRetrofitInterface();
+        retrofitInterface.getClassroomList().enqueue(new Callback<List<ClassroomList>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<ClassroomList>> call, @NonNull Response<List<ClassroomList>> response) {
+                classAdapter = new ClassAdapter(response.body());
+                recyclerView.setAdapter(classAdapter);
+                
+                Log.d("Retrofit", "Succeed!");
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<ClassroomList>> call, @NonNull Throwable t) {
+                Log.e("Retrofit", "Fail!");
+            }
         });
 
     }

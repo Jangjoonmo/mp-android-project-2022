@@ -4,4 +4,9 @@
     <string name="add_button">추가</string>
     <string name="del_button">삭제</string>
     <string name="add_class">반 추가</string>
+    <string name="del_class">반 삭제</string>
+    <string name="add_student">원생 추가</string>
+    <string name="del_student">원생 삭제</string>
+    <string name="put_name_of_class">추가할 반의 이름을 입력하세요</string>
+    <string name="put_name_of_teacher">담임 교사의 이름을 입력하세요</string>
 </resources>
