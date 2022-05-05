@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--로그인 xml에서 아이디/패스워드 엣지-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#ffffff" />
+    <stroke
+        android:width="2dp"
+        android:color="#bb86fc" />
+</shape>
