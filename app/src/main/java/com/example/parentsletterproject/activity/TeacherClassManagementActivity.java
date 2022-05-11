@@ -53,7 +53,7 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
 
             final Button submit = (Button) view.findViewById(R.id.add_class_submit);
             final EditText className = (EditText) view.findViewById(R.id.edittext_add_class_name);
-            final EditText teacherInCharge = (EditText) view.findViewById(R.id.edittext_add_class_teacher_in_charge);
+            final EditText tName = (EditText) view.findViewById(R.id.edittext_add_class_teacher_in_charge);
 
             final AlertDialog dialog = ad.create();
             submit.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +61,7 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     String resultClassName = className.getText().toString();
-                    String resultTeacherInCharge = teacherInCharge.getText().toString();
+                    String resultTName = tName.getText().toString();
 
 
 

@@ -40,19 +40,19 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView classId, className, teacherInCharge;
+        private TextView classId, className, tName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             classId = itemView.findViewById(R.id.class_id);
             className = itemView.findViewById(R.id.class_name);
-            teacherInCharge = itemView.findViewById(R.id.teacher_in_charge);
+            tName = itemView.findViewById(R.id.teacher_in_charge);
         }
 
         public void setItem(ClassroomList item) {
             classId.setText(item.getClassId());
             className.setText(item.getClassName());
-            teacherInCharge.setText(item.getTeacherInCharge());
+            tName.setText(item.getTName());
         }
     }
 

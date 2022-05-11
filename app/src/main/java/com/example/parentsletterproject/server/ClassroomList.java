@@ -13,9 +13,9 @@ public class ClassroomList {
     @SerializedName("className")
     @Expose
     private String className;
-    @SerializedName("teacherInCharge")
+    @SerializedName("tName")
     @Expose
-    private String teacherInCharge;
+    private String tName;
 
     public String getClassId() {
         return classId;
@@ -33,12 +33,12 @@ public class ClassroomList {
         this.className = className;
     }
 
-    public String getTeacherInCharge() {
-        return teacherInCharge;
+    public String getTName() {
+        return tName;
     }
 
-    public void setTeacherInCharge(String teacherInCharge) {
-        this.teacherInCharge = teacherInCharge;
+    public void setTName(String tName) {
+        this.tName = tName;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class ClassroomList {
         return "Class Model{" +
                 "id='" + classId + '\'' +
                 ", name='" + className + '\'' +
-                ", teacher in charge='" + teacherInCharge + '\'' +
+                ", tName='" + tName + '\'' +
                 '}';
     }
 
