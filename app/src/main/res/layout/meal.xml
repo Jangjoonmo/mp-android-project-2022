@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="411dp"
+        android:layout_height="58dp"
+        android:background="#FFFFFF"
+        android:gravity="center|center_vertical"
+        android:text="급 식 표"
+        android:textAlignment="center"
+        android:textColor="@color/purple_200"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01"
+        tools:ignore="TextContrastCheck" />
+
+    <LinearLayout
+        android:layout_width="411dp"
+        android:layout_height="647dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <TextView
+            android:id="@+id/yesterday"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="@color/purple_200"
+            android:gravity="center_vertical"
+            android:text="YESTERDAY"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/yester"
+            android:layout_width="match_parent"
+            android:layout_height="156dp"
+            android:text="yester"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/today"
+            android:layout_width="match_parent"
+            android:layout_height="39dp"
+            android:background="@color/purple_200"
+            android:gravity="center_vertical"
+            android:text="TODAY"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/to"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:text="to"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tomorrow"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:background="@color/purple_200"
+            android:gravity="center_vertical"
+            android:text="TOMORROW"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/tomo"
+            android:layout_width="match_parent"
+            android:layout_height="177dp"
+            android:text="tomo"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
