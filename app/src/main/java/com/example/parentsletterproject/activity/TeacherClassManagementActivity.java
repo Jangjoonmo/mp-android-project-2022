@@ -6,10 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -33,6 +36,7 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
     private RetrofitInterface retrofitInterface;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter classAdapter;
+    private ArrayAdapter arrayAdapter;
     private Button addButton;
     private Button delButton;
 
@@ -53,7 +57,8 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
 
             final Button submit = (Button) view.findViewById(R.id.add_class_submit);
             final EditText className = (EditText) view.findViewById(R.id.edittext_add_class_name);
-            final EditText tName = (EditText) view.findViewById(R.id.edittext_add_class_teacher_in_charge);
+            final EditText tId = (EditText) view.findViewById(R.id.edittext_add_teacher_id);
+            final EditText tName = (EditText) view.findViewById(R.id.edittext_add_teacher_name);
 
             final AlertDialog dialog = ad.create();
             submit.setOnClickListener(new View.OnClickListener() {
@@ -61,13 +66,14 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     String resultClassName = className.getText().toString();
+                    String resultTId = tId.getText().toString();
                     String resultTName = tName.getText().toString();
-
 
 
 
                     dialog.dismiss();
                 }
+
             });
 
             dialog.show();
@@ -84,6 +90,25 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
 
             final Spinner spinner = new Spinner(TeacherClassManagementActivity.this);
             ad.setView(spinner);
+
+            retrofitClient = RetrofitClient.getInstance();
+            retrofitInterface = RetrofitClient.getRetrofitInterface();
+            retrofitInterface.getClassroomList().enqueue(new Callback<List<ClassroomList>>() {
+                @Override
+                public void onResponse(@NonNull Call<List<ClassroomList>> call, @NonNull Response<List<ClassroomList>> response) {
+                    // new ClassAdapter(response.body());
+
+                    Log.d("Retrofit", "Succeed!");
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<List<ClassroomList>> call, @NonNull Throwable t) {
+                    Log.e("Retrofit", "Fail!");
+                }
+            });
+
+
+            spinner.setAdapter(arrayAdapter);
 
             ad.setPositiveButton("확인", (dialogInterface, i) -> {
 
@@ -122,4 +147,5 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
         });
 
     }
+
 }

@@ -13,7 +13,7 @@ public class ClassroomList {
     @SerializedName("className")
     @Expose
     private String className;
-    @SerializedName("tName")
+    @SerializedName("tname")
     @Expose
     private String tName;
 

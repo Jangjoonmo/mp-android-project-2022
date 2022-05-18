@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp" >
+
+    <TextView
+        android:id="@+id/add_student_logo"
+        android:layout_width="221dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/add_student"
+        android:textSize="35sp" />
+
+    <TextView
+        android:id="@+id/textview_add_student_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_student_logo"
+        android:text="@string/put_name_of_student"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/edittext_add_teacher_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview_add_student_name"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="10dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/add_class_submit"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edittext_add_teacher_id"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/add_button" />
+
+</RelativeLayout>

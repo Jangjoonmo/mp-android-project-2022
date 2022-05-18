@@ -8,7 +8,7 @@
     android:paddingTop="16dp" >
 
     <TextView
-        android:id="@+id/add_class_logo"
+        android:id="@+id/add_student_logo"
         android:layout_width="221dp"
         android:layout_height="54dp"
         android:layout_marginBottom="16dp"
@@ -16,10 +16,10 @@
         android:textSize="35sp" />
 
     <TextView
-        android:id="@+id/textview_add_class_name"
+        android:id="@+id/textview_add_student_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/add_class_logo"
+        android:layout_below="@+id/add_student_logo"
         android:text="@string/put_name_of_class"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -27,40 +27,56 @@
         android:id="@+id/edittext_add_class_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textview_add_class_name"
+        android:layout_below="@+id/textview_add_student_name"
         android:layout_marginBottom="10dp"
         android:ems="10"
-        android:inputType="textEmailAddress"
         android:minHeight="48dp">
 
     </EditText>
 
     <TextView
-        android:id="@+id/textview_add_class_teacher_in_charge"
+        android:id="@+id/textview_add_class_teacher_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edittext_add_class_name"
-        android:text="@string/put_name_of_teacher"
+        android:text="@string/put_id_of_teacher"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
-        android:id="@+id/edittext_add_class_teacher_in_charge"
+        android:id="@+id/edittext_add_teacher_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textview_add_class_name"
+        android:layout_below="@+id/textview_add_student_name"
         android:layout_marginTop="80dp"
         android:layout_marginBottom="10dp"
         android:ems="10"
-        android:inputType="textEmailAddress"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:id="@+id/textview_add_teacher_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edittext_add_teacher_id"
+        android:layout_marginTop="2dp"
+        android:text="@string/put_name_of_teacher"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/edittext_add_teacher_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview_add_class_teacher_id"
+        android:layout_marginTop="78dp"
+        android:ems="10"
+        android:inputType="textPersonName"
         android:minHeight="48dp" />
 
     <Button
         android:id="@+id/add_class_submit"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edittext_add_class_teacher_in_charge"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/edittext_add_teacher_name"
+        android:layout_marginTop="12dp"
         android:text="@string/add_button" />
 
 </RelativeLayout>
