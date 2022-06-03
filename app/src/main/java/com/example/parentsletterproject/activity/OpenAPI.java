@@ -55,6 +55,10 @@ public class OpenAPI extends AsyncTask<Void, Void, String> {
             if(nNode.getNodeType() == Node.ELEMENT_NODE){
 
                 Element eElement = (Element) nNode;
+
+                int date = 20220603;
+                //getTagValue("MLSV_YMD", );
+
                 Log.d("OPEN_API","data  : " + getTagValue("MLSV_YMD", eElement));
                 Log.d("OPEN_API","급식 메뉴  : " + getTagValue("DDISH_NM", eElement));
                 //Log.d("OPEN_API","초미세먼지 : " + getTagValue("pm25Value", eElement));
