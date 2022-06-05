@@ -18,10 +18,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button button = findViewById(R.id.button);
+        Button button = findViewById(R.id.button1);
         button.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), TeacherClassManagementActivity.class);
             startActivity(intent);
         });
+
+        Button button1 = findViewById(R.id.button3);
+        button1.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), BoardRegisterActivity.class);
+            startActivity(intent);
+        });
+
     }
 }
