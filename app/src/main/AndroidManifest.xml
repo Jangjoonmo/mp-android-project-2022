@@ -18,12 +18,6 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".BoardDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name="activity.BoardListActivity"
-            android:exported="false" />
-        <activity
             android:name=".activity.TeacherClassManagementActivity"
             android:exported="false" />
         <activity
@@ -46,6 +40,12 @@
             android:exported="false" />
         <activity
             android:name=".activity.BoardRegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BoardDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BoardListActivity"
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"

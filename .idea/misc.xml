@@ -32,6 +32,7 @@
         <entry key="..\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/xml/network_config.xml" value="0.10648148148148148" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.241" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.241" />
+        <entry key="app/src/main/res/layout/activity_board_detail.xml" value="0.2441123188405797" />
         <entry key="app/src/main/res/layout/activity_board_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_board_register.xml" value="0.1875" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.15625" />
