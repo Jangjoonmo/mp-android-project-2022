@@ -40,14 +40,16 @@ class DBHelper extends SQLiteOpenHelper{
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS user");
+        onCreate(db);
     }
 
     public void insertUser(SQLiteDatabase db, String name, String id, String password, boolean isTeacher){
         Log.i("TAG", "회원가입 시 실행");
         db.beginTransaction();
         try{
-            String sql = "INSERT INTO " + DATABASE_NAME + "(name, id, password, is_teacher)" +
-                    "values('"+ name + "', '"+ id +"', '" + password + "' '" + isTeacher + "' )";
+            String sql = "INSERT INTO user (name, id, password, is_teacher)" +
+                    "values('"+ name + "', '"+ id +"', '" + password + "', '" + isTeacher + "')";
             db.execSQL(sql);
             db.setTransactionSuccessful();
         }catch (Exception e){
@@ -65,10 +67,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     private EditText idText, passwordText, nameText, pwckText;
     private RadioGroup teacher_group;
+    private Button signButton, delete, checkButton;
 
-    private Button signButton, delete;
-    boolean teacherYes;
-
+    boolean teacherYes ,checkId, checkTeacher;
 
     String sql;
     Cursor cursor;
@@ -79,21 +80,49 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_register );
 
+
+
         //아이디값 찾아주기
         nameText = findViewById(R.id.join_name);
         idText = findViewById( R.id.join_id );
         passwordText = findViewById( R.id.join_password );
         pwckText = findViewById(R.id.join_pwck);
         teacher_group = findViewById(R.id.is_teacher);
+        checkTeacher=false;
+
         teacher_group.setOnCheckedChangeListener((radioGroup, i) -> {
+            checkTeacher=true;
                 if (i == R.id.teacher_yes) {                // 첫 번째 버튼이 선택 되었을 때
                     teacherYes = true;
                 } else if (i == R.id.parents_yes) {      // 두 번째 버튼이 선택 되었을 때
                     teacherYes = false;
                 }
         });
-//        is_teacher = findViewById(R.id.teacher_yes);
-//        is_parents = findViewById(R.id.parents_yes);
+        delete = findViewById(R.id.join_delete);
+        delete.setOnClickListener(new View.OnClickListener() {//취소 버튼을 클릭하였을 시
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(RegisterActivity.this, "로그인 화면으로 돌아갑니다.", Toast.LENGTH_SHORT);
+                finish();
+            }
+        });
+
+        checkButton = findViewById(R.id.check_button);
+        checkButton.setOnClickListener(new View.OnClickListener(){//확인 버튼으로 이미 존재하는 아이디인지 확인
+            @Override
+            public void onClick(View view) {
+                sql = "SELECT id FROM user WHERE id = '" + idText.getText().toString() + "'";
+                cursor = database.rawQuery(sql, null);
+                if(cursor.getCount() != 0){
+                    Toast toast = Toast.makeText(RegisterActivity.this, "이미 존재하는 아이디입니다.", Toast.LENGTH_SHORT);
+                    toast.show();
+                    checkId = false;
+                }else{
+                    Toast.makeText(RegisterActivity.this, "가능한 아이디입니다.", Toast.LENGTH_SHORT).show();
+                    checkId=true;
+                }
+            }
+        });
 
 
         //데이터베이스 생성
@@ -111,7 +140,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String userName = nameText.getText().toString();
 
                 //입력값이 없을 경우
-                if(userID.length() == 0 || userPass.length()==0 || userName.length()==0 || userPwck.length()==0) {
+                if(userID.length() == 0 || userPass.length()==0 || userName.length()==0 || userPwck.length()==0 || !checkTeacher) {
                     Toast toast = Toast.makeText(RegisterActivity.this, "빈칸 없이 입력해 주세요.", Toast.LENGTH_SHORT);
                     toast.show();
                     return;
@@ -123,14 +152,7 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-                //이미 존재하는 아이디인지 확인
-                sql = "SELECT id FROM user WHERE id = '" + userID + "'";
-                cursor = database.rawQuery(sql, null);
-                if(cursor.getCount() != 0){
-                    Toast toast = Toast.makeText(RegisterActivity.this, "이미 존재하는 아이디입니다.", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-                else{//아니라면 데이터베이스에 입력
+                if(checkId){//아이디 중복 확인이 되었을 경우
                     helper.insertUser(database, userName, userID, userPass, teacherYes);
                     Toast toast = Toast.makeText(RegisterActivity.this, "가입이 완료되었습니다.", Toast.LENGTH_SHORT);
                     toast.show();
@@ -138,6 +160,9 @@ public class RegisterActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
                     startActivity(intent);
 //                    finish();
+                }
+                else{
+                    Toast.makeText(RegisterActivity.this, "아이디 중복 확인을 해주세요.", Toast.LENGTH_SHORT).show();
                 }
 
             }
