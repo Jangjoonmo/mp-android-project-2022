@@ -31,13 +31,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String url = "https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=c0dadaab5ff14ca48e48aa850bb3652a&Type=xml&pIndex=1&pSize=10&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7751096";
-        OpenAPI dust = new OpenAPI(url);
-        dust.execute();
+//        String url = "https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=c0dadaab5ff14ca48e48aa850bb3652a&Type=xml&pIndex=1&pSize=10&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7751096";
+//        OpenAPI dust = new OpenAPI(url);
+//        dust.execute();
 
-        Button button = findViewById(R.id.button2);
-        button.setOnClickListener(view -> {
+        Button button1 = findViewById(R.id.class_button);
+        button1.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), TeacherClassManagementActivity.class);
+            startActivity(intent);
+        });
+
+        Button button2 = findViewById(R.id.stu_button);
+        button2.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), TeacherStudentManagementActivity.class);
+            startActivity(intent);
+        });
+
+        Button button3 = findViewById(R.id.board_button);
+        button3.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), BoardListActivity.class);
             startActivity(intent);
         });
     }
