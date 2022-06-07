@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/activity_add_student.xml" value="0.23802083333333332" />
         <entry key="..\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/activity_login.xml" value="0.215625" />
         <entry key="..\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/activity_main.xml" value="0.13905775075987842" />
@@ -37,19 +38,22 @@
         <entry key="app/src/main/res/layout/activity_board_detail.xml" value="0.2441123188405797" />
         <entry key="app/src/main/res/layout/activity_board_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_board_register.xml" value="0.1875" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.2678009033203125" />
+        <entry key="app/src/main/res/layout/activity_class_deletion.xml" value="0.26507466634114585" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.17135416666666667" />
         <entry key="app/src/main/res/layout/activity_parents_attendance.xml" value="0.1875" />
         <entry key="app/src/main/res/layout/activity_parents_home.xml" value="0.1875" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.29030797101449274" />
         <entry key="app/src/main/res/layout/activity_teacher_class_management.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/activity_teacher_home.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/activity_teacher_management_list.xml" value="0.1875" />
         <entry key="app/src/main/res/layout/activity_teacher_student_management.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/add_class.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/add_student.xml" value="0.15625" />
+        <entry key="app/src/main/res/layout/del_class.xml" value="0.3818817138671875" />
         <entry key="app/src/main/res/layout/item_for_recycler.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/meal.xml" value="0.15625" />
+        <entry key="app/src/main/res/layout/spin_dropdown.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/spinner_item.xml" value="0.15425531914893617" />
       </map>
     </option>
   </component>

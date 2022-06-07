@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/teacher_class_management_layout"
+    android:id="@+id/teacher_student_management_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.TeacherClassManagementActivity">
+    tools:context=".activity.TeacherStudentManagementActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/AddDelStudentLayout"

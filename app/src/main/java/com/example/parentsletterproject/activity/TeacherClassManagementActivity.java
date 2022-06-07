@@ -6,19 +6,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 
 import com.example.parentsletterproject.R;
 import com.example.parentsletterproject.action.ClassAdapter;
+import com.example.parentsletterproject.server.ClassName;
 import com.example.parentsletterproject.server.Classroom;
 import com.example.parentsletterproject.server.ClassroomList;
 import com.example.parentsletterproject.server.RetrofitClient;
@@ -27,6 +26,7 @@ import com.example.parentsletterproject.server.RetrofitInterface;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,6 +41,8 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
     private Button addButton;
     private Button delButton;
     private Classroom classroom;
+    private List<ClassName> classNameList;
+    private EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,7 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
         setContentView(R.layout.activity_teacher_class_management);
 
         // 반 추가
-        addButton = (Button) findViewById(R.id.add_student_button);
+        addButton = (Button) findViewById(R.id.add_class_button);
         addButton.setOnClickListener(v -> {
 
             AlertDialog.Builder ad = new AlertDialog.Builder(TeacherClassManagementActivity.this);
@@ -87,51 +89,90 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
                     });
 
                     dialog.dismiss();
+
+                    finish();//인텐트 종료
+                    overridePendingTransition(0, 0);//인텐트 효과 없애기
+                    Intent intent = getIntent(); //인텐트
+                    startActivity(intent); //액티비티 열기
+                    overridePendingTransition(0, 0);//인텐트 효과 없애기
                 }
+
 
             });
 
             dialog.show();
 
+
+
         });
 
         // 반 삭제
-        delButton = (Button)findViewById(R.id.del_student_button);
+        delButton = (Button)findViewById(R.id.del_class_button);
         delButton.setOnClickListener(view -> {
 
             AlertDialog.Builder ad = new AlertDialog.Builder(TeacherClassManagementActivity.this);
-            ad.setTitle("반 삭제");
-            ad.setMessage("삭제할 반을 선택하세요");
+            LayoutInflater inflater = getLayoutInflater();
+            View view1 = inflater.inflate(R.layout.del_class, null);
+            ad.setView(view1);
 
-            final Spinner spinner = new Spinner(TeacherClassManagementActivity.this);
-            ad.setView(spinner);
-
+            ArrayList<String> item = new ArrayList<>();
             retrofitClient = RetrofitClient.getInstance();
             retrofitInterface = RetrofitClient.getRetrofitInterface();
-            retrofitInterface.getClassroomList().enqueue(new Callback<List<ClassroomList>>() {
+            retrofitInterface.getClassName().enqueue(new Callback<List<ClassName>>() {
                 @Override
-                public void onResponse(@NonNull Call<List<ClassroomList>> call, @NonNull Response<List<ClassroomList>> response) {
-                    // new ClassAdapter(response.body());
-
-                    Log.d("Retrofit", "Succeed!");
+                public void onResponse(Call<List<ClassName>> call, Response<List<ClassName>> response) {
+                    List<ClassName> classNames = response.body();
+                    for (ClassName className : classNames) {
+                        item.add(className.getClassName());
+                    }
                 }
 
                 @Override
-                public void onFailure(@NonNull Call<List<ClassroomList>> call, @NonNull Throwable t) {
-                    Log.e("Retrofit", "Fail!");
+                public void onFailure(Call<List<ClassName>> call, Throwable t) {
+                    Log.e("Retrofit spinner", t.getMessage().toString());
                 }
             });
 
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.spin_dropdown, item);
 
-            spinner.setAdapter(arrayAdapter);
+            adapter.notifyDataSetChanged();
 
-            ad.setPositiveButton("확인", (dialogInterface, i) -> {
+            final AlertDialog dialog = ad.create();
+
+            final Button submit = (Button) view1.findViewById(R.id.del_class_submit);
+            submit.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+
+                    editText = (EditText) view1.findViewById(R.id.class_name_text);
+                    String className = editText.getText().toString();
+                    retrofitInterface.deleteClassroom(className).enqueue(new Callback<ResponseBody>() {
+
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            Log.d("Retrofit DELETE", "삭제 성공");
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Log.e("Retrofit DELETE", t.getMessage().toString());
+                        }
+                    });
+
+                    dialog.dismiss();
+
+                    finish();//인텐트 종료
+                    overridePendingTransition(0, 0);//인텐트 효과 없애기
+                    Intent intent = getIntent(); //인텐트
+                    startActivity(intent); //액티비티 열기
+                    overridePendingTransition(0, 0);//인텐트 효과 없애기
+
+                }
 
             });
 
-            ad.setNegativeButton("취소", (dialogInterface, i) -> dialogInterface.dismiss());
-
-            ad.show();
+            dialog.show();
 
         });
 
@@ -151,7 +192,6 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<List<ClassroomList>> call, @NonNull Response<List<ClassroomList>> response) {
                 classAdapter = new ClassAdapter(response.body());
                 recyclerView.setAdapter(classAdapter);
-
                 Log.d("Retrofit GET", "조회 성공");
             }
 

@@ -8,7 +8,7 @@
     tools:context=".activity.TeacherClassManagementActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/AddDelStudentLayout"
+        android:id="@+id/AddDelClassLayout"
         android:layout_width="402dp"
         android:layout_height="52dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,19 +19,19 @@
         app:layout_constraintVertical_bias="0.023">
 
         <Button
-            android:id="@+id/add_student_button"
+            android:id="@+id/add_class_button"
             android:layout_width="120dp"
             android:layout_height="48dp"
             android:text="반 추가"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/del_student_button"
+            app:layout_constraintEnd_toStartOf="@+id/del_class_button"
             app:layout_constraintHorizontal_bias="0.568"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
-            android:id="@+id/del_student_button"
+            android:id="@+id/del_class_button"
             android:layout_width="120dp"
             android:layout_height="48dp"
             android:layout_marginEnd="56dp"
@@ -51,6 +51,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AddDelStudentLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/AddDelClassLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
