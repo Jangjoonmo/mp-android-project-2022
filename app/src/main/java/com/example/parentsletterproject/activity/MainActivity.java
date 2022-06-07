@@ -14,29 +14,29 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_teacher_home);
 
 
 
-        Button button1 = findViewById(R.id.class_button);
+        Button button1 = findViewById(R.id.class_manage);
         button1.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), TeacherClassManagementActivity.class);
             startActivity(intent);
         });
 
-        Button button2 = findViewById(R.id.stu_button);
+        Button button2 = findViewById(R.id.student);
         button2.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), TeacherStudentManagementActivity.class);
             startActivity(intent);
         });
 
-        Button button3 = findViewById(R.id.board_button);
+        Button button3 = findViewById(R.id.posting);
         button3.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), BoardListActivity.class);
             startActivity(intent);
         });
 
-        Button button4 = findViewById(R.id.meal_button);
+        Button button4 = findViewById(R.id.meal);
         button4.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), MealActivity.class);
             startActivity(intent);
