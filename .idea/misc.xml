@@ -35,10 +35,11 @@
         <entry key="app/src/main/res/layout/activity_board_detail.xml" value="0.2441123188405797" />
         <entry key="app/src/main/res/layout/activity_board_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_board_register.xml" value="0.1875" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.15625" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.2678009033203125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.17135416666666667" />
         <entry key="app/src/main/res/layout/activity_parents_attendance.xml" value="0.1875" />
         <entry key="app/src/main/res/layout/activity_parents_home.xml" value="0.1875" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.29030797101449274" />
         <entry key="app/src/main/res/layout/activity_teacher_class_management.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/activity_teacher_home.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/activity_teacher_management_list.xml" value="0.1875" />
