@@ -20,9 +20,9 @@
             android:layout_width="match_parent"
             android:layout_height="53dp"
             android:gravity="center_horizontal"
-            android:text="회원 로그인"
+            android:text="Kinder Book"
             android:textAlignment="center"
-            android:textColor="@color/purple_200"
+            android:textColor="#EF6BD2"
             android:textSize="34sp"
             android:textStyle="bold" />
 
@@ -56,22 +56,25 @@
             android:layout_height="33dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:background="@color/purple_200"
+            android:background="#EF6BD2"
             android:text="로그인"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
             tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
 
-        <TextView
-            android:id="@+id/signIn"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/signButton"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#EF6BD2"
             android:text="회원가입"
-            android:textColor="@color/black"
-            android:textSize="13dp"
-            android:textStyle="bold" />
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,7 +38,7 @@
         tools:ignore="TextContrastCheck" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/board_button"
         android:layout_width="400dp"
         android:layout_height="55dp"
         android:background="@color/main_color"
@@ -65,7 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
+        app:layout_constraintTop_toBottomOf="@+id/board_button"
         app:layout_constraintVertical_bias="0.034"
         tools:ignore="TextContrastCheck" />
 

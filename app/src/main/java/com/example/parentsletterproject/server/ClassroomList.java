@@ -43,9 +43,9 @@ public class ClassroomList {
 
     @Override
     public String toString() {
-        return "Class Model{" +
-                "id='" + classId + '\'' +
-                ", name='" + className + '\'' +
+        return "ClassroomList{" +
+                "classId='" + classId + '\'' +
+                ", className='" + className + '\'' +
                 ", tName='" + tName + '\'' +
                 '}';
     }

@@ -12,6 +12,7 @@ public class RetrofitClient {
     private RetrofitClient() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
+                .addConverterFactory(new NullOnEmptyConverterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);

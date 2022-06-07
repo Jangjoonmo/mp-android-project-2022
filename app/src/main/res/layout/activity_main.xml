@@ -7,7 +7,7 @@
     tools:context=".activity.MainActivity">
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/class_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="반 관리"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/stu_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="학생 관리"
@@ -27,4 +27,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.327" />
+
+    <Button
+        android:id="@+id/board_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="알림장"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/class_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
