@@ -47,12 +47,13 @@
             tools:ignore="TextContrastCheck" />
 
         <TextView
-            android:id="@+id/yester"
+            android:id="@+id/yester_text"
             android:layout_width="match_parent"
             android:layout_height="156dp"
-            android:text="yester"
+            android:text=" "
             android:textAlignment="center"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/today"
@@ -67,12 +68,13 @@
             tools:ignore="TextContrastCheck" />
 
         <TextView
-            android:id="@+id/to"
+            android:id="@+id/to_text"
             android:layout_width="match_parent"
             android:layout_height="190dp"
-            android:text="to"
+            android:text=" "
             android:textAlignment="center"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/tomorrow"
@@ -87,12 +89,13 @@
             tools:ignore="TextContrastCheck" />
 
         <TextView
-            android:id="@+id/tomo"
+            android:id="@+id/tomo_text"
             android:layout_width="match_parent"
             android:layout_height="177dp"
-            android:text="tomo"
+            android:text=" "
             android:textAlignment="center"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

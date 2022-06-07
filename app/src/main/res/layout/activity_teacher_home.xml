@@ -92,7 +92,7 @@
             tools:ignore="TextContrastCheck" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/notice_text"
             android:layout_width="match_parent"
             android:layout_height="92dp"
             android:layout_gravity="center|center_horizontal|center_vertical"
@@ -126,7 +126,7 @@
             tools:ignore="TextContrastCheck,DuplicateClickableBoundsCheck" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/meal_notice"
             android:layout_width="match_parent"
             android:layout_height="161dp"
             android:background="#C5C5C5"
