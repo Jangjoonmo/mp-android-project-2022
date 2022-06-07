@@ -2,6 +2,7 @@ package com.example.parentsletterproject.activity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.example.parentsletterproject.R;
 
@@ -22,6 +23,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class MealActivity extends AppCompatActivity {
 
+    TextView textView1, textView2, textView3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,11 +33,18 @@ public class MealActivity extends AppCompatActivity {
         String url = "https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=c0dadaab5ff14ca48e48aa850bb3652a&Type=xml&pIndex=1&pSize=10&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7751096";
         MealActivity.OpenAPI dust = new MealActivity.OpenAPI(url);
         dust.execute();
+
+        textView1 = (TextView) findViewById(R.id.to_text);
+        textView2 = (TextView) findViewById(R.id.yester_text);
+        textView3 = (TextView) findViewById(R.id.tomo_text);
+
+        //System.out.println(list.get(0));
     }
 
-    public static class OpenAPI extends AsyncTask<Void, Void, String> {
+    class OpenAPI extends AsyncTask<Void, Void, String> {
 
         private String url;
+        private ArrayList<String> list;
 
         public OpenAPI(String url) {
 
@@ -67,7 +77,7 @@ public class MealActivity extends AppCompatActivity {
             // 파싱할 tag
             NodeList nList = doc.getElementsByTagName("row");
 
-            ArrayList<String> list = new ArrayList<>();
+            list = new ArrayList<>();
 
             for(int temp = 0; temp < nList.getLength(); temp++){
                 Node nNode = nList.item(temp);
@@ -102,6 +112,11 @@ public class MealActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String str) {
             super.onPostExecute(str);
+            textView1.setText(list.get(0).toString());
+            textView2.setText(list.get(1).toString());
+            textView3.setText(list.get(2).toString());
+
+
         }
 
         private String getTagValue(String tag, Element eElement) {
@@ -110,6 +125,12 @@ public class MealActivity extends AppCompatActivity {
             if(nValue == null)
                 return null;
             return nValue.getNodeValue();
+        }
+
+        public ArrayList<String> getList() {
+
+            //doInBackground();
+            return list;
         }
 
     }
