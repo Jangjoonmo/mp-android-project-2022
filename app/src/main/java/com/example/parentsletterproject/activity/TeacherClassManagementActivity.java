@@ -19,6 +19,7 @@ import android.widget.Spinner;
 
 import com.example.parentsletterproject.R;
 import com.example.parentsletterproject.action.ClassAdapter;
+import com.example.parentsletterproject.server.Classroom;
 import com.example.parentsletterproject.server.ClassroomList;
 import com.example.parentsletterproject.server.RetrofitClient;
 import com.example.parentsletterproject.server.RetrofitInterface;
@@ -39,6 +40,7 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
     private ArrayAdapter arrayAdapter;
     private Button addButton;
     private Button delButton;
+    private Classroom classroom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +71,20 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
                     String resultTId = tId.getText().toString();
                     String resultTName = tName.getText().toString();
 
+                    retrofitClient = RetrofitClient.getInstance();
+                    retrofitInterface = RetrofitClient.getRetrofitInterface();
+                    retrofitInterface.putClassroom(resultClassName, resultTName, resultTId).enqueue(new Callback<Classroom>() {
+                        @Override
+                        public void onResponse(Call<Classroom> call, Response<Classroom> response) {
 
+                            Log.d("Retrofit PUT", "삽입 성공");
+                        }
+
+                        @Override
+                        public void onFailure(Call<Classroom> call, Throwable t) {
+                            Log.e("Retrofit PUT", t.getMessage().toString());
+                        }
+                    });
 
                     dialog.dismiss();
                 }
@@ -136,13 +151,13 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<List<ClassroomList>> call, @NonNull Response<List<ClassroomList>> response) {
                 classAdapter = new ClassAdapter(response.body());
                 recyclerView.setAdapter(classAdapter);
-                
-                Log.d("Retrofit", "Succeed!");
+
+                Log.d("Retrofit GET", "조회 성공");
             }
 
             @Override
             public void onFailure(@NonNull Call<List<ClassroomList>> call, @NonNull Throwable t) {
-                Log.e("Retrofit", "Fail!");
+                Log.e("Retrofit GET", t.getMessage().toString());
             }
         });
 
