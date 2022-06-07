@@ -3,15 +3,23 @@ package com.example.parentsletterproject.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import com.example.parentsletterproject.R;
+import com.example.parentsletterproject.server.Board;
+import com.example.parentsletterproject.server.RetrofitClient;
+import com.example.parentsletterproject.server.RetrofitInterface;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BoardRegisterActivity extends AppCompatActivity {
 
-    // 로그에 사용할 TAG 변수 선언
-    final private String TAG = getClass().getSimpleName();
+    private RetrofitClient retrofitClient;
+    private RetrofitInterface retrofitInterface;
 
     // 사용할 컴포넌트 선언
     EditText title_et, content_et;
@@ -30,39 +38,28 @@ public class BoardRegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                String resultPostName = title_et.getText().toString();
+                String resultPostBody = content_et.getText().toString();
+
+                System.out.println(resultPostName);
+                System.out.println(resultPostBody);
+
+                retrofitClient = RetrofitClient.getInstance();
+                retrofitInterface = RetrofitClient.getRetrofitInterface();
+                retrofitInterface.putBoard(resultPostName, resultPostBody).enqueue(new Callback<Board>() {
+                    @Override
+                    public void onResponse(Call<Board> call, Response<Board> response) {
+                        Log.d("Retrofit PUT", "삽입 성공");
+                    }
+
+                    @Override
+                    public void onFailure(Call<Board> call, Throwable t) {
+                        Log.e("Retrofit PUT", t.getMessage().toString());
+                    }
+                });
 
             }
         });
 
     }
 }
-
-//    class RegBoard extends AsyncTask<String, Void, String> {
-//
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//
-//            Log.d(TAG, "onPreExecute");
-//        }
-//
-//
-//        @Override
-//        protected void onPostExecute(String result) {
-//            super.onPostExecute(result);
-//            Log.d(TAG, "onPostExecute, " + result);
-//
-//            if (result.equals("success")) {
-//// 결과값이 success 이면
-//// 토스트 메시지를 뿌리고
-//// 이전 액티비티(ListActivity)로 이동,
-//// 이때 ListActivity 의 onResume() 함수 가 호출되며, 데이터를 새로 고침
-//                Toast.makeText(RegisterActivity.this, "등록되었습니다.", Toast.LENGTH_SHORT).show();
-//                finish();
-//            } else {
-//                Toast.makeText(RegisterActivity.this, result, Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//
-//    }
-//}

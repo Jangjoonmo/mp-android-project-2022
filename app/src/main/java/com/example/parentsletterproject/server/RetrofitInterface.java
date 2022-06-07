@@ -15,6 +15,8 @@ import retrofit2.http.Query;
 
 public interface RetrofitInterface {
 
+    // API for class
+
     @GET("class/all")
     Call<List<ClassroomList>> getClassroomList();
 
@@ -26,5 +28,16 @@ public interface RetrofitInterface {
 
     @DELETE("class/{className}")
     Call<ResponseBody> deleteClassroom(@Path("className") String className);
+
+    // API for post
+
+    @PUT("post/create")
+    Call<Board> putBoard(@Query("postName") String postName, @Query("postBody") String postBody);
+
+    @GET("post/all")
+    Call<List<Board>> getBoardList();
+
+    @GET("post/{postNum}")
+    Call<Board> getBoard();
 
 }

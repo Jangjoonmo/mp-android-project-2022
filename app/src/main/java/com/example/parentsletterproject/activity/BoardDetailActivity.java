@@ -18,9 +18,6 @@ public class BoardDetailActivity extends AppCompatActivity {
         // ListActivity 에서 넘긴 변수들을 받아줌
         board_seq = getIntent().getStringExtra("board_seq");
 
-
-
-
     }
 
 }

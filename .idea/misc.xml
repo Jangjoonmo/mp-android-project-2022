@@ -19,10 +19,8 @@
         <entry key="..\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/item.xml" value="0.4" />
         <entry key="..\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/item_for_recycler.xml" value="0.28125" />
         <entry key="..\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/listview_item.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_board_register.xml" value="0.23324275362318841" />
         <entry key="..\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_login.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_meal.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_parents_attendance.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_parents_home.xml" value="0.264" />
         <entry key="..\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_teacher_attendence.xml" value="0.22826086956521738" />
@@ -49,6 +47,7 @@
         <entry key="app/src/main/res/layout/activity_teacher_student_management.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/add_class.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/add_student.xml" value="0.15625" />
+        <entry key="app/src/main/res/layout/board_recycler.xml" value="0.3443526170798898" />
         <entry key="app/src/main/res/layout/del_class.xml" value="0.3818817138671875" />
         <entry key="app/src/main/res/layout/item_for_recycler.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/meal.xml" value="0.15625" />
