@@ -7,18 +7,25 @@
     tools:context=".activity.BoardDetailActivity">
 
     <TextView
-        android:id="@+id/textView9"
-        android:layout_width="362dp"
-        android:layout_height="52dp"
+        android:id="@+id/post_up"
+        android:layout_width="372dp"
+        android:layout_height="50dp"
+        android:background="#DADADA"
         android:text="TextView"
-        tools:layout_editor_absoluteX="24dp"
-        tools:layout_editor_absoluteY="30dp" />
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/post_down"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView10"
-        android:layout_width="355dp"
-        android:layout_height="627dp"
+        android:id="@+id/post_down"
+        android:layout_width="372dp"
+        android:layout_height="653dp"
+        android:background="#DADADA"
         android:text="TextView"
-        tools:layout_editor_absoluteX="28dp"
-        tools:layout_editor_absoluteY="104dp" />
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

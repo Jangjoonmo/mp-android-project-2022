@@ -1,5 +1,7 @@
-package com.example.parentsletterproject.action;
+package com.example.parentsletterproject.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +34,14 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull BoardAdapter.ViewHolder holder, int position) {
         Board item = items.get(position);
         holder.setItem(item);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(context, BoardDetailActivity.class);
+//                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -47,9 +57,16 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
             postName = itemView.findViewById(R.id.post_name);
         }
 
+
+
         public void setItem(Board item) {
             postName.setText(item.getPostName());
         }
+
+        public int getPos() {
+            return getAdapterPosition();
+        }
     }
+
 
 }

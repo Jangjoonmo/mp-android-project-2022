@@ -133,12 +133,10 @@ public class TeacherClassManagementActivity extends AppCompatActivity {
                 }
             });
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.spin_dropdown, item);
-
-            adapter.notifyDataSetChanged();
+//            ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.spin_dropdown, item);
+//            adapter.notifyDataSetChanged();
 
             final AlertDialog dialog = ad.create();
-
             final Button submit = (Button) view1.findViewById(R.id.del_class_submit);
             submit.setOnClickListener(new View.OnClickListener() {
 
