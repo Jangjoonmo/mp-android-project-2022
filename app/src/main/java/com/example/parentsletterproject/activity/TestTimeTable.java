@@ -22,13 +22,13 @@ public class TestTimeTable extends AppCompatActivity {
 
         setContentView(R.layout.activity_test_time_table);
 
-        timetable = findViewById(R.id.timetable);
-        if(EditTimeTableMain.getCrurrentWeek()-1 <6)
-            timetable.setHeaderHighlight(EditTimeTableMain.getCrurrentWeek()-1);
-        SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String savedData = mPref.getString("timetable_demo","");
-        if(savedData == null && savedData.equals("")) return;
-        timetable.load(savedData);
+//        timetable = findViewById(R.id.timetable);
+//        if(EditTimeTableMain.getCrurrentWeek()-1 <6)
+//            timetable.setHeaderHighlight(EditTimeTableMain.getCrurrentWeek()-1);
+//        SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(this);
+//        String savedData = mPref.getString("timetable_demo","");
+//        if(savedData == null && savedData.equals("")) return;
+//        timetable.load(savedData);
 
     }
 

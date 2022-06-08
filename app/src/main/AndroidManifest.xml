@@ -45,9 +45,12 @@
         <activity
             android:name=".activity.RegisterActivity"
             android:exported="false"/>
-        <activity android:name=".activity.TestTimeTable"/>
-        <activity android:name=".activity.EditTimeTableMain"/>
-        <activity android:name=".activity.EditTimeTableActivity"/>
+        <activity
+            android:name=".activity.TestTimeTable"/>
+        <activity
+            android:name=".activity.EditTimeTableMain"/>
+        <activity
+            android:name=".activity.EditTimeTableActivity"/>
         <activity
             android:name=".activity.MealActivity"
             android:exported="false"/>
