@@ -1,0 +1,2420 @@
+Index: settings.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>pluginManagement {\n    repositories {\n        gradlePluginPortal()\n        google()\n        mavenCentral()\n    }\n}\ndependencyResolutionManagement {\n    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)\n    repositories {\n        google()\n        mavenCentral()\n    }\n}\nrootProject.name = \"ParentsLetterProject\"\ninclude ':app'\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/settings.gradle b/settings.gradle
+--- a/settings.gradle	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/settings.gradle	(date 1654633551210)
+@@ -3,6 +3,7 @@
+         gradlePluginPortal()
+         google()
+         mavenCentral()
++        maven { url 'https://jitpack.io' }
+     }
+ }
+ dependencyResolutionManagement {
+@@ -10,7 +11,10 @@
+     repositories {
+         google()
+         mavenCentral()
++        maven { url 'https://jitpack.io' }
+     }
+ }
+ rootProject.name = "ParentsLetterProject"
+ include ':app'
++include ':timetableview'
++
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    package=\"com.example.parentsletterproject\">\n\n    <uses-permission android:name=\"android.permission.INTERNET\" />\n\n    <application\n        android:allowBackup=\"true\"\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\n        android:fullBackupContent=\"@xml/backup_rules\"\n        android:icon=\"@mipmap/ic_launcher\"\n        android:label=\"@string/app_name\"\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\n        android:networkSecurityConfig=\"@xml/network_config\"\n        android:supportsRtl=\"true\"\n        android:theme=\"@style/Theme.ParentsLetterProject\"\n        android:usesCleartextTraffic=\"true\"\n        tools:targetApi=\"31\">\n        <activity\n            android:name=\".activity.TeacherClassManagementActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".activity.TeacherStudentManagementActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".activity.TeacherManagementListActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".activity.ParentsAttendanceActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".activity.ParentsHomeActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".activity.TeacherHomeActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".activity.TeacherAttendanceActivity\"\n            android:exported=\"false\" />\n\n        <activity\n            android:name=\".activity.LoginActivity\"\n            android:exported=\"false\"/>\n        <activity\n            android:name=\".activity.RegisterActivity\"\n            android:exported=\"false\"/>\n        <activity\n            android:name=\".activity.MealActivity\"\n            android:exported=\"false\"/>\n        <activity\n            android:name=\".activity.BoardRegisterActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".activity.BoardDetailActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".activity.BoardListActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".activity.MainActivity\"\n            android:exported=\"true\">\n            <intent-filter>\n                <action android:name=\"android.intent.action.MAIN\" />\n\n                <category android:name=\"android.intent.category.LAUNCHER\" />\n            </intent-filter>\n        </activity>\n\n    </application>\n\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/app/src/main/AndroidManifest.xml	(date 1654634529492)
+@@ -11,8 +11,8 @@
+         android:fullBackupContent="@xml/backup_rules"
+         android:icon="@mipmap/ic_launcher"
+         android:label="@string/app_name"
+-        android:roundIcon="@mipmap/ic_launcher_round"
+         android:networkSecurityConfig="@xml/network_config"
++        android:roundIcon="@mipmap/ic_launcher_round"
+         android:supportsRtl="true"
+         android:theme="@style/Theme.ParentsLetterProject"
+         android:usesCleartextTraffic="true"
+@@ -38,16 +38,11 @@
+         <activity
+             android:name=".activity.TeacherAttendanceActivity"
+             android:exported="false" />
+-
+-        <activity
+-            android:name=".activity.LoginActivity"
+-            android:exported="false"/>
+-        <activity
+-            android:name=".activity.RegisterActivity"
+-            android:exported="false"/>
+-        <activity
+-            android:name=".activity.MealActivity"
+-            android:exported="false"/>
++        <activity android:name=".activity.LoginActivity" />
++        <activity android:name=".activity.RegisterActivity" />
++        <activity android:name=".activity.EditTimeTableActivity" />
++        <activity android:name=".activity.EditTimeTableMain" />
++        <activity android:name=".activity.TestTimeTable"/>
+         <activity
+             android:name=".activity.BoardRegisterActivity"
+             android:exported="false" />
+@@ -66,7 +61,6 @@
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+         </activity>
+-
+     </application>
+ 
+ </manifest>
+\ No newline at end of file
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\n    id 'com.android.application'\n}\n\nandroid {\n    namespace 'com.example.parentsletterproject'\n    compileSdk 32\n\n    defaultConfig {\n        applicationId \"com.example.parentsletterproject\"\n        minSdk 26\n        targetSdk 32\n        versionCode 1\n        versionName \"1.0\"\n\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\n    }\n\n    buildTypes {\n        release {\n            minifyEnabled false\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\n        }\n    }\n    compileOptions {\n        sourceCompatibility JavaVersion.VERSION_1_8\n        targetCompatibility JavaVersion.VERSION_1_8\n    }\n}\n\ndependencies {\n\n    implementation 'com.squareup.retrofit2:retrofit:2.6.0'\n    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'\n    implementation 'com.google.code.gson:gson:2.8.6'\n    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'\n    implementation 'androidx.appcompat:appcompat:1.4.1'\n    implementation 'com.google.android.material:material:1.5.0'\n    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'\n    implementation 'com.android.volley:volley:1.2.0'\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\n    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'\n    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'\n    testImplementation 'junit:junit:4.13.2'\n    androidTestImplementation 'androidx.test.ext:junit:1.1.3'\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'\n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/app/build.gradle	(date 1654635929269)
+@@ -16,6 +16,7 @@
+         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+     }
+ 
++
+     buildTypes {
+         release {
+             minifyEnabled false
+@@ -26,23 +27,25 @@
+         sourceCompatibility JavaVersion.VERSION_1_8
+         targetCompatibility JavaVersion.VERSION_1_8
+     }
++
++
+ }
+ 
+ dependencies {
+ 
+-    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+-    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+-    implementation 'com.google.code.gson:gson:2.8.6'
+-    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+-    implementation 'androidx.appcompat:appcompat:1.4.1'
+-    implementation 'com.google.android.material:material:1.5.0'
+-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+-    implementation 'com.android.volley:volley:1.2.0'
+-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
++    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
++    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
++    implementation 'com.google.code.gson:gson:2.9.0'
++    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.7'
++    implementation 'androidx.appcompat:appcompat:1.4.2'
++    implementation 'com.google.android.material:material:1.6.1'
++    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
++    implementation 'com.android.volley:volley:1.2.1'
++    implementation project(path: ':timetableview')
+     testImplementation 'junit:junit:4.13.2'
+     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
++    implementation 'com.github.tlaabs:TimetableView:1.0.3-fx1'
+ 
+-}
+\ No newline at end of file
++
++}
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// Top-level build file where you can add configuration options common to all sub-projects/modules.\nplugins {\n    id 'com.android.application' version '7.2.1' apply false\n    id 'com.android.library' version '7.2.1' apply false\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build.gradle b/build.gradle
+--- a/build.gradle	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/build.gradle	(date 1654635997665)
+@@ -2,4 +2,5 @@
+ plugins {
+     id 'com.android.application' version '7.2.1' apply false
+     id 'com.android.library' version '7.2.1' apply false
++
+ }
+Index: app/src/main/java/com/example/parentsletterproject/activity/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.parentsletterproject.activity;\n\nimport androidx.appcompat.app.AppCompatActivity;\n\nimport android.content.Intent;\nimport android.os.Bundle;\nimport android.widget.Button;\n\nimport com.example.parentsletterproject.R;\n\npublic class MainActivity extends AppCompatActivity {\n\n    public static final int REQUEST_CODE_TCM = 101;\n\n    protected void onCreate(Bundle savedInstanceState) {\n        super.onCreate(savedInstanceState);\n        setContentView(R.layout.activity_teacher_home);\n\n\n\n        Button button1 = findViewById(R.id.class_manage);\n        button1.setOnClickListener(view -> {\n            Intent intent = new Intent(getApplicationContext(), TeacherClassManagementActivity.class);\n            startActivity(intent);\n        });\n\n        Button button2 = findViewById(R.id.student);\n        button2.setOnClickListener(view -> {\n            Intent intent = new Intent(getApplicationContext(), TeacherStudentManagementActivity.class);\n            startActivity(intent);\n        });\n\n        Button button3 = findViewById(R.id.posting);\n        button3.setOnClickListener(view -> {\n            Intent intent = new Intent(getApplicationContext(), BoardListActivity.class);\n            startActivity(intent);\n        });\n\n        Button button4 = findViewById(R.id.meal);\n        button4.setOnClickListener(view -> {\n            Intent intent = new Intent(getApplicationContext(), MealActivity.class);\n            startActivity(intent);\n        });\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/activity/MainActivity.java b/app/src/main/java/com/example/parentsletterproject/activity/MainActivity.java
+--- a/app/src/main/java/com/example/parentsletterproject/activity/MainActivity.java	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/app/src/main/java/com/example/parentsletterproject/activity/MainActivity.java	(date 1654636151179)
+@@ -3,43 +3,60 @@
+ import androidx.appcompat.app.AppCompatActivity;
+ 
+ import android.content.Intent;
++import android.os.AsyncTask;
+ import android.os.Bundle;
++import android.util.Log;
++import android.view.View;
+ import android.widget.Button;
+ 
+ import com.example.parentsletterproject.R;
+ 
++import org.w3c.dom.Document;
++import org.w3c.dom.Element;
++import org.w3c.dom.Node;
++import org.w3c.dom.NodeList;
++import org.xml.sax.SAXException;
++
++import java.io.IOException;
++
++import javax.xml.parsers.DocumentBuilder;
++import javax.xml.parsers.DocumentBuilderFactory;
++import javax.xml.parsers.ParserConfigurationException;
++
+ public class MainActivity extends AppCompatActivity {
+ 
+     public static final int REQUEST_CODE_TCM = 101;
+ 
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+-        setContentView(R.layout.activity_teacher_home);
++        setContentView(R.layout.activity_main);
+ 
++//        String url = "https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=c0dadaab5ff14ca48e48aa850bb3652a&Type=xml&pIndex=1&pSize=10&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7751096";
++//        OpenAPI dust = new OpenAPI(url);
++//        dust.execute();
+ 
+ 
+-        Button button1 = findViewById(R.id.class_manage);
+-        button1.setOnClickListener(view -> {
+-            Intent intent = new Intent(getApplicationContext(), TeacherClassManagementActivity.class);
+-            startActivity(intent);
+-        });
+-
+-        Button button2 = findViewById(R.id.student);
+-        button2.setOnClickListener(view -> {
+-            Intent intent = new Intent(getApplicationContext(), TeacherStudentManagementActivity.class);
+-            startActivity(intent);
+-        });
++//        Intent intent = new Intent(getApplicationContext(), EditTimeTableMain.class);
++//        startActivity(intent);
++        Intent intent = new Intent(getApplicationContext(), TestTimeTable.class);
++        startActivity(intent);
+ 
+-        Button button3 = findViewById(R.id.posting);
+-        button3.setOnClickListener(view -> {
+-            Intent intent = new Intent(getApplicationContext(), BoardListActivity.class);
+-            startActivity(intent);
+-        });
+-
+-        Button button4 = findViewById(R.id.meal);
+-        button4.setOnClickListener(view -> {
+-            Intent intent = new Intent(getApplicationContext(), MealActivity.class);
+-            startActivity(intent);
+-        });
++//        Button button1 = findViewById(R.id.class_button);
++//        button1.setOnClickListener(view -> {
++//            Intent intent = new Intent(getApplicationContext(), TeacherClassManagementActivity.class);
++//            startActivity(intent);
++//        });
++//
++//        Button button2 = findViewById(R.id.stu_button);
++//        button2.setOnClickListener(view -> {
++//            Intent intent = new Intent(getApplicationContext(), TeacherStudentManagementActivity.class);
++//            startActivity(intent);
++//        });
++//
++//        Button button3 = findViewById(R.id.board_button);
++//        button3.setOnClickListener(view -> {
++//            Intent intent = new Intent(getApplicationContext(), BoardListActivity.class);
++//            startActivity(intent);
++//        });
+     }
+ }
+\ No newline at end of file
+Index: gradle.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># Project-wide Gradle settings.\n# IDE (e.g. Android Studio) users:\n# Gradle settings configured through the IDE *will override*\n# any settings specified in this file.\n# For more details on how to configure your build environment visit\n# http://www.gradle.org/docs/current/userguide/build_environment.html\n# Specifies the JVM arguments used for the daemon process.\n# The setting is particularly useful for tweaking memory settings.\norg.gradle.jvmargs=-Xmx2048m -Dfile.encoding=UTF-8\n# When configured, Gradle will run in incubating parallel mode.\n# This option should only be used with decoupled projects. More details, visit\n# http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects\n# org.gradle.parallel=true\n# AndroidX package structure to make it clearer which packages are bundled with the\n# Android operating system, and which are packaged with your app\"s APK\n# https://developer.android.com/topic/libraries/support-library/androidx-rn\nandroid.useAndroidX=true\n# Enables namespacing of each library's R class so that its R class includes only the\n# resources declared in the library itself and none from the library's dependencies,\n# thereby reducing the size of the R class for that library\nandroid.nonTransitiveRClass=true
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/gradle.properties b/gradle.properties
+--- a/gradle.properties	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/gradle.properties	(date 1654636030431)
+@@ -18,4 +18,5 @@
+ # Enables namespacing of each library's R class so that its R class includes only the
+ # resources declared in the library itself and none from the library's dependencies,
+ # thereby reducing the size of the R class for that library
+-android.nonTransitiveRClass=true
+\ No newline at end of file
++android.nonTransitiveRClass=true
++android.enableJetifier=true
+\ No newline at end of file
+Index: app/src/main/res/layout/del_class.xml
+===================================================================
+diff --git a/app/src/main/res/layout/del_class.xml b/app/src/main/res/layout/del_class.xml
+deleted file mode 100644
+--- a/app/src/main/res/layout/del_class.xml	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ /dev/null	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
+@@ -1,37 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:layout_width="fill_parent"
+-    android:layout_height="fill_parent"
+-    android:orientation="vertical"
+-    android:paddingLeft="16dp"
+-    android:paddingRight="16dp"
+-    android:paddingTop="16dp" >
+-    <TextView
+-        android:id="@+id/del_class_logo"
+-        android:layout_width="221dp"
+-        android:layout_height="54dp"
+-        android:layout_marginBottom="16dp"
+-        android:text="반 삭제"
+-        android:textSize="35sp" />
+-
+-    <EditText
+-        android:id="@+id/class_name_text"
+-        android:layout_width="311dp"
+-        android:layout_height="wrap_content"
+-        android:layout_below="@+id/del_class_logo"
+-        android:layout_marginTop="10dp"
+-        android:contentDescription="@string/del_class"
+-        android:ems="10"
+-        android:inputType="textPersonName"
+-        android:minHeight="48dp"
+-        android:visibility="visible" />
+-
+-    <Button
+-        android:id="@+id/del_class_submit"
+-        android:layout_width="100dp"
+-        android:layout_height="wrap_content"
+-        android:layout_below="@+id/class_name_text"
+-        android:layout_marginTop="12dp"
+-        android:text="삭제" />
+-
+-</RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/parentsletterproject/action/BlankViewModel.java
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/action/BlankViewModel.java b/app/src/main/java/com/example/parentsletterproject/action/BlankViewModel.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/parentsletterproject/action/BlankViewModel.java	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ /dev/null	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
+@@ -1,7 +0,0 @@
+-package com.example.parentsletterproject.action;
+-
+-import androidx.lifecycle.ViewModel;
+-
+-public class BlankViewModel extends ViewModel {
+-    // TODO: Implement the ViewModel
+-}
+\ No newline at end of file
+Index: app/src/main/java/com/example/parentsletterproject/activity/ClassDeletionActivity.java
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/activity/ClassDeletionActivity.java b/app/src/main/java/com/example/parentsletterproject/activity/ClassDeletionActivity.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/parentsletterproject/activity/ClassDeletionActivity.java	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ /dev/null	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
+@@ -1,15 +0,0 @@
+-package com.example.parentsletterproject.activity;
+-
+-import androidx.appcompat.app.AppCompatActivity;
+-
+-import android.os.Bundle;
+-import com.example.parentsletterproject.R;
+-
+-public class ClassDeletionActivity extends AppCompatActivity {
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        setContentView(R.layout.activity_class_deletion);
+-    }
+-}
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_class_deletion.xml
+===================================================================
+diff --git a/app/src/main/res/layout/activity_class_deletion.xml b/app/src/main/res/layout/activity_class_deletion.xml
+deleted file mode 100644
+--- a/app/src/main/res/layout/activity_class_deletion.xml	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ /dev/null	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
+@@ -1,20 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    tools:context=".activity.ClassDeletionActivity">
+-
+-    <TextView
+-        android:id="@+id/textView8"
+-        android:layout_width="313dp"
+-        android:layout_height="36dp"
+-        android:text="삭제할 반을 선택하세요"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintHorizontal_bias="0.073"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toTopOf="parent"
+-        app:layout_constraintVertical_bias="0.047" />
+-</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/parentsletterproject/action/BlankFragment.java
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/action/BlankFragment.java b/app/src/main/java/com/example/parentsletterproject/action/BlankFragment.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/parentsletterproject/action/BlankFragment.java	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ /dev/null	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
+@@ -1,38 +0,0 @@
+-package com.example.parentsletterproject.action;
+-
+-import androidx.lifecycle.ViewModelProvider;
+-
+-import android.os.Bundle;
+-
+-import androidx.annotation.NonNull;
+-import androidx.annotation.Nullable;
+-import androidx.fragment.app.Fragment;
+-
+-import android.view.LayoutInflater;
+-import android.view.View;
+-import android.view.ViewGroup;
+-
+-import com.example.parentsletterproject.R;
+-
+-public class BlankFragment extends Fragment {
+-
+-    private BlankViewModel mViewModel;
+-
+-    public static BlankFragment newInstance() {
+-        return new BlankFragment();
+-    }
+-
+-    @Override
+-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+-                             @Nullable Bundle savedInstanceState) {
+-        return inflater.inflate(R.layout.fragment_blank, container, false);
+-    }
+-
+-    @Override
+-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+-        super.onActivityCreated(savedInstanceState);
+-        mViewModel = new ViewModelProvider(this).get(BlankViewModel.class);
+-        // TODO: Use the ViewModel
+-    }
+-
+-}
+\ No newline at end of file
+Index: app/src/main/res/layout/spinner_item.xml
+===================================================================
+diff --git a/app/src/main/res/layout/spinner_item.xml b/app/src/main/res/layout/spinner_item.xml
+deleted file mode 100644
+--- a/app/src/main/res/layout/spinner_item.xml	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ /dev/null	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
+@@ -1,11 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<TextView
+-    xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:id="@+id/spinner_inner_text"
+-    android:layout_width="match_parent"
+-    android:layout_height="wrap_content"
+-    android:textSize="18dp"
+-    android:textAlignment="center"
+-    style="?android:attr/spinnerItemStyle"
+-    android:paddingTop="4dp"
+-    android:paddingBottom="4dp" />
+\ No newline at end of file
+Index: app/src/main/java/com/example/parentsletterproject/activity/MealActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/activity/MealActivity.java b/app/src/main/java/com/example/parentsletterproject/activity/MealActivity.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/parentsletterproject/activity/MealActivity.java	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ /dev/null	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
+@@ -1,138 +0,0 @@
+-package com.example.parentsletterproject.activity;
+-
+-import android.os.AsyncTask;
+-import android.os.Bundle;
+-import android.widget.TextView;
+-
+-import com.example.parentsletterproject.R;
+-
+-import androidx.appcompat.app.AppCompatActivity;
+-
+-import org.w3c.dom.Document;
+-import org.w3c.dom.Element;
+-import org.w3c.dom.Node;
+-import org.w3c.dom.NodeList;
+-import org.xml.sax.SAXException;
+-
+-import java.io.IOException;
+-import java.util.ArrayList;
+-
+-import javax.xml.parsers.DocumentBuilder;
+-import javax.xml.parsers.DocumentBuilderFactory;
+-import javax.xml.parsers.ParserConfigurationException;
+-
+-public class MealActivity extends AppCompatActivity {
+-
+-    TextView textView1, textView2, textView3;
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        setContentView(R.layout.activity_meal);
+-
+-        String url = "https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=c0dadaab5ff14ca48e48aa850bb3652a&Type=xml&pIndex=1&pSize=10&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7751096";
+-        MealActivity.OpenAPI dust = new MealActivity.OpenAPI(url);
+-        dust.execute();
+-
+-        textView1 = (TextView) findViewById(R.id.to_text);
+-        textView2 = (TextView) findViewById(R.id.yester_text);
+-        textView3 = (TextView) findViewById(R.id.tomo_text);
+-
+-        //System.out.println(list.get(0));
+-    }
+-
+-    class OpenAPI extends AsyncTask<Void, Void, String> {
+-
+-        private String url;
+-        private ArrayList<String> list;
+-
+-        public OpenAPI(String url) {
+-
+-            this.url = url;
+-        }
+-
+-        @Override
+-        protected String doInBackground(Void... params) {
+-
+-            // parsing할 url 지정(API 키 포함해서)
+-
+-            DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
+-            DocumentBuilder dBuilder = null;
+-            try {
+-                dBuilder = dbFactoty.newDocumentBuilder();
+-            } catch (ParserConfigurationException e) {
+-                e.printStackTrace();
+-            }
+-            Document doc = null;
+-            try {
+-                doc = dBuilder.parse(url);
+-            } catch (IOException | SAXException e) {
+-                e.printStackTrace();
+-            }
+-
+-            // root tag
+-            doc.getDocumentElement().normalize();
+-            System.out.println("Root element: " + doc.getDocumentElement().getNodeName()); // Root element: result
+-
+-            // 파싱할 tag
+-            NodeList nList = doc.getElementsByTagName("row");
+-
+-            list = new ArrayList<>();
+-
+-            for(int temp = 0; temp < nList.getLength(); temp++){
+-                Node nNode = nList.item(temp);
+-                if(nNode.getNodeType() == Node.ELEMENT_NODE){
+-
+-                    Element eElement = (Element) nNode;
+-
+-                    String data = getTagValue("MLSV_YMD", eElement);
+-                    String meal_menu = getTagValue("DDISH_NM", eElement);
+-
+-                    // System.out.println("OPEN_API data : "+data);
+-                    //System.out.println("OPEN_API 급식 메뉴 : "+meal_menu);
+-
+-                    String trim = "[<br/>*]";
+-
+-                    String resultMealMenu = meal_menu.toString().replaceAll(trim, " ");
+-
+-                    System.out.println(resultMealMenu);
+-
+-                    list.add(resultMealMenu);
+-
+-                    //Log.d("OPEN_API", "data  : " + getTagValue("MLSV_YMD", eElement));
+-                    //Log.d("OPEN_API", "급식 메뉴  : " + getTagValue("DDISH_NM", eElement));
+-                }   // for end
+-            }   // if end
+-            ;
+-            //System.out.println(list);
+-
+-            return null;
+-        }
+-
+-        @Override
+-        protected void onPostExecute(String str) {
+-            super.onPostExecute(str);
+-            textView1.setText(list.get(0).toString());
+-            textView2.setText(list.get(1).toString());
+-            textView3.setText(list.get(2).toString());
+-
+-
+-        }
+-
+-        private String getTagValue(String tag, Element eElement) {
+-            NodeList nlList = eElement.getElementsByTagName(tag).item(0).getChildNodes();
+-            Node nValue = (Node) nlList.item(0);
+-            if(nValue == null)
+-                return null;
+-            return nValue.getNodeValue();
+-        }
+-
+-        public ArrayList<String> getList() {
+-
+-            //doInBackground();
+-            return list;
+-        }
+-
+-    }
+-
+-}
+Index: app/src/main/java/com/example/parentsletterproject/server/Board.java
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/server/Board.java b/app/src/main/java/com/example/parentsletterproject/server/Board.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/parentsletterproject/server/Board.java	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ /dev/null	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
+@@ -1,42 +0,0 @@
+-package com.example.parentsletterproject.server;
+-
+-import com.google.gson.annotations.Expose;
+-import com.google.gson.annotations.SerializedName;
+-
+-public class Board {
+-    @SerializedName("postName")
+-    @Expose
+-    private String postName;
+-    @SerializedName("postBody")
+-    @Expose
+-    private String postBody;
+-
+-    public Board(String postName, String postBody) {
+-        this.postName = postName;
+-        this.postBody = postBody;
+-    }
+-
+-    public String getPostName() {
+-        return postName;
+-    }
+-
+-    public void setPostName(String postName) {
+-        this.postName = postName;
+-    }
+-
+-    public String getPostBody() {
+-        return postBody;
+-    }
+-
+-    public void setPostBody(String postBody) {
+-        this.postBody = postBody;
+-    }
+-
+-    @Override
+-    public String toString() {
+-        return "Board{" +
+-                "postName='" + postName + '\'' +
+-                ", postBody='" + postBody + '\'' +
+-                '}';
+-    }
+-}
+Index: app/src/main/res/layout/spin_dropdown.xml
+===================================================================
+diff --git a/app/src/main/res/layout/spin_dropdown.xml b/app/src/main/res/layout/spin_dropdown.xml
+deleted file mode 100644
+--- a/app/src/main/res/layout/spin_dropdown.xml	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ /dev/null	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
+@@ -1,9 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-
+-<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:id="@android:id/text1"
+-    style="?android:attr/spinnerDropDownItemStyle"
+-    android:singleLine="true"
+-    android:layout_width="match_parent"
+-    android:layout_height="wrap_content"
+-    android:ellipsize="marquee"/>
+\ No newline at end of file
+Index: app/src/main/java/com/example/parentsletterproject/action/BoardAdapter.java
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/action/BoardAdapter.java b/app/src/main/java/com/example/parentsletterproject/action/BoardAdapter.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/parentsletterproject/action/BoardAdapter.java	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ /dev/null	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
+@@ -1,55 +0,0 @@
+-package com.example.parentsletterproject.action;
+-
+-import android.view.LayoutInflater;
+-import android.view.View;
+-import android.view.ViewGroup;
+-import android.widget.TextView;
+-
+-import androidx.annotation.NonNull;
+-import androidx.recyclerview.widget.RecyclerView;
+-
+-import com.example.parentsletterproject.R;
+-import com.example.parentsletterproject.server.Board;
+-
+-import java.util.List;
+-
+-public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> {
+-
+-    private List<Board> items;
+-
+-    public BoardAdapter(List<Board> items) {
+-        this.items = items;
+-    }
+-
+-    @NonNull
+-    @Override
+-    public BoardAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.board_recycler, parent, false);
+-        return new ViewHolder(itemView);
+-    }
+-
+-    @Override
+-    public void onBindViewHolder(@NonNull BoardAdapter.ViewHolder holder, int position) {
+-        Board item = items.get(position);
+-        holder.setItem(item);
+-    }
+-
+-    @Override
+-    public int getItemCount() {
+-        return items.size();
+-    }
+-
+-    public static class ViewHolder extends RecyclerView.ViewHolder {
+-        private TextView postName;
+-
+-        public ViewHolder(@NonNull View itemView) {
+-            super(itemView);
+-            postName = itemView.findViewById(R.id.post_name);
+-        }
+-
+-        public void setItem(Board item) {
+-            postName.setText(item.getPostName());
+-        }
+-    }
+-
+-}
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_blank.xml
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_blank.xml b/app/src/main/res/layout/fragment_blank.xml
+deleted file mode 100644
+--- a/app/src/main/res/layout/fragment_blank.xml	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ /dev/null	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
+@@ -1,13 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:tools="http://schemas.android.com/tools"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    tools:context=".action.BlankFragment">
+-
+-    <TextView
+-        android:layout_width="match_parent"
+-        android:layout_height="match_parent"
+-        android:text="Hello" />
+-
+-</FrameLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/board_recycler.xml
+===================================================================
+diff --git a/app/src/main/res/layout/board_recycler.xml b/app/src/main/res/layout/board_recycler.xml
+deleted file mode 100644
+--- a/app/src/main/res/layout/board_recycler.xml	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ /dev/null	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
+@@ -1,47 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools"
+-    android:layout_width="match_parent"
+-    android:layout_height="wrap_content">
+-
+-    <androidx.cardview.widget.CardView
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_margin="8dp"
+-        app:cardBackgroundColor="@color/white"
+-        app:cardCornerRadius="16dp"
+-        app:cardElevation="10dp"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toTopOf="parent">
+-
+-        <androidx.constraintlayout.widget.ConstraintLayout
+-            android:layout_width="match_parent"
+-            android:layout_height="match_parent">
+-
+-            <LinearLayout
+-                android:layout_width="match_parent"
+-                android:layout_height="match_parent"
+-                android:gravity="center"
+-                android:orientation="vertical"
+-                app:layout_constraintBottom_toBottomOf="parent"
+-                app:layout_constraintEnd_toEndOf="parent"
+-                app:layout_constraintStart_toStartOf="parent"
+-                app:layout_constraintTop_toTopOf="parent">
+-
+-                <TextView
+-                    android:id="@+id/post_name"
+-                    android:layout_width="wrap_content"
+-                    android:layout_height="wrap_content"
+-                    android:layout_marginTop="8dp"
+-                    android:layout_marginBottom="8dp"
+-                    android:textSize="18sp"
+-                    tools:text="test" />
+-            </LinearLayout>
+-
+-        </androidx.constraintlayout.widget.ConstraintLayout>
+-
+-    </androidx.cardview.widget.CardView>
+-</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/parentsletterproject/activity/LoginRequest.java
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/activity/LoginRequest.java b/app/src/main/java/com/example/parentsletterproject/activity/LoginRequest.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/parentsletterproject/activity/LoginRequest.java	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ /dev/null	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
+@@ -1,28 +0,0 @@
+-package com.example.parentsletterproject.activity;
+-
+-import com.android.volley.AuthFailureError;
+-import com.android.volley.Response;
+-import com.android.volley.toolbox.StringRequest;
+-
+-import java.util.HashMap;
+-import java.util.Map;
+-
+-public class LoginRequest extends StringRequest {
+-
+-    //서버 URL 설정(php 파일 연동)
+-    final static private String URL = "http://jjmo97/Login.php";
+-    private Map<String, String> map;
+-
+-    public LoginRequest(String userID, String userPassword, Response.Listener<String> listener) {
+-        super(Method.POST, URL, listener, null);
+-
+-        map = new HashMap<>();
+-        map.put("userID", userID);
+-        map.put("userPassword", userPassword);
+-    }
+-
+-    @Override
+-    protected Map<String, String>getParams() throws AuthFailureError {
+-        return map;
+-    }
+-}
+\ No newline at end of file
+Index: app/src/main/java/com/example/parentsletterproject/server/ClassName.java
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/server/ClassName.java b/app/src/main/java/com/example/parentsletterproject/server/ClassName.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/parentsletterproject/server/ClassName.java	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ /dev/null	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
+@@ -1,29 +0,0 @@
+-package com.example.parentsletterproject.server;
+-
+-import com.google.gson.annotations.Expose;
+-import com.google.gson.annotations.SerializedName;
+-
+-public class ClassName {
+-    @SerializedName("className")
+-    @Expose
+-    private String className;
+-
+-    public ClassName(String className) {
+-        this.className = className;
+-    }
+-
+-    public String getClassName() {
+-        return className;
+-    }
+-
+-    public void setClassName(String className) {
+-        this.className = className;
+-    }
+-
+-    @Override
+-    public String toString() {
+-        return "ClassName{" +
+-                "className='" + className + '\'' +
+-                '}';
+-    }
+-}
+Index: app/src/main/res/layout/add_class.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<RelativeLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    android:layout_width=\"fill_parent\"\n    android:layout_height=\"fill_parent\"\n    android:orientation=\"vertical\"\n    android:paddingLeft=\"16dp\"\n    android:paddingRight=\"16dp\"\n    android:paddingTop=\"16dp\" >\n\n    <TextView\n        android:id=\"@+id/add_student_logo\"\n        android:layout_width=\"221dp\"\n        android:layout_height=\"54dp\"\n        android:layout_marginBottom=\"16dp\"\n        android:text=\"@string/add_class\"\n        android:textSize=\"35sp\" />\n\n    <TextView\n        android:id=\"@+id/textview_add_student_name\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_below=\"@+id/add_student_logo\"\n        android:text=\"@string/put_name_of_class\"\n        android:textAppearance=\"?android:attr/textAppearanceMedium\" />\n\n    <EditText\n        android:id=\"@+id/edittext_add_class_name\"\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"wrap_content\"\n        android:layout_below=\"@+id/textview_add_student_name\"\n        android:layout_marginBottom=\"10dp\"\n        android:ems=\"10\"\n        android:minHeight=\"48dp\">\n\n    </EditText>\n\n    <TextView\n        android:id=\"@+id/textview_add_class_teacher_id\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_below=\"@+id/edittext_add_class_name\"\n        android:text=\"@string/put_id_of_teacher\"\n        android:textAppearance=\"?android:attr/textAppearanceMedium\" />\n\n    <EditText\n        android:id=\"@+id/edittext_add_teacher_id\"\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"wrap_content\"\n        android:layout_below=\"@+id/textview_add_student_name\"\n        android:layout_marginTop=\"80dp\"\n        android:layout_marginBottom=\"10dp\"\n        android:ems=\"10\"\n        android:minHeight=\"48dp\" />\n\n    <TextView\n        android:id=\"@+id/textview_add_teacher_name\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_below=\"@+id/edittext_add_teacher_id\"\n        android:layout_marginTop=\"2dp\"\n        android:text=\"@string/put_name_of_teacher\"\n        android:textSize=\"18sp\" />\n\n    <EditText\n        android:id=\"@+id/edittext_add_teacher_name\"\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"wrap_content\"\n        android:layout_below=\"@+id/textview_add_class_teacher_id\"\n        android:layout_marginTop=\"78dp\"\n        android:ems=\"10\"\n        android:inputType=\"textPersonName\"\n        android:minHeight=\"48dp\" />\n\n    <Button\n        android:id=\"@+id/add_class_submit\"\n        android:layout_width=\"100dp\"\n        android:layout_height=\"wrap_content\"\n        android:layout_below=\"@+id/edittext_add_teacher_name\"\n        android:layout_marginTop=\"12dp\"\n        android:layout_marginBottom=\"10dp\"\n        android:text=\"@string/add_button\" />\n\n</RelativeLayout>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/add_class.xml b/app/src/main/res/layout/add_class.xml
+--- a/app/src/main/res/layout/add_class.xml	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/app/src/main/res/layout/add_class.xml	(date 1654632137053)
+@@ -77,7 +77,6 @@
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/edittext_add_teacher_name"
+         android:layout_marginTop="12dp"
+-        android:layout_marginBottom="10dp"
+         android:text="@string/add_button" />
+ 
+ </RelativeLayout>
+Index: app/src/main/java/com/example/parentsletterproject/activity/TeacherClassManagementActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.parentsletterproject.activity;\n\nimport androidx.annotation.NonNull;\nimport androidx.appcompat.app.AlertDialog;\nimport androidx.appcompat.app.AppCompatActivity;\nimport androidx.recyclerview.widget.LinearLayoutManager;\nimport androidx.recyclerview.widget.RecyclerView;\n\nimport android.content.Intent;\nimport android.os.Bundle;\nimport android.util.Log;\nimport android.view.LayoutInflater;\nimport android.view.View;\nimport android.widget.ArrayAdapter;\nimport android.widget.Button;\nimport android.widget.EditText;\n\nimport com.example.parentsletterproject.R;\nimport com.example.parentsletterproject.action.ClassAdapter;\nimport com.example.parentsletterproject.server.ClassName;\nimport com.example.parentsletterproject.server.Classroom;\nimport com.example.parentsletterproject.server.ClassroomList;\nimport com.example.parentsletterproject.server.RetrofitClient;\nimport com.example.parentsletterproject.server.RetrofitInterface;\n\nimport java.util.ArrayList;\nimport java.util.List;\n\nimport okhttp3.ResponseBody;\nimport retrofit2.Call;\nimport retrofit2.Callback;\nimport retrofit2.Response;\n\npublic class TeacherClassManagementActivity extends AppCompatActivity {\n\n    private RetrofitClient retrofitClient;\n    private RetrofitInterface retrofitInterface;\n    private RecyclerView recyclerView;\n    private RecyclerView.Adapter classAdapter;\n    private ArrayAdapter arrayAdapter;\n    private Button addButton;\n    private Button delButton;\n    private Classroom classroom;\n    private List<ClassName> classNameList;\n    private EditText editText;\n\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n\n        super.onCreate(savedInstanceState);\n        setContentView(R.layout.activity_teacher_class_management);\n\n        // 반 추가\n        addButton = (Button) findViewById(R.id.add_class_button);\n        addButton.setOnClickListener(v -> {\n\n            AlertDialog.Builder ad = new AlertDialog.Builder(TeacherClassManagementActivity.this);\n            LayoutInflater inflater = getLayoutInflater();\n            View view = inflater.inflate(R.layout.add_class, null);\n            ad.setView(view);\n\n            final Button submit = (Button) view.findViewById(R.id.add_class_submit);\n            final EditText className = (EditText) view.findViewById(R.id.edittext_add_class_name);\n            final EditText tId = (EditText) view.findViewById(R.id.edittext_add_teacher_id);\n            final EditText tName = (EditText) view.findViewById(R.id.edittext_add_teacher_name);\n\n            final AlertDialog dialog = ad.create();\n            submit.setOnClickListener(new View.OnClickListener() {\n\n                @Override\n                public void onClick(View view) {\n                    String resultClassName = className.getText().toString();\n                    String resultTId = tId.getText().toString();\n                    String resultTName = tName.getText().toString();\n\n                    retrofitClient = RetrofitClient.getInstance();\n                    retrofitInterface = RetrofitClient.getRetrofitInterface();\n                    retrofitInterface.putClassroom(resultClassName, resultTName, resultTId).enqueue(new Callback<Classroom>() {\n                        @Override\n                        public void onResponse(Call<Classroom> call, Response<Classroom> response) {\n\n                            Log.d(\"Retrofit PUT\", \"삽입 성공\");\n                        }\n\n                        @Override\n                        public void onFailure(Call<Classroom> call, Throwable t) {\n                            Log.e(\"Retrofit PUT\", t.getMessage().toString());\n                        }\n                    });\n\n                    dialog.dismiss();\n\n                    finish();//인텐트 종료\n                    overridePendingTransition(0, 0);//인텐트 효과 없애기\n                    Intent intent = getIntent(); //인텐트\n                    startActivity(intent); //액티비티 열기\n                    overridePendingTransition(0, 0);//인텐트 효과 없애기\n                }\n\n\n            });\n\n            dialog.show();\n\n\n\n        });\n\n        // 반 삭제\n        delButton = (Button)findViewById(R.id.del_class_button);\n        delButton.setOnClickListener(view -> {\n\n            AlertDialog.Builder ad = new AlertDialog.Builder(TeacherClassManagementActivity.this);\n            LayoutInflater inflater = getLayoutInflater();\n            View view1 = inflater.inflate(R.layout.del_class, null);\n            ad.setView(view1);\n\n            ArrayList<String> item = new ArrayList<>();\n            retrofitClient = RetrofitClient.getInstance();\n            retrofitInterface = RetrofitClient.getRetrofitInterface();\n            retrofitInterface.getClassName().enqueue(new Callback<List<ClassName>>() {\n                @Override\n                public void onResponse(Call<List<ClassName>> call, Response<List<ClassName>> response) {\n                    List<ClassName> classNames = response.body();\n                    for (ClassName className : classNames) {\n                        item.add(className.getClassName());\n                    }\n                }\n\n                @Override\n                public void onFailure(Call<List<ClassName>> call, Throwable t) {\n                    Log.e(\"Retrofit spinner\", t.getMessage().toString());\n                }\n            });\n\n            ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.spin_dropdown, item);\n\n            adapter.notifyDataSetChanged();\n\n            final AlertDialog dialog = ad.create();\n\n            final Button submit = (Button) view1.findViewById(R.id.del_class_submit);\n            submit.setOnClickListener(new View.OnClickListener() {\n\n                @Override\n                public void onClick(View view) {\n\n                    editText = (EditText) view1.findViewById(R.id.class_name_text);\n                    String className = editText.getText().toString();\n                    retrofitInterface.deleteClassroom(className).enqueue(new Callback<ResponseBody>() {\n\n                        @Override\n                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {\n                            Log.d(\"Retrofit DELETE\", \"삭제 성공\");\n                        }\n\n                        @Override\n                        public void onFailure(Call<ResponseBody> call, Throwable t) {\n                            Log.e(\"Retrofit DELETE\", t.getMessage().toString());\n                        }\n                    });\n\n                    dialog.dismiss();\n\n                    finish();//인텐트 종료\n                    overridePendingTransition(0, 0);//인텐트 효과 없애기\n                    Intent intent = getIntent(); //인텐트\n                    startActivity(intent); //액티비티 열기\n                    overridePendingTransition(0, 0);//인텐트 효과 없애기\n\n                }\n\n            });\n\n            dialog.show();\n\n        });\n\n        // 반 조회\n        recyclerView = findViewById(R.id.RecyclerView);\n        LinearLayoutManager layoutManager\n                = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);\n        recyclerView.setLayoutManager(layoutManager);\n        // recyclerview No adapter attached; skipping layout 에러 로그가 떠서 콜백 함수 전에 setAdapter\n        classAdapter = new ClassAdapter(new ArrayList<>());\n        recyclerView.setAdapter(classAdapter);\n\n        retrofitClient = RetrofitClient.getInstance();\n        retrofitInterface = RetrofitClient.getRetrofitInterface();\n        retrofitInterface.getClassroomList().enqueue(new Callback<List<ClassroomList>>() {\n            @Override\n            public void onResponse(@NonNull Call<List<ClassroomList>> call, @NonNull Response<List<ClassroomList>> response) {\n                classAdapter = new ClassAdapter(response.body());\n                recyclerView.setAdapter(classAdapter);\n                Log.d(\"Retrofit GET\", \"조회 성공\");\n            }\n\n            @Override\n            public void onFailure(@NonNull Call<List<ClassroomList>> call, @NonNull Throwable t) {\n                Log.e(\"Retrofit GET\", t.getMessage().toString());\n            }\n        });\n\n    }\n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/activity/TeacherClassManagementActivity.java b/app/src/main/java/com/example/parentsletterproject/activity/TeacherClassManagementActivity.java
+--- a/app/src/main/java/com/example/parentsletterproject/activity/TeacherClassManagementActivity.java	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/app/src/main/java/com/example/parentsletterproject/activity/TeacherClassManagementActivity.java	(date 1654631976918)
+@@ -6,18 +6,19 @@
+ import androidx.recyclerview.widget.LinearLayoutManager;
+ import androidx.recyclerview.widget.RecyclerView;
+ 
+-import android.content.Intent;
++import android.annotation.SuppressLint;
+ import android.os.Bundle;
+ import android.util.Log;
+ import android.view.LayoutInflater;
++import android.view.MenuItem;
+ import android.view.View;
+ import android.widget.ArrayAdapter;
+ import android.widget.Button;
+ import android.widget.EditText;
++import android.widget.Spinner;
+ 
+ import com.example.parentsletterproject.R;
+ import com.example.parentsletterproject.action.ClassAdapter;
+-import com.example.parentsletterproject.server.ClassName;
+ import com.example.parentsletterproject.server.Classroom;
+ import com.example.parentsletterproject.server.ClassroomList;
+ import com.example.parentsletterproject.server.RetrofitClient;
+@@ -26,7 +27,6 @@
+ import java.util.ArrayList;
+ import java.util.List;
+ 
+-import okhttp3.ResponseBody;
+ import retrofit2.Call;
+ import retrofit2.Callback;
+ import retrofit2.Response;
+@@ -41,8 +41,6 @@
+     private Button addButton;
+     private Button delButton;
+     private Classroom classroom;
+-    private List<ClassName> classNameList;
+-    private EditText editText;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -51,7 +49,7 @@
+         setContentView(R.layout.activity_teacher_class_management);
+ 
+         // 반 추가
+-        addButton = (Button) findViewById(R.id.add_class_button);
++        addButton = (Button) findViewById(R.id.add_student_button);
+         addButton.setOnClickListener(v -> {
+ 
+             AlertDialog.Builder ad = new AlertDialog.Builder(TeacherClassManagementActivity.this);
+@@ -89,90 +87,51 @@
+                     });
+ 
+                     dialog.dismiss();
+-
+-                    finish();//인텐트 종료
+-                    overridePendingTransition(0, 0);//인텐트 효과 없애기
+-                    Intent intent = getIntent(); //인텐트
+-                    startActivity(intent); //액티비티 열기
+-                    overridePendingTransition(0, 0);//인텐트 효과 없애기
+                 }
+-
+ 
+             });
+ 
+             dialog.show();
+ 
+-
+-
+         });
+ 
+         // 반 삭제
+-        delButton = (Button)findViewById(R.id.del_class_button);
++        delButton = (Button)findViewById(R.id.del_student_button);
+         delButton.setOnClickListener(view -> {
+ 
+             AlertDialog.Builder ad = new AlertDialog.Builder(TeacherClassManagementActivity.this);
+-            LayoutInflater inflater = getLayoutInflater();
+-            View view1 = inflater.inflate(R.layout.del_class, null);
+-            ad.setView(view1);
++            ad.setTitle("반 삭제");
++            ad.setMessage("삭제할 반을 선택하세요");
+ 
+-            ArrayList<String> item = new ArrayList<>();
++            final Spinner spinner = new Spinner(TeacherClassManagementActivity.this);
++            ad.setView(spinner);
++
+             retrofitClient = RetrofitClient.getInstance();
+             retrofitInterface = RetrofitClient.getRetrofitInterface();
+-            retrofitInterface.getClassName().enqueue(new Callback<List<ClassName>>() {
++            retrofitInterface.getClassroomList().enqueue(new Callback<List<ClassroomList>>() {
+                 @Override
+-                public void onResponse(Call<List<ClassName>> call, Response<List<ClassName>> response) {
+-                    List<ClassName> classNames = response.body();
+-                    for (ClassName className : classNames) {
+-                        item.add(className.getClassName());
+-                    }
++                public void onResponse(@NonNull Call<List<ClassroomList>> call, @NonNull Response<List<ClassroomList>> response) {
++                    // new ClassAdapter(response.body());
++
++                    Log.d("Retrofit", "Succeed!");
+                 }
+ 
+                 @Override
+-                public void onFailure(Call<List<ClassName>> call, Throwable t) {
+-                    Log.e("Retrofit spinner", t.getMessage().toString());
++                public void onFailure(@NonNull Call<List<ClassroomList>> call, @NonNull Throwable t) {
++                    Log.e("Retrofit", "Fail!");
+                 }
+             });
+ 
+-            ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.spin_dropdown, item);
+-
+-            adapter.notifyDataSetChanged();
+-
+-            final AlertDialog dialog = ad.create();
+-
+-            final Button submit = (Button) view1.findViewById(R.id.del_class_submit);
+-            submit.setOnClickListener(new View.OnClickListener() {
+-
+-                @Override
+-                public void onClick(View view) {
+ 
+-                    editText = (EditText) view1.findViewById(R.id.class_name_text);
+-                    String className = editText.getText().toString();
+-                    retrofitInterface.deleteClassroom(className).enqueue(new Callback<ResponseBody>() {
++            spinner.setAdapter(arrayAdapter);
+ 
+-                        @Override
+-                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+-                            Log.d("Retrofit DELETE", "삭제 성공");
+-                        }
++            ad.setPositiveButton("확인", (dialogInterface, i) -> {
+ 
+-                        @Override
+-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+-                            Log.e("Retrofit DELETE", t.getMessage().toString());
+-                        }
+-                    });
++            });
+ 
+-                    dialog.dismiss();
++            ad.setNegativeButton("취소", (dialogInterface, i) -> dialogInterface.dismiss());
+ 
+-                    finish();//인텐트 종료
+-                    overridePendingTransition(0, 0);//인텐트 효과 없애기
+-                    Intent intent = getIntent(); //인텐트
+-                    startActivity(intent); //액티비티 열기
+-                    overridePendingTransition(0, 0);//인텐트 효과 없애기
+-
+-                }
+-
+-            });
+-
+-            dialog.show();
++            ad.show();
+ 
+         });
+ 
+@@ -192,6 +151,7 @@
+             public void onResponse(@NonNull Call<List<ClassroomList>> call, @NonNull Response<List<ClassroomList>> response) {
+                 classAdapter = new ClassAdapter(response.body());
+                 recyclerView.setAdapter(classAdapter);
++
+                 Log.d("Retrofit GET", "조회 성공");
+             }
+ 
+Index: app/src/main/java/com/example/parentsletterproject/activity/BoardDetailActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.parentsletterproject.activity;\n\nimport androidx.appcompat.app.AppCompatActivity;\n\nimport android.os.Bundle;\nimport com.example.parentsletterproject.R;\n\npublic class BoardDetailActivity extends AppCompatActivity {\n\n    // 선택한 게시물의 번호\n    String board_seq = \"\";\n\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        super.onCreate(savedInstanceState);\n        setContentView(R.layout.activity_board_detail);\n\n        // ListActivity 에서 넘긴 변수들을 받아줌\n        board_seq = getIntent().getStringExtra(\"board_seq\");\n\n    }\n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/activity/BoardDetailActivity.java b/app/src/main/java/com/example/parentsletterproject/activity/BoardDetailActivity.java
+--- a/app/src/main/java/com/example/parentsletterproject/activity/BoardDetailActivity.java	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/app/src/main/java/com/example/parentsletterproject/activity/BoardDetailActivity.java	(date 1654631976919)
+@@ -3,21 +3,14 @@
+ import androidx.appcompat.app.AppCompatActivity;
+ 
+ import android.os.Bundle;
++
+ import com.example.parentsletterproject.R;
+ 
+ public class BoardDetailActivity extends AppCompatActivity {
+ 
+-    // 선택한 게시물의 번호
+-    String board_seq = "";
+-
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_board_detail);
+-
+-        // ListActivity 에서 넘긴 변수들을 받아줌
+-        board_seq = getIntent().getStringExtra("board_seq");
+-
+     }
+-
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_teacher_class_management.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:id=\"@+id/teacher_class_management_layout\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    tools:context=\".activity.TeacherClassManagementActivity\">\n\n    <androidx.constraintlayout.widget.ConstraintLayout\n        android:id=\"@+id/AddDelClassLayout\"\n        android:layout_width=\"402dp\"\n        android:layout_height=\"52dp\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.444\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:layout_constraintVertical_bias=\"0.023\">\n\n        <Button\n            android:id=\"@+id/add_class_button\"\n            android:layout_width=\"120dp\"\n            android:layout_height=\"48dp\"\n            android:text=\"반 추가\"\n            app:layout_constraintBottom_toBottomOf=\"parent\"\n            app:layout_constraintEnd_toStartOf=\"@+id/del_class_button\"\n            app:layout_constraintHorizontal_bias=\"0.568\"\n            app:layout_constraintStart_toStartOf=\"parent\"\n            app:layout_constraintTop_toTopOf=\"parent\"\n            app:layout_constraintVertical_bias=\"0.0\" />\n\n        <Button\n            android:id=\"@+id/del_class_button\"\n            android:layout_width=\"120dp\"\n            android:layout_height=\"48dp\"\n            android:layout_marginEnd=\"56dp\"\n            android:text=\"반 삭제\"\n            app:layout_constraintBottom_toBottomOf=\"parent\"\n            app:layout_constraintEnd_toEndOf=\"parent\"\n            app:layout_constraintTop_toTopOf=\"parent\"\n            app:layout_constraintVertical_bias=\"0.0\" />\n\n    </androidx.constraintlayout.widget.ConstraintLayout>\n\n    <androidx.recyclerview.widget.RecyclerView\n        android:id=\"@+id/RecyclerView\"\n        android:layout_width=\"383dp\"\n        android:layout_height=\"632dp\"\n        app:layoutManager=\"androidx.recyclerview.widget.LinearLayoutManager\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/AddDelClassLayout\" />\n\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_teacher_class_management.xml b/app/src/main/res/layout/activity_teacher_class_management.xml
+--- a/app/src/main/res/layout/activity_teacher_class_management.xml	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/app/src/main/res/layout/activity_teacher_class_management.xml	(date 1654632137051)
+@@ -8,7 +8,7 @@
+     tools:context=".activity.TeacherClassManagementActivity">
+ 
+     <androidx.constraintlayout.widget.ConstraintLayout
+-        android:id="@+id/AddDelClassLayout"
++        android:id="@+id/AddDelStudentLayout"
+         android:layout_width="402dp"
+         android:layout_height="52dp"
+         app:layout_constraintBottom_toBottomOf="parent"
+@@ -19,19 +19,19 @@
+         app:layout_constraintVertical_bias="0.023">
+ 
+         <Button
+-            android:id="@+id/add_class_button"
++            android:id="@+id/add_student_button"
+             android:layout_width="120dp"
+             android:layout_height="48dp"
+             android:text="반 추가"
+             app:layout_constraintBottom_toBottomOf="parent"
+-            app:layout_constraintEnd_toStartOf="@+id/del_class_button"
++            app:layout_constraintEnd_toStartOf="@+id/del_student_button"
+             app:layout_constraintHorizontal_bias="0.568"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent"
+             app:layout_constraintVertical_bias="0.0" />
+ 
+         <Button
+-            android:id="@+id/del_class_button"
++            android:id="@+id/del_student_button"
+             android:layout_width="120dp"
+             android:layout_height="48dp"
+             android:layout_marginEnd="56dp"
+@@ -51,6 +51,6 @@
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toBottomOf="@+id/AddDelClassLayout" />
++        app:layout_constraintTop_toBottomOf="@+id/AddDelStudentLayout" />
+ 
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_parents_home.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    tools:context=\".activity.ParentsHomeActivity\"\n\n\n    >\n\n    <LinearLayout\n        android:id=\"@+id/linearLayout2\"\n        android:layout_width=\"400dp\"\n        android:layout_height=\"142dp\"\n        android:orientation=\"horizontal\"\n        app:barrierMargin=\"@dimen/material_emphasis_medium\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.454\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:layout_constraintVertical_bias=\"0.027\">\n\n        <ImageView\n            android:id=\"@+id/imageView\"\n            android:layout_width=\"172dp\"\n            android:layout_height=\"match_parent\"\n            android:layout_weight=\"1\"\n            app:srcCompat=\"@drawable/imjawong\" />\n\n        <LinearLayout\n            android:layout_width=\"190dp\"\n            android:layout_height=\"match_parent\"\n            android:layout_weight=\"1\"\n            android:orientation=\"vertical\">\n\n            <TextView\n                android:id=\"@+id/textView5\"\n                android:layout_width=\"137dp\"\n                android:layout_height=\"68dp\"\n                android:gravity=\"center\"\n                android:text=\"김 아 주\"\n                android:textSize=\"20sp\" />\n\n            <TextView\n                android:id=\"@+id/textView6\"\n                android:layout_width=\"137dp\"\n                android:layout_height=\"76dp\"\n                android:gravity=\"center\"\n                android:text=\"새 싹 반\"\n                android:textSize=\"20sp\" />\n        </LinearLayout>\n\n        <TextView\n            android:id=\"@+id/textView7\"\n            android:layout_width=\"196dp\"\n            android:layout_height=\"match_parent\"\n            android:layout_weight=\"1\"\n            android:gravity=\"center\"\n            android:text=\"등원\"\n            android:textSize=\"20sp\" />\n\n\n    </LinearLayout>\n\n    <Button\n        android:id=\"@+id/button\"\n        android:layout_width=\"400dp\"\n        android:layout_height=\"55dp\"\n        android:layout_weight=\"1\"\n        android:background=\"@color/main_color\"\n        android:text=\"선생님과 연락하기\"\n        android:textAlignment=\"center\"\n        android:textSize=\"20sp\"\n        android:textStyle=\"bold\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.454\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/linearLayout2\"\n        app:layout_constraintVertical_bias=\"0.023\"\n        tools:ignore=\"TextContrastCheck\" />\n\n    <Button\n        android:id=\"@+id/button7\"\n        android:layout_width=\"400dp\"\n        android:layout_height=\"55dp\"\n        android:background=\"@color/main_color\"\n        android:text=\"체육 활동 중\"\n        android:textAlignment=\"center\"\n        android:textSize=\"20sp\"\n        android:textStyle=\"bold\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.454\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/button\"\n        app:layout_constraintVertical_bias=\"0.026\"\n        tools:ignore=\"TextContrastCheck\" />\n\n    <LinearLayout\n        android:id=\"@+id/linearLayout\"\n        android:layout_width=\"400dp\"\n        android:layout_height=\"148dp\"\n        android:orientation=\"vertical\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.454\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/button7\"\n        app:layout_constraintVertical_bias=\"0.059\">\n\n        <Button\n            android:id=\"@+id/posting\"\n            android:layout_width=\"400dp\"\n            android:layout_height=\"55dp\"\n            android:background=\"@color/main_color\"\n            android:text=\"알림장\"\n            android:textSize=\"20sp\"\n            android:textStyle=\"bold\"\n            tools:ignore=\"TextContrastCheck\" />\n\n        <TextView\n            android:id=\"@+id/notice_text\"\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"92dp\"\n            android:layout_gravity=\"center|center_horizontal|center_vertical\"\n            android:background=\"#C5C5C5\"\n            android:text=\"TextView\"\n            android:textAlignment=\"center\"\n            android:textAllCaps=\"false\"\n            android:textSize=\"16sp\" />\n    </LinearLayout>\n\n    <LinearLayout\n        android:id=\"@+id/linearLayout3\"\n        android:layout_width=\"400dp\"\n        android:layout_height=\"217dp\"\n        android:layout_marginTop=\"8dp\"\n        android:orientation=\"vertical\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.454\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/linearLayout\"\n        app:layout_constraintVertical_bias=\"0.2\">\n\n        <Button\n            android:id=\"@+id/meal\"\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"55dp\"\n            android:background=\"@color/main_color\"\n            android:text=\"2022년 6월 03일\"\n            android:textSize=\"20sp\"\n            tools:ignore=\"TextContrastCheck,DuplicateClickableBoundsCheck\" />\n\n        <TextView\n            android:id=\"@+id/meal_notice\"\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"161dp\"\n            android:background=\"#C5C5C5\"\n            android:text=\"TextView\"\n            android:textAlignment=\"center\"\n            android:textSize=\"16sp\" />\n    </LinearLayout>\n\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_parents_home.xml b/app/src/main/res/layout/activity_parents_home.xml
+--- a/app/src/main/res/layout/activity_parents_home.xml	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/app/src/main/res/layout/activity_parents_home.xml	(date 1654632137052)
+@@ -112,7 +112,7 @@
+         app:layout_constraintVertical_bias="0.059">
+ 
+         <Button
+-            android:id="@+id/posting"
++            android:id="@+id/button5"
+             android:layout_width="400dp"
+             android:layout_height="55dp"
+             android:background="@color/main_color"
+@@ -147,7 +147,7 @@
+         app:layout_constraintVertical_bias="0.2">
+ 
+         <Button
+-            android:id="@+id/meal"
++            android:id="@+id/button6"
+             android:layout_width="match_parent"
+             android:layout_height="55dp"
+             android:background="@color/main_color"
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    tools:context=\".activity.MainActivity\">\n\n    <Button\n        android:id=\"@+id/class_button\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:text=\"반 관리\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\" />\n\n    <Button\n        android:id=\"@+id/stu_button\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:text=\"학생 관리\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.492\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:layout_constraintVertical_bias=\"0.327\" />\n\n    <Button\n        android:id=\"@+id/board_button\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:text=\"알림장\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/class_button\" />\n\n    <Button\n        android:id=\"@+id/meal_button\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:text=\"식단\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.501\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:layout_constraintVertical_bias=\"0.62\" />\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml
+--- a/app/src/main/res/layout/activity_main.xml	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/app/src/main/res/layout/activity_main.xml	(date 1654632137053)
+@@ -37,16 +37,4 @@
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/class_button" />
+-
+-    <Button
+-        android:id="@+id/meal_button"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:text="식단"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintHorizontal_bias="0.501"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toTopOf="parent"
+-        app:layout_constraintVertical_bias="0.62" />
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/parentsletterproject/activity/BoardRegisterActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.parentsletterproject.activity;\n\nimport androidx.appcompat.app.AppCompatActivity;\n\nimport android.os.Bundle;\nimport android.util.Log;\nimport android.view.View;\nimport android.widget.Button;\nimport android.widget.EditText;\nimport com.example.parentsletterproject.R;\nimport com.example.parentsletterproject.server.Board;\nimport com.example.parentsletterproject.server.RetrofitClient;\nimport com.example.parentsletterproject.server.RetrofitInterface;\n\nimport retrofit2.Call;\nimport retrofit2.Callback;\nimport retrofit2.Response;\n\npublic class BoardRegisterActivity extends AppCompatActivity {\n\n    private RetrofitClient retrofitClient;\n    private RetrofitInterface retrofitInterface;\n\n    // 사용할 컴포넌트 선언\n    EditText title_et, content_et;\n    Button reg_button;\n\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        super.onCreate(savedInstanceState);\n        setContentView(R.layout.activity_board_register);\n\n        title_et = findViewById(R.id.title_et);\n        content_et = findViewById(R.id.content_et);\n        reg_button = findViewById(R.id.reg_button);\n\n        reg_button.setOnClickListener(new View.OnClickListener() {\n            @Override\n            public void onClick(View view) {\n\n                String resultPostName = title_et.getText().toString();\n                String resultPostBody = content_et.getText().toString();\n\n                System.out.println(resultPostName);\n                System.out.println(resultPostBody);\n\n                retrofitClient = RetrofitClient.getInstance();\n                retrofitInterface = RetrofitClient.getRetrofitInterface();\n                retrofitInterface.putBoard(resultPostName, resultPostBody).enqueue(new Callback<Board>() {\n                    @Override\n                    public void onResponse(Call<Board> call, Response<Board> response) {\n                        Log.d(\"Retrofit PUT\", \"삽입 성공\");\n                    }\n\n                    @Override\n                    public void onFailure(Call<Board> call, Throwable t) {\n                        Log.e(\"Retrofit PUT\", t.getMessage().toString());\n                    }\n                });\n\n            }\n        });\n\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/activity/BoardRegisterActivity.java b/app/src/main/java/com/example/parentsletterproject/activity/BoardRegisterActivity.java
+--- a/app/src/main/java/com/example/parentsletterproject/activity/BoardRegisterActivity.java	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/app/src/main/java/com/example/parentsletterproject/activity/BoardRegisterActivity.java	(date 1654631976919)
+@@ -1,65 +1,23 @@
+ package com.example.parentsletterproject.activity;
+ 
+-import androidx.appcompat.app.AppCompatActivity;
+-
+ import android.os.Bundle;
+-import android.util.Log;
+-import android.view.View;
+-import android.widget.Button;
+-import android.widget.EditText;
++
++import androidx.appcompat.app.AppCompatActivity;
+ import com.example.parentsletterproject.R;
+-import com.example.parentsletterproject.server.Board;
+-import com.example.parentsletterproject.server.RetrofitClient;
+-import com.example.parentsletterproject.server.RetrofitInterface;
+-
+-import retrofit2.Call;
+-import retrofit2.Callback;
+-import retrofit2.Response;
+ 
+ public class BoardRegisterActivity extends AppCompatActivity {
+ 
+-    private RetrofitClient retrofitClient;
+-    private RetrofitInterface retrofitInterface;
+ 
+-    // 사용할 컴포넌트 선언
+-    EditText title_et, content_et;
+-    Button reg_button;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_board_register);
+ 
+-        title_et = findViewById(R.id.title_et);
+-        content_et = findViewById(R.id.content_et);
+-        reg_button = findViewById(R.id.reg_button);
+-
+-        reg_button.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View view) {
+-
+-                String resultPostName = title_et.getText().toString();
+-                String resultPostBody = content_et.getText().toString();
+-
+-                System.out.println(resultPostName);
+-                System.out.println(resultPostBody);
+ 
+-                retrofitClient = RetrofitClient.getInstance();
+-                retrofitInterface = RetrofitClient.getRetrofitInterface();
+-                retrofitInterface.putBoard(resultPostName, resultPostBody).enqueue(new Callback<Board>() {
+-                    @Override
+-                    public void onResponse(Call<Board> call, Response<Board> response) {
+-                        Log.d("Retrofit PUT", "삽입 성공");
+-                    }
++    }
+ 
+-                    @Override
+-                    public void onFailure(Call<Board> call, Throwable t) {
+-                        Log.e("Retrofit PUT", t.getMessage().toString());
+-                    }
+-                });
+ 
+-            }
+-        });
++
+ 
+-    }
+-}
+\ No newline at end of file
++}
+Index: app/src/main/res/layout/activity_teacher_student_management.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:id=\"@+id/teacher_student_management_layout\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    tools:context=\".activity.TeacherStudentManagementActivity\">\n\n    <androidx.constraintlayout.widget.ConstraintLayout\n        android:id=\"@+id/AddDelStudentLayout\"\n        android:layout_width=\"402dp\"\n        android:layout_height=\"52dp\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.444\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:layout_constraintVertical_bias=\"0.023\">\n\n        <Button\n            android:id=\"@+id/add_student_button\"\n            android:layout_width=\"120dp\"\n            android:layout_height=\"48dp\"\n            android:text=\"원생 추가\"\n            app:layout_constraintBottom_toBottomOf=\"parent\"\n            app:layout_constraintEnd_toStartOf=\"@+id/del_student_button\"\n            app:layout_constraintHorizontal_bias=\"0.568\"\n            app:layout_constraintStart_toStartOf=\"parent\"\n            app:layout_constraintTop_toTopOf=\"parent\"\n            app:layout_constraintVertical_bias=\"0.0\" />\n\n        <Button\n            android:id=\"@+id/del_student_button\"\n            android:layout_width=\"120dp\"\n            android:layout_height=\"48dp\"\n            android:layout_marginEnd=\"56dp\"\n            android:text=\"원생 삭제\"\n            app:layout_constraintBottom_toBottomOf=\"parent\"\n            app:layout_constraintEnd_toEndOf=\"parent\"\n            app:layout_constraintTop_toTopOf=\"parent\"\n            app:layout_constraintVertical_bias=\"0.0\" />\n\n    </androidx.constraintlayout.widget.ConstraintLayout>\n\n    <androidx.recyclerview.widget.RecyclerView\n        android:id=\"@+id/RecyclerView\"\n        android:layout_width=\"383dp\"\n        android:layout_height=\"632dp\"\n        app:layoutManager=\"androidx.recyclerview.widget.LinearLayoutManager\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/AddDelStudentLayout\" />\n\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_teacher_student_management.xml b/app/src/main/res/layout/activity_teacher_student_management.xml
+--- a/app/src/main/res/layout/activity_teacher_student_management.xml	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/app/src/main/res/layout/activity_teacher_student_management.xml	(date 1654632137051)
+@@ -2,10 +2,10 @@
+ <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+-    android:id="@+id/teacher_student_management_layout"
++    android:id="@+id/teacher_class_management_layout"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".activity.TeacherStudentManagementActivity">
++    tools:context=".activity.TeacherClassManagementActivity">
+ 
+     <androidx.constraintlayout.widget.ConstraintLayout
+         android:id="@+id/AddDelStudentLayout"
+Index: app/src/main/res/layout/activity_teacher_home.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    tools:context=\".activity.TeacherHomeActivity\">\n\n    <TextView\n        android:id=\"@+id/textView2\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:text=\"Kinder Book\"\n        android:textAlignment=\"center\"\n        android:textColor=\"@color/main_color\"\n        android:textSize=\"40dp\"\n        android:textStyle=\"bold\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:layout_constraintVertical_bias=\"0.057\" />\n\n    <Button\n        android:id=\"@+id/student\"\n        android:layout_width=\"190dp\"\n        android:layout_height=\"55dp\"\n        android:background=\"@color/main_color\"\n        android:text=\"학생관리\"\n        android:textSize=\"20sp\"\n        android:textStyle=\"bold\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.022\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/textView2\"\n        app:layout_constraintVertical_bias=\"0.058\"\n        tools:ignore=\"TextContrastCheck\" />\n\n    <Button\n        android:id=\"@+id/class_manage\"\n        android:layout_width=\"190dp\"\n        android:layout_height=\"55dp\"\n        android:background=\"@color/main_color\"\n        android:text=\"반관리\"\n        android:textSize=\"20sp\"\n        android:textStyle=\"bold\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.761\"\n        app:layout_constraintStart_toEndOf=\"@+id/student\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:layout_constraintVertical_bias=\"0.185\" />\n\n    <Button\n        android:id=\"@+id/board_button\"\n        android:layout_width=\"400dp\"\n        android:layout_height=\"55dp\"\n        android:background=\"@color/main_color\"\n        android:text=\"학부모와 연락하기\"\n        android:textSize=\"20sp\"\n        android:textStyle=\"bold\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.454\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/student\"\n        app:layout_constraintVertical_bias=\"0.027\"\n        tools:ignore=\"TextContrastCheck\" />\n\n    <Button\n        android:id=\"@+id/button4\"\n        android:layout_width=\"400dp\"\n        android:layout_height=\"55dp\"\n        android:background=\"@color/main_color\"\n        android:text=\"체육 활동 중\"\n        android:textSize=\"20sp\"\n        android:textStyle=\"bold\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.454\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/board_button\"\n        app:layout_constraintVertical_bias=\"0.034\"\n        tools:ignore=\"TextContrastCheck\" />\n\n    <LinearLayout\n        android:id=\"@+id/linearLayout\"\n        android:layout_width=\"400dp\"\n        android:layout_height=\"148dp\"\n        android:orientation=\"vertical\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.454\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/button4\"\n        app:layout_constraintVertical_bias=\"0.059\">\n\n        <Button\n            android:id=\"@+id/posting\"\n            android:layout_width=\"400dp\"\n            android:layout_height=\"55dp\"\n            android:background=\"@color/main_color\"\n            android:text=\"알림장\"\n            android:textSize=\"20sp\"\n            android:textStyle=\"bold\"\n            tools:ignore=\"TextContrastCheck\" />\n\n        <TextView\n            android:id=\"@+id/notice_text\"\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"92dp\"\n            android:layout_gravity=\"center|center_horizontal|center_vertical\"\n            android:background=\"#C5C5C5\"\n            android:text=\"TextView\"\n            android:textAlignment=\"center\"\n            android:textAllCaps=\"false\"\n            android:textSize=\"16sp\" />\n    </LinearLayout>\n\n    <LinearLayout\n        android:id=\"@+id/linearLayout3\"\n        android:layout_width=\"400dp\"\n        android:layout_height=\"217dp\"\n        android:layout_marginTop=\"8dp\"\n        android:orientation=\"vertical\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.454\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/linearLayout\"\n        app:layout_constraintVertical_bias=\"0.2\">\n\n        <Button\n            android:id=\"@+id/meal\"\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"55dp\"\n            android:background=\"@color/main_color\"\n            android:text=\"2022년 6월 03일\"\n            android:textSize=\"20sp\"\n            tools:ignore=\"TextContrastCheck,DuplicateClickableBoundsCheck\" />\n\n        <TextView\n            android:id=\"@+id/meal_notice\"\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"161dp\"\n            android:background=\"#C5C5C5\"\n            android:text=\"TextView\"\n            android:textAlignment=\"center\"\n            android:textSize=\"16sp\" />\n    </LinearLayout>\n\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_teacher_home.xml b/app/src/main/res/layout/activity_teacher_home.xml
+--- a/app/src/main/res/layout/activity_teacher_home.xml	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/app/src/main/res/layout/activity_teacher_home.xml	(date 1654632137052)
+@@ -22,49 +22,34 @@
+         app:layout_constraintVertical_bias="0.057" />
+ 
+     <Button
+-        android:id="@+id/student"
+-        android:layout_width="190dp"
++        android:id="@+id/attendance"
++        android:layout_width="400dp"
+         android:layout_height="55dp"
+         android:background="@color/main_color"
+-        android:text="학생관리"
++        android:text="출석 관리"
+         android:textSize="20sp"
+         android:textStyle="bold"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintHorizontal_bias="0.022"
++        app:layout_constraintHorizontal_bias="0.454"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/textView2"
+-        app:layout_constraintVertical_bias="0.058"
++        app:layout_constraintVertical_bias="0.049"
+         tools:ignore="TextContrastCheck" />
+ 
+-    <Button
+-        android:id="@+id/class_manage"
+-        android:layout_width="190dp"
+-        android:layout_height="55dp"
+-        android:background="@color/main_color"
+-        android:text="반관리"
+-        android:textSize="20sp"
+-        android:textStyle="bold"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintHorizontal_bias="0.761"
+-        app:layout_constraintStart_toEndOf="@+id/student"
+-        app:layout_constraintTop_toTopOf="parent"
+-        app:layout_constraintVertical_bias="0.185" />
+-
+     <Button
+         android:id="@+id/board_button"
+         android:layout_width="400dp"
+         android:layout_height="55dp"
+         android:background="@color/main_color"
+-        android:text="학부모와 연락하기"
++        android:text="선생님과 연락하기"
+         android:textSize="20sp"
+         android:textStyle="bold"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.454"
+         app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toBottomOf="@+id/student"
++        app:layout_constraintTop_toBottomOf="@+id/attendance"
+         app:layout_constraintVertical_bias="0.027"
+         tools:ignore="TextContrastCheck" />
+ 
+@@ -97,7 +82,7 @@
+         app:layout_constraintVertical_bias="0.059">
+ 
+         <Button
+-            android:id="@+id/posting"
++            android:id="@+id/button5"
+             android:layout_width="400dp"
+             android:layout_height="55dp"
+             android:background="@color/main_color"
+@@ -132,7 +117,7 @@
+         app:layout_constraintVertical_bias="0.2">
+ 
+         <Button
+-            android:id="@+id/meal"
++            android:id="@+id/button6"
+             android:layout_width="match_parent"
+             android:layout_height="55dp"
+             android:background="@color/main_color"
+Index: app/src/main/res/layout/activity_board_detail.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    tools:context=\".activity.BoardDetailActivity\">\n\n    <TextView\n        android:id=\"@+id/textView9\"\n        android:layout_width=\"362dp\"\n        android:layout_height=\"52dp\"\n        android:text=\"TextView\"\n        tools:layout_editor_absoluteX=\"24dp\"\n        tools:layout_editor_absoluteY=\"30dp\" />\n\n    <TextView\n        android:id=\"@+id/textView10\"\n        android:layout_width=\"355dp\"\n        android:layout_height=\"627dp\"\n        android:text=\"TextView\"\n        tools:layout_editor_absoluteX=\"28dp\"\n        tools:layout_editor_absoluteY=\"104dp\" />\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_board_detail.xml b/app/src/main/res/layout/activity_board_detail.xml
+--- a/app/src/main/res/layout/activity_board_detail.xml	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/app/src/main/res/layout/activity_board_detail.xml	(date 1654632137053)
+@@ -6,19 +6,4 @@
+     android:layout_height="match_parent"
+     tools:context=".activity.BoardDetailActivity">
+ 
+-    <TextView
+-        android:id="@+id/textView9"
+-        android:layout_width="362dp"
+-        android:layout_height="52dp"
+-        android:text="TextView"
+-        tools:layout_editor_absoluteX="24dp"
+-        tools:layout_editor_absoluteY="30dp" />
+-
+-    <TextView
+-        android:id="@+id/textView10"
+-        android:layout_width="355dp"
+-        android:layout_height="627dp"
+-        android:text="TextView"
+-        tools:layout_editor_absoluteX="28dp"
+-        tools:layout_editor_absoluteY="104dp" />
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\n  <component name=\"GradleSettings\">\n    <option name=\"linkedExternalProjectsSettings\">\n      <GradleProjectSettings>\n        <option name=\"testRunner\" value=\"GRADLE\" />\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\n        <option name=\"modules\">\n          <set>\n            <option value=\"$PROJECT_DIR$\" />\n            <option value=\"$PROJECT_DIR$/app\" />\n          </set>\n        </option>\n      </GradleProjectSettings>\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/.idea/gradle.xml	(date 1654633555861)
+@@ -11,6 +11,7 @@
+           <set>
+             <option value="$PROJECT_DIR$" />
+             <option value="$PROJECT_DIR$/app" />
++            <option value="$PROJECT_DIR$/timetableview" />
+           </set>
+         </option>
+       </GradleProjectSettings>
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\n    <string name=\"app_name\">가정통신문 Demo</string>\n    <string name=\"search\">검색</string>\n    <string name=\"add_button\">추가</string>\n    <string name=\"del_button\">삭제</string>\n    <string name=\"add_class\">반 추가</string>\n    <string name=\"del_class\">반 삭제</string>\n    <string name=\"add_student\">원생 추가</string>\n    <string name=\"del_student\">원생 삭제</string>\n    <string name=\"put_name_of_class\">추가할 반의 이름을 입력하세요</string>\n    <string name=\"put_id_of_teacher\">담임 교사의 ID를 입력하세요</string>\n    <string name=\"put_name_of_student\">추가할 원생의 이름을 입력하세요</string>\n    <string name=\"put_name_of_teacher\">담임 교사의 이름을 입력하세요</string>\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+--- a/app/src/main/res/values/strings.xml	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/app/src/main/res/values/strings.xml	(date 1654633694505)
+@@ -11,4 +11,21 @@
+     <string name="put_id_of_teacher">담임 교사의 ID를 입력하세요</string>
+     <string name="put_name_of_student">추가할 원생의 이름을 입력하세요</string>
+     <string name="put_name_of_teacher">담임 교사의 이름을 입력하세요</string>
++
++    <string-array name="header_title">
++        <item></item>
++        <item>Mon</item>
++        <item>Tue</item>
++        <item>Wed</item>
++        <item>Thu</item>
++        <item>Fri</item>
++    </string-array>
++
++    <string-array name="days">
++        <item>Mon</item>
++        <item>Tue</item>
++        <item>Wed</item>
++        <item>Thu</item>
++        <item>Fri</item>
++    </string-array>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/java/com/example/parentsletterproject/activity/mealActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/activity/mealActivity.java b/app/src/main/java/com/example/parentsletterproject/activity/mealActivity.java
+new file mode 100644
+--- /dev/null	(date 1654632137037)
++++ b/app/src/main/java/com/example/parentsletterproject/activity/mealActivity.java	(date 1654632137037)
+@@ -0,0 +1,26 @@
++package com.example.parentsletterproject.activity;
++
++import android.os.Bundle;
++
++import com.example.parentsletterproject.R;
++
++import androidx.annotation.NonNull;
++import androidx.appcompat.app.AppCompatActivity;
++
++import android.content.Intent;
++import android.os.Bundle;
++import android.widget.CalendarView;
++import android.widget.EditText;
++import android.widget.TextView;
++
++public class mealActivity extends AppCompatActivity {
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_meal);
++
++        TextView to_text = (TextView) findViewById(R.id.to_text);
++        //to_text.setText();
++    }
++}
+Index: app/src/main/res/drawable/ic_kitty.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/ic_kitty.xml b/app/src/main/res/drawable/ic_kitty.xml
+new file mode 100644
+--- /dev/null	(date 1654632137048)
++++ b/app/src/main/res/drawable/ic_kitty.xml	(date 1654632137048)
+@@ -0,0 +1,44 @@
++<vector android:height="24dp" android:viewportHeight="512"
++    android:viewportWidth="512" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
++    <path android:fillColor="#BD4568" android:pathData="M170.991,283.153C137.845,299.728 64.142,373.6 33.083,441.072c-3.312,7.195 -0.617,15.758 6.263,19.685c48.015,27.407 167.804,23.111 224.694,13.003c23.381,-52.235 4.501,-199.788 4.501,-199.788L170.991,283.153z"/>
++    <path android:fillColor="#EDA751" android:pathData="M61.626,472.594c-3.486,0 -6.993,-1.174 -9.883,-3.579c-6.564,-5.463 -7.457,-15.213 -1.993,-21.777c27.654,-33.227 52.162,-39.648 73.783,-45.313c15.905,-4.167 29.64,-7.766 45.06,-22.576c6.161,-5.915 15.949,-5.718 21.863,0.44c5.916,6.159 5.719,15.948 -0.44,21.864c-21.222,20.383 -41.103,25.593 -58.645,30.189c-19.606,5.137 -36.538,9.573 -57.852,35.18C70.461,470.697 66.059,472.594 61.626,472.594z"/>
++    <path android:fillColor="#FCD79D" android:pathData="M58.992,436.991c-3.042,3.105 -6.121,6.497 -9.243,10.248c-5.464,6.564 -4.571,16.314 1.993,21.777c2.89,2.405 6.396,3.579 9.883,3.579c4.434,0 8.836,-1.897 11.893,-5.571c2.944,-3.538 5.803,-6.658 8.599,-9.446C76.381,447.9 67.186,440.444 58.992,436.991z"/>
++    <path android:fillColor="#EDA751" android:pathData="M147.036,511.635c-8.912,0 -17.521,-4.829 -21.94,-13.273c-6.336,-12.106 -1.659,-27.056 10.447,-33.393c28.199,-14.76 42.338,-33.368 54.812,-49.787c1.406,-1.851 2.779,-3.657 4.13,-5.407c8.351,-10.813 23.89,-12.811 34.703,-4.459c10.814,8.352 12.81,23.889 4.459,34.703c-1.274,1.65 -2.567,3.352 -3.893,5.097c-14.048,18.491 -33.289,43.814 -71.266,63.692C154.826,510.726 150.903,511.635 147.036,511.635z"/>
++    <path android:fillColor="#EDA751" android:pathData="M267.041,512c-7.107,0 -14.159,-3.046 -19.053,-8.943c-8.724,-10.515 -7.273,-26.113 3.241,-34.838c20.329,-16.867 16.206,-40.008 14.552,-43.865c-5.384,-12.558 0.431,-27.103 12.99,-32.488c12.559,-5.384 27.104,0.432 32.488,12.99c9.518,22.201 10.216,69.373 -28.432,101.442C278.208,510.131 272.608,512 267.041,512z"/>
++    <path android:fillColor="#EDA751" android:pathData="M335.653,365.049c-12.263,0 -22.905,-9.109 -24.507,-21.594c-1.74,-13.553 7.838,-25.949 21.389,-27.688c17.321,-2.222 70.373,-31.069 101.366,-55.118c10.796,-8.377 26.337,-6.415 34.714,4.38c8.375,10.795 6.415,26.337 -4.38,34.713c-30.933,24.001 -93.388,60.995 -125.401,65.103C337.766,364.983 336.701,365.049 335.653,365.049z"/>
++    <path android:fillAlpha="0.2" android:fillColor="#A35F00"
++        android:pathData="M381.379,350.217c0.338,-17.327 -3.093,-34.355 -10.022,-50.24c-16.586,8.645 -31.182,14.809 -38.822,15.79c-13.552,1.739 -23.129,14.135 -21.389,27.688c1.602,12.485 12.245,21.594 24.507,21.594c1.049,0 2.113,-0.066 3.181,-0.204C350.13,363.396 365.223,357.841 381.379,350.217z" android:strokeAlpha="0.2"/>
++    <path android:fillAlpha="0.2" android:fillColor="#A35F00"
++        android:pathData="M278.771,391.866c-12.559,5.384 -18.374,19.93 -12.99,32.488c1.654,3.857 5.777,26.998 -14.552,43.865c-1.507,1.25 -2.82,2.645 -3.952,4.142c0.78,0.013 1.561,0.037 2.339,0.037c22.753,0 44.928,-5.508 64.476,-15.793c4.892,-20.332 2.328,-39.712 -2.833,-51.749C305.875,392.299 291.33,386.483 278.771,391.866z" android:strokeAlpha="0.2"/>
++    <path android:fillAlpha="0.2" android:fillColor="#A35F00"
++        android:pathData="M229.189,405.317c-10.813,-8.352 -26.352,-6.354 -34.703,4.459c-1.352,1.75 -2.724,3.556 -4.13,5.407c-7.159,9.422 -14.872,19.565 -25.47,29.289c13.884,10.445 29.768,18.206 46.893,22.865c7.102,-7.914 12.884,-15.516 17.976,-22.219c1.326,-1.745 2.619,-3.447 3.893,-5.097C241.999,429.206 240.003,413.668 229.189,405.317z" android:strokeAlpha="0.2"/>
++    <path android:fillAlpha="0.2" android:fillColor="#A35F00"
++        android:pathData="M168.592,379.349c-14.126,13.568 -26.84,17.727 -41.103,21.533c4.16,7.859 9.206,15.385 15.123,22.459c1.215,1.453 2.464,2.872 3.735,4.267c13.598,-4.375 28.28,-11.175 43.667,-25.954c6.158,-5.916 6.355,-15.704 0.44,-21.864C184.541,373.632 174.753,373.434 168.592,379.349z" android:strokeAlpha="0.2"/>
++    <path android:fillColor="#FCD690" android:pathData="M234.082,451.424a106.034,114.102 97.193,1 0,26.552 -210.399a106.034,114.102 97.193,1 0,-26.552 210.399z"/>
++    <path android:fillColor="#FF91AB" android:pathData="M247.709,429.085c-0.919,0 -1.841,-0.032 -2.764,-0.098c-12.04,-0.853 -21.813,-7.239 -26.816,-17.519c-1.813,-3.725 -0.262,-8.213 3.463,-10.026c3.727,-1.813 8.213,-0.262 10.025,3.462c3.374,6.934 9.686,8.787 14.389,9.12c7.133,0.513 14.746,-2.401 17.693,-6.763c2.319,-3.431 6.981,-4.333 10.414,-2.014c3.432,2.32 4.333,6.982 2.014,10.414C270.57,423.883 259.395,429.085 247.709,429.085z"/>
++    <path android:fillColor="#FF91AB" android:pathData="M284.401,377.75m-42.937,0a42.937,42.937 0,1 1,85.874 0a42.937,42.937 0,1 1,-85.874 0"/>
++    <path android:fillAlpha="0.15" android:fillColor="#C17A00"
++        android:pathData="M217.73,448.215c-47.451,-40.493 -22.635,-108.087 -10.011,-137.424l8.48,-67.223c-42.958,10.667 -76.496,44.573 -82.021,88.368C127.507,384.819 163.979,433.88 217.73,448.215z" android:strokeAlpha="0.15"/>
++    <path android:fillColor="#BD4568" android:pathData="M144.533,271.819c-18.143,2.152 -29.456,47.092 9.175,50.359c52.761,4.461 106.94,10.438 129.792,24.609c4.01,2.487 9.009,2.496 13.139,0.215c21.706,-11.986 60.284,-11.155 72.69,-13.073c28.737,-4.443 15.33,-49.419 -2.946,-48.403C348.107,286.542 144.533,271.819 144.533,271.819z"/>
++    <path android:fillColor="#EDA751" android:pathData="M201.551,156.944c23.313,-17.497 39.906,-48.095 10.98,-96.231C183.376,12.196 136.821,-2.098 99.742,0.241c-9.141,0.576 -17.11,6.557 -20.217,15.174c-12.603,34.95 -11.882,83.645 26.559,125.191C144.224,181.827 178.239,174.441 201.551,156.944z"/>
++    <path android:fillColor="#FF91AB" android:pathData="M77.746,20.771c-10.648,34.458 -8.18,80.368 28.337,119.835c33.059,35.729 63.012,34.932 85.59,22.694C182.19,60.479 118.021,29.864 77.746,20.771z"/>
++    <path android:fillColor="#EDA751" android:pathData="M340.235,164.48c-21.28,-19.92 -34.46,-52.136 -0.488,-96.854c34.24,-45.072 82.07,-54.237 118.677,-47.895c9.025,1.564 16.299,8.373 18.454,17.275c8.742,36.11 2.749,84.44 -39.968,121.576C394.529,195.428 361.515,184.4 340.235,164.48z"/>
++    <path android:fillColor="#FF91AB" android:pathData="M478.066,42.523c6.851,35.409 -0.576,80.781 -41.155,116.059c-36.735,31.937 -66.426,27.899 -87.545,13.286C369.935,70.681 437.044,47.198 478.066,42.523z"/>
++    <path android:fillColor="#FFDC9C" android:pathData="M463.347,199.49c-4.819,88.697 -93.781,122.825 -200.918,117.004c-107.137,-5.821 -191.877,-49.389 -187.058,-138.085c4.82,-88.697 95.578,-155.88 202.714,-150.059S468.166,110.794 463.347,199.49z"/>
++    <path android:fillAlpha="0.15" android:fillColor="#C17A00"
++        android:pathData="M173.158,47.518c-55.875,25.509 -94.681,73.729 -97.787,130.891c-4.143,76.246 57.896,119.143 143.452,133.382C99.275,231.272 120.784,132.873 173.158,47.518z" android:strokeAlpha="0.15"/>
++    <path android:fillColor="#FF91AB" android:pathData="M200.452,205.996a28.008,35.178 93.113,1 0,3.042 -55.934a28.008,35.178 93.113,1 0,-3.042 55.934z"/>
++    <path android:fillColor="#FF91AB" android:pathData="M393.923,160.38a28.008,35.178 93.113,1 0,-3.042 55.934a28.008,35.178 93.113,1 0,3.042 -55.934z"/>
++    <path android:fillColor="#495059" android:pathData="M223.986,158.729c-0.138,0 -0.275,-0.003 -0.414,-0.011c-4.136,-0.225 -7.307,-3.76 -7.082,-7.895l0.674,-12.403c0.226,-4.137 3.764,-7.315 7.896,-7.082c4.136,0.225 7.307,3.76 7.082,7.895l-0.674,12.403C231.251,155.633 227.941,158.729 223.986,158.729z"/>
++    <path android:fillColor="#495059" android:pathData="M373.429,166.849c-0.138,0 -0.275,-0.003 -0.414,-0.011c-4.136,-0.225 -7.307,-3.76 -7.082,-7.895l0.674,-12.403c0.226,-4.137 3.78,-7.308 7.896,-7.082c4.136,0.225 7.307,3.76 7.082,7.896l-0.674,12.403C380.693,163.753 377.384,166.849 373.429,166.849z"/>
++    <path android:fillColor="#495059" android:pathData="M299.605,172.352c-0.608,0 -1.218,-0.017 -1.828,-0.05c-9.715,-0.528 -18.725,-5.237 -24.719,-12.92c-2.548,-3.266 -1.966,-7.979 1.3,-10.527c3.265,-2.547 7.979,-1.966 10.526,1.3c3.326,4.264 8.322,6.877 13.707,7.169c5.372,0.292 10.633,-1.763 14.401,-5.643c2.886,-2.97 7.635,-3.04 10.605,-0.151c2.971,2.887 3.039,7.635 0.152,10.605C317.384,168.686 308.67,172.352 299.605,172.352z"/>
++    <path android:fillColor="#495059" android:pathData="M152.642,179.568c-3.522,0 -6.664,-2.493 -7.356,-6.08c-0.785,-4.067 1.876,-8.001 5.943,-8.786c9.776,-1.886 32.853,-2.355 43.966,-0.268c4.07,0.765 6.751,4.684 5.986,8.755c-0.765,4.072 -4.69,6.752 -8.756,5.987c-9.061,-1.702 -30.263,-1.307 -38.355,0.254C153.591,179.523 153.112,179.568 152.642,179.568z"/>
++    <path android:fillColor="#495059" android:pathData="M161.57,221.794c-2.44,0 -4.833,-1.189 -6.273,-3.381c-2.275,-3.461 -1.314,-8.111 2.146,-10.387c8.318,-5.469 29.476,-14.695 40.547,-17.001c4.048,-0.839 8.026,1.759 8.871,5.814c0.844,4.055 -1.759,8.027 -5.814,8.872c-9.027,1.879 -28.48,10.323 -35.363,14.849C164.414,221.395 162.984,221.794 161.57,221.794z"/>
++    <path android:fillColor="#495059" android:pathData="M442.077,195.295c-0.733,0 -1.478,-0.108 -2.214,-0.335c-7.873,-2.429 -28.914,-5.114 -38.101,-4.409c-4.163,0.313 -7.737,-2.771 -8.056,-6.899c-0.319,-4.13 2.77,-7.737 6.899,-8.056c11.272,-0.874 34.165,2.095 43.679,5.031c3.958,1.221 6.177,5.419 4.956,9.377C448.247,193.226 445.28,195.295 442.077,195.295z"/>
++    <path android:fillColor="#495059" android:pathData="M428.634,236.305c-1.682,0 -3.373,-0.562 -4.771,-1.716c-6.353,-5.245 -24.774,-15.747 -33.547,-18.593c-3.939,-1.279 -6.097,-5.509 -4.818,-9.449s5.508,-6.096 9.449,-4.818c10.757,3.491 30.79,14.956 38.467,21.293c3.193,2.637 3.645,7.364 1.008,10.559C432.939,235.376 430.794,236.305 428.634,236.305z"/>
++    <path android:fillColor="#EDA751" android:pathData="M164.291,403.677c-20.785,0 -39.72,-10.032 -49.481,-26.679c-5.724,-9.762 -7.901,-21.174 -6.293,-33.002c1.51,-11.119 6.326,-22.478 14.316,-33.762c7.893,-11.152 23.334,-13.792 34.488,-5.894c11.151,7.896 13.79,23.337 5.894,34.488c-5.632,7.954 -5.922,12.443 -5.691,13.211c0.471,0.71 3.848,2.552 8.437,2.067c13.595,-1.449 25.775,8.397 27.219,21.985c1.446,13.587 -8.397,25.773 -21.984,27.219C168.879,403.555 166.572,403.677 164.291,403.677z"/>
++    <path android:fillAlpha="0.07" android:fillColor="#FF000000"
++        android:pathData="M312.118,344.968c-25.319,12.929 -56.44,19.028 -68.629,19.721c-1.313,4.118 -2.028,8.503 -2.028,13.057c0,0.636 0.021,1.266 0.048,1.895c14.745,-0.283 51.067,-6.981 80.367,-22.842C319.35,352.29 316.036,348.285 312.118,344.968z" android:strokeAlpha="0.07"/>
++    <path android:fillAlpha="0.07" android:fillColor="#FF000000"
++        android:pathData="M327.149,381.656c0.116,-1.289 0.185,-2.591 0.185,-3.91c0,-4.37 -0.657,-8.586 -1.871,-12.559c-27.918,17.908 -69.839,25.33 -82.074,25.319c1.653,5.317 4.314,10.188 7.755,14.397C269.51,403.092 301.5,396.068 327.149,381.656z" android:strokeAlpha="0.07"/>
++</vector>
+Index: app/src/main/java/com/example/parentsletterproject/activity/TestTimeTable.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/activity/TestTimeTable.java b/app/src/main/java/com/example/parentsletterproject/activity/TestTimeTable.java
+new file mode 100644
+--- /dev/null	(date 1654631976916)
++++ b/app/src/main/java/com/example/parentsletterproject/activity/TestTimeTable.java	(date 1654631976916)
+@@ -0,0 +1,36 @@
++package com.example.parentsletterproject.activity;
++
++import androidx.appcompat.app.AppCompatActivity;
++
++import android.content.SharedPreferences;
++import android.os.Bundle;
++import android.preference.PreferenceManager;
++import android.widget.Toast;
++
++import com.example.parentsletterproject.R;
++import com.github.tlaabs.timetableview.TimetableView;
++
++public class TestTimeTable extends AppCompatActivity {
++
++    private TimetableView timetable;
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++
++
++
++        setContentView(R.layout.activity_test_time_table);
++
++        timetable = findViewById(R.id.timetable);
++        if(EditTimeTableMain.getCrurrentWeek()-1 <6)
++            timetable.setHeaderHighlight(EditTimeTableMain.getCrurrentWeek()-1);
++        SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(this);
++        String savedData = mPref.getString("timetable_demo","");
++        if(savedData == null && savedData.equals("")) return;
++        timetable.load(savedData);
++
++    }
++
++
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_test_time_table.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_test_time_table.xml b/app/src/main/res/layout/activity_test_time_table.xml
+new file mode 100644
+--- /dev/null	(date 1654632137050)
++++ b/app/src/main/res/layout/activity_test_time_table.xml	(date 1654632137050)
+@@ -0,0 +1,15 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context=".activity.TestTimeTable">
++
++    <com.github.tlaabs.timetableview.TimetableView
++        android:id="@+id/timetable"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        app:column_count="6"
++        app:row_count="12" />
++</androidx.appcompat.widget.LinearLayoutCompat>
+\ No newline at end of file
+Index: app/src/main/res/layout/time_box.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/time_box.xml b/app/src/main/res/layout/time_box.xml
+new file mode 100644
+--- /dev/null	(date 1654632137051)
++++ b/app/src/main/res/layout/time_box.xml	(date 1654632137051)
+@@ -0,0 +1,36 @@
++<?xml version="1.0" encoding="utf-8"?>
++<merge xmlns:android="http://schemas.android.com/apk/res/android">
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:orientation="horizontal"
++        >
++        <Spinner
++            android:id="@+id/day_spinner"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:spinnerMode="dialog"
++            android:entries="@array/days"
++            />
++        <TextView
++            android:id="@+id/start_time"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:textSize="20dp"
++            android:text="10:00"
++            />
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:textSize="20dp"
++            android:text=" - "
++            />
++        <TextView
++            android:id="@+id/end_time"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:textSize="20dp"
++            android:text="13:30"
++            />
++    </LinearLayout>
++</merge>
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_edit_time_table.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_edit_time_table.xml b/app/src/main/res/layout/activity_edit_time_table.xml
+new file mode 100644
+--- /dev/null	(date 1654632137050)
++++ b/app/src/main/res/layout/activity_edit_time_table.xml	(date 1654632137050)
+@@ -0,0 +1,40 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:orientation="vertical"
++    tools:context=".activity.EditTimeTableActivity">
++
++    <include layout="@layout/edit_appbar"/>
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:orientation="vertical">
++
++        <EditText
++            android:id="@+id/subject_edit"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:hint="Subject" />
++
++        <EditText
++            android:id="@+id/classroom_edit"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:hint="Classroom" />
++
++        <EditText
++            android:id="@+id/details_edit"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:hint="Details" />
++
++        <include layout="@layout/time_box"/>
++
++    </LinearLayout>
++
++
++</LinearLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/parentsletterproject/activity/EditTimeTableActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/activity/EditTimeTableActivity.java b/app/src/main/java/com/example/parentsletterproject/activity/EditTimeTableActivity.java
+new file mode 100644
+--- /dev/null	(date 1654631874814)
++++ b/app/src/main/java/com/example/parentsletterproject/activity/EditTimeTableActivity.java	(date 1654631874814)
+@@ -0,0 +1,197 @@
++//package com.example.parentsletterproject.activity;
++//
++//import androidx.appcompat.app.AppCompatActivity;
++//
++//import android.os.Bundle;
++//
++//import com.example.parentsletterproject.R;
++//
++//public class EditTimeTableActivity extends AppCompatActivity {
++//
++//    @Override
++//    protected void onCreate(Bundle savedInstanceState) {
++//        super.onCreate(savedInstanceState);
++//        setContentView(R.layout.activity_edit_time_table);
++//    }
++//}
++
++package com.example.parentsletterproject.activity;
++import android.app.TimePickerDialog;
++import android.content.Context;
++import android.content.Intent;
++import android.os.Bundle;
++import android.view.View;
++import android.widget.AdapterView;
++import android.widget.Button;
++import android.widget.EditText;
++import android.widget.Spinner;
++import android.widget.TextView;
++import android.widget.TimePicker;
++
++import androidx.appcompat.app.AppCompatActivity;
++
++import com.example.parentsletterproject.R;
++import com.github.tlaabs.timetableview.Schedule;
++import com.github.tlaabs.timetableview.Time;
++
++import java.util.ArrayList;
++
++public class EditTimeTableActivity extends AppCompatActivity implements View.OnClickListener {
++    public static final int RESULT_OK_ADD = 1;
++    public static final int RESULT_OK_EDIT = 2;
++    public static final int RESULT_OK_DELETE = 3;
++
++    private Context context;
++
++    private Button deleteBtn;
++    private Button submitBtn;
++    private EditText subjectEdit;
++    private EditText classroomEdit;
++    private EditText professorEdit;
++    private Spinner daySpinner;
++    private TextView startTv;
++    private TextView endTv;
++
++    //request mode
++    private int mode;
++
++    private Schedule schedule;
++    private int editIdx;
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_edit_time_table);
++        init();
++    }
++
++    private void init(){
++        this.context = this;
++        deleteBtn = findViewById(R.id.delete_btn);
++        submitBtn = findViewById(R.id.submit_btn);
++        subjectEdit = findViewById(R.id.subject_edit);
++        classroomEdit = findViewById(R.id.classroom_edit);
++        professorEdit = findViewById(R.id.details_edit);
++        daySpinner = findViewById(R.id.day_spinner);
++        startTv = findViewById(R.id.start_time);
++        endTv = findViewById(R.id.end_time);
++
++        //set the default time
++        schedule = new Schedule();
++        schedule.setStartTime(new Time(10,0));
++        schedule.setEndTime(new Time(13,30));
++
++        checkMode();
++        initView();
++    }
++
++    /** check whether the mode is ADD or EDIT */
++    private void checkMode(){
++        Intent i = getIntent();
++        mode = i.getIntExtra("mode", EditTimeTableMain.REQUEST_ADD);
++
++        if(mode == EditTimeTableMain.REQUEST_EDIT){
++            loadScheduleData();
++            deleteBtn.setVisibility(View.VISIBLE);
++        }
++    }
++    private void initView(){
++        submitBtn.setOnClickListener(this);
++        deleteBtn.setOnClickListener(this);
++
++        daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
++            @Override
++            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
++                schedule.setDay(position);
++            }
++
++            @Override
++            public void onNothingSelected(AdapterView<?> parent) {
++
++            }
++        });
++        startTv.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++                TimePickerDialog dialog = new TimePickerDialog(context,listener,schedule.getStartTime().getHour(), schedule.getStartTime().getMinute(), false);
++                dialog.show();
++            }
++
++            private TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
++                @Override
++                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
++                    startTv.setText(hourOfDay + ":" + minute);
++                    schedule.getStartTime().setHour(hourOfDay);
++                    schedule.getStartTime().setMinute(minute);
++                }
++            };
++        });
++        endTv.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++                TimePickerDialog dialog = new TimePickerDialog(context,listener,schedule.getEndTime().getHour(), schedule.getEndTime().getMinute(), false);
++                dialog.show();
++            }
++
++            private TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
++                @Override
++                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
++                    endTv.setText(hourOfDay + ":" + minute);
++                    schedule.getEndTime().setHour(hourOfDay);
++                    schedule.getEndTime().setMinute(minute);
++                }
++            };
++        });
++    }
++
++    @Override
++    public void onClick(View v) {
++        switch (v.getId()){
++            case R.id.submit_btn:
++                if(mode == EditTimeTableMain.REQUEST_ADD){
++                    inputDataProcessing();
++                    Intent i = new Intent();
++                    ArrayList<Schedule> schedules = new ArrayList<Schedule>();
++                    //you can add more schedules to ArrayList
++                    schedules.add(schedule);
++                    i.putExtra("schedules",schedules);
++                    setResult(RESULT_OK_ADD,i);
++                    finish();
++                }
++                else if(mode == EditTimeTableMain.REQUEST_EDIT){
++                    inputDataProcessing();
++                    Intent i = new Intent();
++                    ArrayList<Schedule> schedules = new ArrayList<Schedule>();
++                    schedules.add(schedule);
++                    i.putExtra("idx",editIdx);
++                    i.putExtra("schedules",schedules);
++                    setResult(RESULT_OK_EDIT,i);
++                    finish();
++                }
++                break;
++            case R.id.delete_btn:
++                Intent i = new Intent();
++                i.putExtra("idx",editIdx);
++                setResult(RESULT_OK_DELETE, i);
++                finish();
++                break;
++        }
++    }
++
++    private void loadScheduleData(){
++        Intent i = getIntent();
++        editIdx = i.getIntExtra("idx",-1);
++        ArrayList<Schedule> schedules = (ArrayList<Schedule>)i.getSerializableExtra("schedules");
++        schedule = schedules.get(0);
++        subjectEdit.setText(schedule.getClassTitle());
++        classroomEdit.setText(schedule.getClassPlace());
++        professorEdit.setText(schedule.getProfessorName());
++        daySpinner.setSelection(schedule.getDay());
++    }
++
++    private void inputDataProcessing(){
++        schedule.setClassTitle(subjectEdit.getText().toString());
++        schedule.setClassPlace(classroomEdit.getText().toString());
++        schedule.setProfessorName(professorEdit.getText().toString());
++    }
++}
+Index: app/src/main/res/layout/activity_edit_time_table_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_edit_time_table_main.xml b/app/src/main/res/layout/activity_edit_time_table_main.xml
+new file mode 100644
+--- /dev/null	(date 1654632137049)
++++ b/app/src/main/res/layout/activity_edit_time_table_main.xml	(date 1654632137049)
+@@ -0,0 +1,54 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:orientation="vertical"
++    tools:context=".activity.EditTimeTableMain">
++
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_margin="10dp"
++        android:gravity="center"
++        android:orientation="horizontal">
++
++        <Button
++            android:id="@+id/save_btn"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="Save" />
++
++        <Button
++            android:id="@+id/load_btn"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="Load" />
++
++        <Button
++            android:id="@+id/add_btn"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="Add" />
++
++        <Button
++            android:id="@+id/clear_btn"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="Clear" />
++
++    </LinearLayout>
++
++
++    <com.github.tlaabs.timetableview.TimetableView
++        android:id="@+id/timetable"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        app:header_highlight_image="@drawable/ic_kitty"
++        app:header_highlight_image_size="36dp"
++        app:header_highlight_type="image"
++        app:header_title="@array/header_title" />
++
++</LinearLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/parentsletterproject/activity/EditTimeTableMain.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/activity/EditTimeTableMain.java b/app/src/main/java/com/example/parentsletterproject/activity/EditTimeTableMain.java
+new file mode 100644
+--- /dev/null	(date 1654631899876)
++++ b/app/src/main/java/com/example/parentsletterproject/activity/EditTimeTableMain.java	(date 1654631899876)
+@@ -0,0 +1,148 @@
++package com.example.parentsletterproject.activity;
++import android.content.Context;
++import android.content.Intent;
++import android.content.SharedPreferences;
++import android.preference.PreferenceManager;
++import android.os.Bundle;
++import android.view.View;
++import android.widget.Button;
++import android.widget.Toast;
++
++import androidx.annotation.Nullable;
++import androidx.appcompat.app.AppCompatActivity;
++
++import com.example.parentsletterproject.R;
++import com.github.tlaabs.timetableview.Schedule;
++import com.github.tlaabs.timetableview.TimetableView;
++
++import java.util.ArrayList;
++import java.util.Calendar;
++import java.util.Date;
++
++public class EditTimeTableMain extends AppCompatActivity implements View.OnClickListener {
++    private Context context;
++    public static final int REQUEST_ADD = 1;
++    public static final int REQUEST_EDIT = 2;
++
++    private Button addBtn;
++    private Button clearBtn;
++    private Button saveBtn;
++    private Button loadBtn;
++
++    private TimetableView timetable;
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_edit_time_table_main);
++
++        init();
++    }
++
++    //요일 구하기
++    public static int getCrurrentWeek(){
++        Date date = new Date();
++
++        Calendar calendar = Calendar.getInstance();
++        calendar.setTime(date);
++
++        int dayOfWeekNumber = calendar.get(Calendar.DAY_OF_WEEK);
++
++        return dayOfWeekNumber;
++
++    }
++    private void init(){
++        this.context = this;
++        addBtn = findViewById(R.id.add_btn);
++        clearBtn = findViewById(R.id.clear_btn);
++        saveBtn = findViewById(R.id.save_btn);
++        loadBtn = findViewById(R.id.load_btn);
++
++        timetable = findViewById(R.id.timetable);
++        if(getCrurrentWeek()-1 <6)
++        timetable.setHeaderHighlight(getCrurrentWeek()-1);
++        initView();
++    }
++
++    private void initView(){
++        addBtn.setOnClickListener(this);
++        clearBtn.setOnClickListener(this);
++        saveBtn.setOnClickListener(this);
++        loadBtn.setOnClickListener(this);
++
++        timetable.setOnStickerSelectEventListener(new TimetableView.OnStickerSelectedListener() {
++            @Override
++            public void OnStickerSelected(int idx, ArrayList<Schedule> schedules) {
++                Intent i = new Intent(context, EditTimeTableActivity.class);
++                i.putExtra("mode",REQUEST_EDIT);
++                i.putExtra("idx", idx);
++                i.putExtra("schedules", schedules);
++                startActivityForResult(i,REQUEST_EDIT);
++            }
++        });
++    }
++
++    @Override
++    public void onClick(View v) {
++        switch (v.getId()){
++            case R.id.add_btn:
++                Intent i = new Intent(this,EditTimeTableActivity.class);
++                i.putExtra("mode",REQUEST_ADD);
++                startActivityForResult(i,REQUEST_ADD);
++                break;
++            case R.id.clear_btn:
++                timetable.removeAll();
++                break;
++            case R.id.save_btn:
++                saveByPreference(timetable.createSaveData());
++                break;
++            case R.id.load_btn:
++                loadSavedData();
++                break;
++        }
++    }
++
++    @Override
++    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
++        super.onActivityResult(requestCode, resultCode, data);
++        switch (requestCode) {
++            case REQUEST_ADD:
++                if (resultCode == EditTimeTableActivity.RESULT_OK_ADD) {
++                    ArrayList<Schedule> item = (ArrayList<Schedule>) data.getSerializableExtra("schedules");
++                    timetable.add(item);
++                }
++                break;
++            case REQUEST_EDIT:
++                /** Edit -> Submit */
++                if (resultCode == EditTimeTableActivity.RESULT_OK_EDIT) {
++                    int idx = data.getIntExtra("idx", -1);
++                    ArrayList<Schedule> item = (ArrayList<Schedule>) data.getSerializableExtra("schedules");
++                    timetable.edit(idx, item);
++                }
++                /** Edit -> Delete */
++                else if (resultCode == EditTimeTableActivity.RESULT_OK_DELETE) {
++                    int idx = data.getIntExtra("idx", -1);
++                    timetable.remove(idx);
++                }
++                break;
++        }
++    }
++
++    /** save timetableView's data to SharedPreferences in json format */
++    private void saveByPreference(String data){
++        SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(this);
++        SharedPreferences.Editor editor = mPref.edit();
++        editor.putString("timetable_demo",data);
++        editor.commit();
++        Toast.makeText(this,"저장되었습니다.",Toast.LENGTH_SHORT).show();
++    }
++
++    /** get json data from SharedPreferences and then restore the timetable */
++    private void loadSavedData(){
++        timetable.removeAll();
++        SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(this);
++        String savedData = mPref.getString("timetable_demo","");
++        if(savedData == null && savedData.equals("")) return;
++        timetable.load(savedData);
++        Toast.makeText(this,"loaded!",Toast.LENGTH_SHORT).show();
++    }
++}
+Index: app/src/main/res/layout/edit_appbar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/edit_appbar.xml b/app/src/main/res/layout/edit_appbar.xml
+new file mode 100644
+--- /dev/null	(date 1654632137050)
++++ b/app/src/main/res/layout/edit_appbar.xml	(date 1654632137050)
+@@ -0,0 +1,27 @@
++<?xml version="1.0" encoding="utf-8"?>
++<merge xmlns:android="http://schemas.android.com/apk/res/android">
++<LinearLayout
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content"
++    android:orientation="horizontal"
++    >
++
++    <Button
++        android:id="@+id/delete_btn"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:visibility="gone"
++        android:text="delete"
++        />
++    <Button
++        android:id="@+id/submit_btn"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="submit"
++        />
++
++
++</LinearLayout>
++
++</merge>
++
+Index: app/src/main/java/com/example/parentsletterproject/server/RetrofitInterface.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.parentsletterproject.server;\n\nimport java.util.List;\n\nimport okhttp3.ResponseBody;\nimport retrofit2.Call;\nimport retrofit2.http.Body;\nimport retrofit2.http.DELETE;\nimport retrofit2.http.FormUrlEncoded;\nimport retrofit2.http.GET;\nimport retrofit2.http.POST;\nimport retrofit2.http.PUT;\nimport retrofit2.http.Path;\nimport retrofit2.http.Query;\n\npublic interface RetrofitInterface {\n\n    // API for class\n\n    @GET(\"class/all\")\n    Call<List<ClassroomList>> getClassroomList();\n\n    @GET(\"class/className\")\n    Call<List<ClassName>> getClassName();\n\n    @PUT(\"class/{className}\")\n    Call<Classroom> putClassroom(@Path(\"className\") String className, @Query(\"tName\") String tName, @Query(\"tId\") String tId);\n\n    @DELETE(\"class/{className}\")\n    Call<ResponseBody> deleteClassroom(@Path(\"className\") String className);\n\n    // API for post\n\n    @PUT(\"post/create\")\n    Call<Board> putBoard(@Query(\"postName\") String postName, @Query(\"postBody\") String postBody);\n\n    @GET(\"post/all\")\n    Call<List<Board>> getBoardList();\n\n    @GET(\"post/{postNum}\")\n    Call<Board> getBoard();\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/server/RetrofitInterface.java b/app/src/main/java/com/example/parentsletterproject/server/RetrofitInterface.java
+--- a/app/src/main/java/com/example/parentsletterproject/server/RetrofitInterface.java	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/app/src/main/java/com/example/parentsletterproject/server/RetrofitInterface.java	(date 1654632137044)
+@@ -5,7 +5,6 @@
+ import okhttp3.ResponseBody;
+ import retrofit2.Call;
+ import retrofit2.http.Body;
+-import retrofit2.http.DELETE;
+ import retrofit2.http.FormUrlEncoded;
+ import retrofit2.http.GET;
+ import retrofit2.http.POST;
+@@ -15,29 +14,13 @@
+ 
+ public interface RetrofitInterface {
+ 
+-    // API for class
+-
++    // 조회
+     @GET("class/all")
+     Call<List<ClassroomList>> getClassroomList();
+ 
+-    @GET("class/className")
+-    Call<List<ClassName>> getClassName();
+-
+     @PUT("class/{className}")
+     Call<Classroom> putClassroom(@Path("className") String className, @Query("tName") String tName, @Query("tId") String tId);
+ 
+-    @DELETE("class/{className}")
+-    Call<ResponseBody> deleteClassroom(@Path("className") String className);
+-
+-    // API for post
+ 
+-    @PUT("post/create")
+-    Call<Board> putBoard(@Query("postName") String postName, @Query("postBody") String postBody);
+-
+-    @GET("post/all")
+-    Call<List<Board>> getBoardList();
+-
+-    @GET("post/{postNum}")
+-    Call<Board> getBoard();
+ 
+ }
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"DesignSurface\">\n    <option name=\"filePathToZoomLevelMap\">\n      <map>\n        <entry key=\"../../../../layout/custom_preview.xml\" value=\"0.17037037037037037\" />\n        <entry key=\"..\\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/activity_add_student.xml\" value=\"0.23802083333333332\" />\n        <entry key=\"..\\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/activity_login.xml\" value=\"0.215625\" />\n        <entry key=\"..\\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/activity_main.xml\" value=\"0.13905775075987842\" />\n        <entry key=\"..\\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/activity_parents_attendance.xml\" value=\"0.18085106382978725\" />\n        <entry key=\"..\\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/activity_parents_home.xml\" value=\"0.18085106382978725\" />\n        <entry key=\"..\\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/activity_teacher_attendence.xml\" value=\"0.18085106382978725\" />\n        <entry key=\"..\\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/activity_teacher_class_management.xml\" value=\"0.264\" />\n        <entry key=\"..\\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/activity_teacher_home.xml\" value=\"0.18085106382978725\" />\n        <entry key=\"..\\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/activity_teacher_management_list.xml\" value=\"0.18085106382978725\" />\n        <entry key=\"..\\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/activity_teacher_student_management.xml\" value=\"0.264\" />\n        <entry key=\"..\\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/add_class.xml\" value=\"0.2\" />\n        <entry key=\"..\\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/add_student.xml\" value=\"0.23802083333333332\" />\n        <entry key=\"..\\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/item.xml\" value=\"0.4\" />\n        <entry key=\"..\\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/item_for_recycler.xml\" value=\"0.28125\" />\n        <entry key=\"..\\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/listview_item.xml\" value=\"0.25364583333333335\" />\n        <entry key=\"..\\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_login.xml\" value=\"0.22826086956521738\" />\n        <entry key=\"..\\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_main.xml\" value=\"0.22826086956521738\" />\n        <entry key=\"..\\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_parents_attendance.xml\" value=\"0.22826086956521738\" />\n        <entry key=\"..\\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_parents_home.xml\" value=\"0.264\" />\n        <entry key=\"..\\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_teacher_attendence.xml\" value=\"0.22826086956521738\" />\n        <entry key=\"..\\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_teacher_class_management.xml\" value=\"0.23007246376811594\" />\n        <entry key=\"..\\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_teacher_home.xml\" value=\"0.264\" />\n        <entry key=\"..\\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_teacher_student_management.xml\" value=\"0.35778985507246375\" />\n        <entry key=\"..\\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/item_for_recycler.xml\" value=\"0.23007246376811594\" />\n        <entry key=\"..\\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/meal.xml\" value=\"0.24947916666666667\" />\n        <entry key=\"..\\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/xml/netwirj_config.xml\" value=\"0.1838768115942029\" />\n        <entry key=\"..\\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/xml/network_config.xml\" value=\"0.10648148148148148\" />\n        <entry key=\"app/src/main/res/drawable-v24/ic_launcher_foreground.xml\" value=\"0.241\" />\n        <entry key=\"app/src/main/res/drawable/ic_launcher_background.xml\" value=\"0.241\" />\n        <entry key=\"app/src/main/res/layout/activity_board_detail.xml\" value=\"0.2441123188405797\" />\n        <entry key=\"app/src/main/res/layout/activity_board_list.xml\" value=\"0.1\" />\n        <entry key=\"app/src/main/res/layout/activity_board_register.xml\" value=\"0.1875\" />\n        <entry key=\"app/src/main/res/layout/activity_class_deletion.xml\" value=\"0.26507466634114585\" />\n        <entry key=\"app/src/main/res/layout/activity_login.xml\" value=\"0.15625\" />\n        <entry key=\"app/src/main/res/layout/activity_main.xml\" value=\"0.17135416666666667\" />\n        <entry key=\"app/src/main/res/layout/activity_parents_attendance.xml\" value=\"0.1875\" />\n        <entry key=\"app/src/main/res/layout/activity_parents_home.xml\" value=\"0.1875\" />\n        <entry key=\"app/src/main/res/layout/activity_teacher_class_management.xml\" value=\"0.15625\" />\n        <entry key=\"app/src/main/res/layout/activity_teacher_home.xml\" value=\"0.15625\" />\n        <entry key=\"app/src/main/res/layout/activity_teacher_management_list.xml\" value=\"0.1875\" />\n        <entry key=\"app/src/main/res/layout/activity_teacher_student_management.xml\" value=\"0.15625\" />\n        <entry key=\"app/src/main/res/layout/add_class.xml\" value=\"0.15625\" />\n        <entry key=\"app/src/main/res/layout/add_student.xml\" value=\"0.15625\" />\n        <entry key=\"app/src/main/res/layout/board_recycler.xml\" value=\"0.3443526170798898\" />\n        <entry key=\"app/src/main/res/layout/del_class.xml\" value=\"0.3818817138671875\" />\n        <entry key=\"app/src/main/res/layout/item_for_recycler.xml\" value=\"0.15625\" />\n        <entry key=\"app/src/main/res/layout/meal.xml\" value=\"0.15625\" />\n        <entry key=\"app/src/main/res/layout/spin_dropdown.xml\" value=\"0.1\" />\n        <entry key=\"app/src/main/res/layout/spinner_item.xml\" value=\"0.15425531914893617\" />\n      </map>\n    </option>\n  </component>\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"Android Studio default JDK\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\n  </component>\n  <component name=\"ProjectType\">\n    <option name=\"id\" value=\"Android\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/.idea/misc.xml	(date 1654634778511)
+@@ -32,11 +32,13 @@
+         <entry key="..\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/xml/netwirj_config.xml" value="0.1838768115942029" />
+         <entry key="..\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/xml/network_config.xml" value="0.10648148148148148" />
+         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.241" />
++        <entry key="app/src/main/res/drawable/ic_kitty.xml" value="0.199" />
+         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.241" />
+         <entry key="app/src/main/res/layout/activity_board_detail.xml" value="0.2441123188405797" />
+         <entry key="app/src/main/res/layout/activity_board_list.xml" value="0.1" />
+         <entry key="app/src/main/res/layout/activity_board_register.xml" value="0.1875" />
+         <entry key="app/src/main/res/layout/activity_class_deletion.xml" value="0.26507466634114585" />
++        <entry key="app/src/main/res/layout/activity_edit_time_table.xml" value="0.23697916666666666" />
+         <entry key="app/src/main/res/layout/activity_login.xml" value="0.15625" />
+         <entry key="app/src/main/res/layout/activity_main.xml" value="0.17135416666666667" />
+         <entry key="app/src/main/res/layout/activity_parents_attendance.xml" value="0.1875" />
+@@ -49,10 +51,15 @@
+         <entry key="app/src/main/res/layout/add_student.xml" value="0.15625" />
+         <entry key="app/src/main/res/layout/board_recycler.xml" value="0.3443526170798898" />
+         <entry key="app/src/main/res/layout/del_class.xml" value="0.3818817138671875" />
++        <entry key="app/src/main/res/layout/edit_appbar.xml" value="0.17239583333333333" />
+         <entry key="app/src/main/res/layout/item_for_recycler.xml" value="0.15625" />
+         <entry key="app/src/main/res/layout/meal.xml" value="0.15625" />
+         <entry key="app/src/main/res/layout/spin_dropdown.xml" value="0.1" />
+         <entry key="app/src/main/res/layout/spinner_item.xml" value="0.15425531914893617" />
++        <entry key="app/src/main/res/layout/time_box.xml" value="0.17239583333333333" />
++        <entry key="timetableview/src/main/res/layout/inner_table.xml" value="0.23697916666666666" />
++        <entry key="timetableview/src/main/res/layout/table_header.xml" value="0.23697916666666666" />
++        <entry key="timetableview/src/main/res/layout/view_timetable.xml" value="0.23697916666666666" />
+       </map>
+     </option>
+   </component>
+Index: app/src/main/java/com/example/parentsletterproject/activity/BoardListActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.parentsletterproject.activity;\n\nimport androidx.appcompat.app.AppCompatActivity;\nimport androidx.recyclerview.widget.LinearLayoutManager;\nimport androidx.recyclerview.widget.RecyclerView;\nimport android.view.LayoutInflater;\n\nimport android.content.Intent;\nimport android.os.Bundle;\nimport android.util.Log;\nimport android.view.View;\nimport android.widget.AdapterView;\nimport android.widget.ArrayAdapter;\nimport android.widget.Button;\nimport android.widget.ListView;\n\nimport com.example.parentsletterproject.R;\nimport com.example.parentsletterproject.action.BoardAdapter;\nimport com.example.parentsletterproject.server.Board;\nimport com.example.parentsletterproject.server.RetrofitClient;\nimport com.example.parentsletterproject.server.RetrofitInterface;\n\nimport java.util.ArrayList;\nimport java.util.List;\n\nimport retrofit2.Call;\nimport retrofit2.Callback;\nimport retrofit2.Response;\n\npublic class BoardListActivity extends AppCompatActivity {\n\n    private RecyclerView recyclerView;\n    private RecyclerView.Adapter boardAdapter;\n    private ArrayAdapter arrayAdapter;\n    private ListView listView;\n    private Button button;\n    private RetrofitClient retrofitClient;\n    private RetrofitInterface retrofitInterface;\n\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        super.onCreate(savedInstanceState);\n        setContentView(R.layout.activity_board_list);\n\n        recyclerView = findViewById(R.id.RecyclerView);\n        LinearLayoutManager layoutManager\n                = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);\n        recyclerView.setLayoutManager(layoutManager);\n        boardAdapter = new BoardAdapter(new ArrayList<>());\n        recyclerView.setAdapter(boardAdapter);\n\n        retrofitClient = RetrofitClient.getInstance();\n        retrofitInterface = RetrofitClient.getRetrofitInterface();\n        retrofitInterface.getBoardList().enqueue(new Callback<List<Board>>() {\n            @Override\n            public void onResponse(Call<List<Board>> call, Response<List<Board>> response) {\n                boardAdapter = new BoardAdapter(response.body());\n                recyclerView.setAdapter(boardAdapter);\n                Log.d(\"Retrofit GET\", \"조회 성공\");\n            }\n\n            @Override\n            public void onFailure(Call<List<Board>> call, Throwable t) {\n                Log.e(\"Retrofit GET\", t.getMessage().toString());\n            }\n        });\n\n//        listView = findViewById(R.id.listView);\n//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {\n//            @Override\n//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {\n////                Toast.makeText(BoardListActivity.this, parent.getItemIdAtPosition(position) + \"클릭\", Toast.LENGTH_SHORT).show();\n////\n////                Intent intent = new Intent(BoardListActivity.this, BoardDetailActivity.class);\n////                intent.putExtra(\"board_seq\", seqList.get(position));\n////                startActivity(intent);\n//            }\n//        });\n//\n//        button = findViewById(R.id.reg_button);\n//        button.setOnClickListener(new View.OnClickListener() {\n//\n//            @Override\n//            public void onClick(View v) {\n////                Intent intent = new Intent(BoardListActivity.this, BoardRegisterActivity.class);\n////                startActivity(intent);\n//            }\n//        });\n\n    }\n\n\n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/activity/BoardListActivity.java b/app/src/main/java/com/example/parentsletterproject/activity/BoardListActivity.java
+--- a/app/src/main/java/com/example/parentsletterproject/activity/BoardListActivity.java	(revision de54e11ee278b239dc935e42a49bdd44d6f97de0)
++++ b/app/src/main/java/com/example/parentsletterproject/activity/BoardListActivity.java	(date 1654631976920)
+@@ -1,91 +1,59 @@
+ package com.example.parentsletterproject.activity;
+ 
+ import androidx.appcompat.app.AppCompatActivity;
+-import androidx.recyclerview.widget.LinearLayoutManager;
+-import androidx.recyclerview.widget.RecyclerView;
+-import android.view.LayoutInflater;
+ 
+ import android.content.Intent;
+ import android.os.Bundle;
+-import android.util.Log;
+ import android.view.View;
+ import android.widget.AdapterView;
+-import android.widget.ArrayAdapter;
+ import android.widget.Button;
+ import android.widget.ListView;
++import android.widget.Toast;
+ 
+ import com.example.parentsletterproject.R;
+-import com.example.parentsletterproject.action.BoardAdapter;
+-import com.example.parentsletterproject.server.Board;
+-import com.example.parentsletterproject.server.RetrofitClient;
+-import com.example.parentsletterproject.server.RetrofitInterface;
+ 
+ import java.util.ArrayList;
+-import java.util.List;
+-
+-import retrofit2.Call;
+-import retrofit2.Callback;
+-import retrofit2.Response;
+ 
+ public class BoardListActivity extends AppCompatActivity {
+ 
+-    private RecyclerView recyclerView;
+-    private RecyclerView.Adapter boardAdapter;
+-    private ArrayAdapter arrayAdapter;
+-    private ListView listView;
+-    private Button button;
+-    private RetrofitClient retrofitClient;
+-    private RetrofitInterface retrofitInterface;
++    // for log
++    final private String TAG = getClass().getSimpleName();
++
++    ListView listView;
++    Button button;
++
++    // for listview
++    ArrayList<String> titleList = new ArrayList<>();
++
++    // for numbers
++    ArrayList<String> seqList = new ArrayList<>();
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_board_list);
+ 
+-        recyclerView = findViewById(R.id.RecyclerView);
+-        LinearLayoutManager layoutManager
+-                = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+-        recyclerView.setLayoutManager(layoutManager);
+-        boardAdapter = new BoardAdapter(new ArrayList<>());
+-        recyclerView.setAdapter(boardAdapter);
+-
+-        retrofitClient = RetrofitClient.getInstance();
+-        retrofitInterface = RetrofitClient.getRetrofitInterface();
+-        retrofitInterface.getBoardList().enqueue(new Callback<List<Board>>() {
++        listView = findViewById(R.id.listView);
++        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+             @Override
+-            public void onResponse(Call<List<Board>> call, Response<List<Board>> response) {
+-                boardAdapter = new BoardAdapter(response.body());
+-                recyclerView.setAdapter(boardAdapter);
+-                Log.d("Retrofit GET", "조회 성공");
++            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
++                Toast.makeText(BoardListActivity.this, parent.getItemIdAtPosition(position) + "클릭", Toast.LENGTH_SHORT).show();
++
++                Intent intent = new Intent(BoardListActivity.this, BoardDetailActivity.class);
++                intent.putExtra("board_seq", seqList.get(position));
++                startActivity(intent);
+             }
++        });
++
++        button = findViewById(R.id.reg_button);
++        button.setOnClickListener(new View.OnClickListener() {
+ 
+             @Override
+-            public void onFailure(Call<List<Board>> call, Throwable t) {
+-                Log.e("Retrofit GET", t.getMessage().toString());
++            public void onClick(View v) {
++                Intent intent = new Intent(BoardListActivity.this, BoardRegisterActivity.class);
++                startActivity(intent);
+             }
+         });
+-
+-//        listView = findViewById(R.id.listView);
+-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+-//            @Override
+-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+-////                Toast.makeText(BoardListActivity.this, parent.getItemIdAtPosition(position) + "클릭", Toast.LENGTH_SHORT).show();
+-////
+-////                Intent intent = new Intent(BoardListActivity.this, BoardDetailActivity.class);
+-////                intent.putExtra("board_seq", seqList.get(position));
+-////                startActivity(intent);
+-//            }
+-//        });
+-//
+-//        button = findViewById(R.id.reg_button);
+-//        button.setOnClickListener(new View.OnClickListener() {
+-//
+-//            @Override
+-//            public void onClick(View v) {
+-////                Intent intent = new Intent(BoardListActivity.this, BoardRegisterActivity.class);
+-////                startActivity(intent);
+-//            }
+-//        });
+ 
+     }
+ 

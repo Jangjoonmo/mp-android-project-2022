@@ -1,0 +1,56 @@
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    package=\"com.example.parentsletterproject\">\n\n    <uses-permission android:name=\"android.permission.INTERNET\" />\n\n    <application\n        android:allowBackup=\"true\"\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\n        android:fullBackupContent=\"@xml/backup_rules\"\n        android:icon=\"@mipmap/ic_launcher\"\n        android:label=\"@string/app_name\"\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\n        android:networkSecurityConfig=\"@xml/network_config\"\n        android:supportsRtl=\"true\"\n        android:theme=\"@style/Theme.ParentsLetterProject\"\n        android:usesCleartextTraffic=\"true\"\n        tools:targetApi=\"31\">\n        <activity\n            android:name=\".activity.TeacherClassManagementActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".activity.TeacherStudentManagementActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".activity.TeacherManagementListActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".activity.ParentsAttendanceActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".activity.ParentsHomeActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".activity.TeacherHomeActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".activity.TeacherAttendanceActivity\"\n            android:exported=\"false\" />\n\n        <activity android:name=\".activity.LoginActivity\"/>\n        <activity android:name=\".activity.RegisterActivity\"/>\n        <activity\n            android:name=\".activity.BoardRegisterActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".activity.BoardDetailActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".activity.BoardListActivity\"\n            android:exported=\"false\" />\n        <activity\n            android:name=\".activity.MainActivity\"\n            android:exported=\"true\">\n            <intent-filter>\n                <action android:name=\"android.intent.action.MAIN\" />\n\n                <category android:name=\"android.intent.category.LAUNCHER\" />\n            </intent-filter>\n        </activity>\n\n\n    </application>\n\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	
++++ b/app/src/main/AndroidManifest.xml	
+@@ -11,13 +11,19 @@
+         android:fullBackupContent="@xml/backup_rules"
+         android:icon="@mipmap/ic_launcher"
+         android:label="@string/app_name"
+-        android:roundIcon="@mipmap/ic_launcher_round"
+         android:networkSecurityConfig="@xml/network_config"
++        android:roundIcon="@mipmap/ic_launcher_round"
+         android:supportsRtl="true"
+         android:theme="@style/Theme.ParentsLetterProject"
+         android:usesCleartextTraffic="true"
+         tools:targetApi="31">
+         <activity
++            android:name=".TestTimeTable"
++            android:exported="false" />
++        <activity
++            android:name=".EditTimeTableMain"
++            android:exported="false" />
++        <activity
+             android:name=".activity.TeacherClassManagementActivity"
+             android:exported="false" />
+         <activity
+@@ -38,9 +44,11 @@
+         <activity
+             android:name=".activity.TeacherAttendanceActivity"
+             android:exported="false" />
+-
+-        <activity android:name=".activity.LoginActivity"/>
+-        <activity android:name=".activity.RegisterActivity"/>
++        <activity android:name=".activity.LoginActivity" />
++        <activity android:name=".activity.RegisterActivity" />
++        <activity android:name=".activity.EditTimeTableActivity" />
++        <activity android:name=".activity.EditTimeTableMain" />
++        <activity android:name=".activity.TestTimeTable"/>
+         <activity
+             android:name=".activity.BoardRegisterActivity"
+             android:exported="false" />
+@@ -59,8 +67,6 @@
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+         </activity>
+-
+-
+     </application>
+ 
+ </manifest>
+\ No newline at end of file

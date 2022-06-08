@@ -1,0 +1,134 @@
+Index: app/src/main/java/com/example/parentsletterproject/server/Board.java
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/server/Board.java b/app/src/main/java/com/example/parentsletterproject/server/Board.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/parentsletterproject/server/Board.java	(revision 554db173a29bdc7eee615de019010e3e96d0ec31)
++++ /dev/null	(revision 554db173a29bdc7eee615de019010e3e96d0ec31)
+@@ -1,42 +0,0 @@
+-package com.example.parentsletterproject.server;
+-
+-import com.google.gson.annotations.Expose;
+-import com.google.gson.annotations.SerializedName;
+-
+-public class Board {
+-    @SerializedName("postName")
+-    @Expose
+-    private String postName;
+-    @SerializedName("postBody")
+-    @Expose
+-    private String postBody;
+-
+-    public Board(String postName, String postBody) {
+-        this.postName = postName;
+-        this.postBody = postBody;
+-    }
+-
+-    public String getPostName() {
+-        return postName;
+-    }
+-
+-    public void setPostName(String postName) {
+-        this.postName = postName;
+-    }
+-
+-    public String getPostBody() {
+-        return postBody;
+-    }
+-
+-    public void setPostBody(String postBody) {
+-        this.postBody = postBody;
+-    }
+-
+-    @Override
+-    public String toString() {
+-        return "Board{" +
+-                "postName='" + postName + '\'' +
+-                ", postBody='" + postBody + '\'' +
+-                '}';
+-    }
+-}
+Index: app/src/main/java/com/example/parentsletterproject/server/ClassName.java
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/server/ClassName.java b/app/src/main/java/com/example/parentsletterproject/server/ClassName.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/parentsletterproject/server/ClassName.java	(revision 554db173a29bdc7eee615de019010e3e96d0ec31)
++++ /dev/null	(revision 554db173a29bdc7eee615de019010e3e96d0ec31)
+@@ -1,29 +0,0 @@
+-package com.example.parentsletterproject.server;
+-
+-import com.google.gson.annotations.Expose;
+-import com.google.gson.annotations.SerializedName;
+-
+-public class ClassName {
+-    @SerializedName("className")
+-    @Expose
+-    private String className;
+-
+-    public ClassName(String className) {
+-        this.className = className;
+-    }
+-
+-    public String getClassName() {
+-        return className;
+-    }
+-
+-    public void setClassName(String className) {
+-        this.className = className;
+-    }
+-
+-    @Override
+-    public String toString() {
+-        return "ClassName{" +
+-                "className='" + className + '\'' +
+-                '}';
+-    }
+-}
+Index: app/src/main/java/com/example/parentsletterproject/server/RetrofitInterface.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.parentsletterproject.server;\n\nimport java.util.List;\n\nimport okhttp3.ResponseBody;\nimport retrofit2.Call;\nimport retrofit2.http.Body;\nimport retrofit2.http.DELETE;\nimport retrofit2.http.FormUrlEncoded;\nimport retrofit2.http.GET;\nimport retrofit2.http.POST;\nimport retrofit2.http.PUT;\nimport retrofit2.http.Path;\nimport retrofit2.http.Query;\n\npublic interface RetrofitInterface {\n\n    // API for class\n\n    @GET(\"class/all\")\n    Call<List<ClassroomList>> getClassroomList();\n\n    @GET(\"class/className\")\n    Call<List<ClassName>> getClassName();\n\n    @PUT(\"class/{className}\")\n    Call<Classroom> putClassroom(@Path(\"className\") String className, @Query(\"tName\") String tName, @Query(\"tId\") String tId);\n\n    @DELETE(\"class/{className}\")\n    Call<ResponseBody> deleteClassroom(@Path(\"className\") String className);\n\n    // API for post\n\n    @PUT(\"post/create\")\n    Call<Board> putBoard(@Query(\"postName\") String postName, @Query(\"postBody\") String postBody);\n\n    @GET(\"post/all\")\n    Call<List<Board>> getBoardList();\n\n    @GET(\"post/{postNum}\")\n    Call<Board> getBoard();\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/parentsletterproject/server/RetrofitInterface.java b/app/src/main/java/com/example/parentsletterproject/server/RetrofitInterface.java
+--- a/app/src/main/java/com/example/parentsletterproject/server/RetrofitInterface.java	(revision 554db173a29bdc7eee615de019010e3e96d0ec31)
++++ b/app/src/main/java/com/example/parentsletterproject/server/RetrofitInterface.java	(date 1654682803855)
+@@ -5,7 +5,6 @@
+ import okhttp3.ResponseBody;
+ import retrofit2.Call;
+ import retrofit2.http.Body;
+-import retrofit2.http.DELETE;
+ import retrofit2.http.FormUrlEncoded;
+ import retrofit2.http.GET;
+ import retrofit2.http.POST;
+@@ -15,29 +14,13 @@
+ 
+ public interface RetrofitInterface {
+ 
+-    // API for class
+-
++    // 조회
+     @GET("class/all")
+     Call<List<ClassroomList>> getClassroomList();
+ 
+-    @GET("class/className")
+-    Call<List<ClassName>> getClassName();
+-
+     @PUT("class/{className}")
+     Call<Classroom> putClassroom(@Path("className") String className, @Query("tName") String tName, @Query("tId") String tId);
+ 
+-    @DELETE("class/{className}")
+-    Call<ResponseBody> deleteClassroom(@Path("className") String className);
+-
+-    // API for post
+ 
+-    @PUT("post/create")
+-    Call<Board> putBoard(@Query("postName") String postName, @Query("postBody") String postBody);
+-
+-    @GET("post/all")
+-    Call<List<Board>> getBoardList();
+-
+-    @GET("post/{postNum}")
+-    Call<Board> getBoard();
+ 
+ }
