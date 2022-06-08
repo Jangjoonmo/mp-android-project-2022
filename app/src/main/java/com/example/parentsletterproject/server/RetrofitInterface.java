@@ -38,6 +38,6 @@ public interface RetrofitInterface {
     Call<List<Board>> getBoardList();
 
     @GET("post/{postNum}")
-    Call<Board> getBoard();
+    Call<Board> getBoard(@Path("postNum") int postNum);
 
 }

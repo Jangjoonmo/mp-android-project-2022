@@ -65,7 +65,7 @@
         tools:ignore="TextContrastCheck" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/time_table"
         android:layout_width="385dp"
         android:layout_height="55dp"
         android:background="@drawable/button_background"
@@ -89,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4"
+        app:layout_constraintTop_toBottomOf="@+id/time_table"
         app:layout_constraintVertical_bias="0.059">
 
         <Button
