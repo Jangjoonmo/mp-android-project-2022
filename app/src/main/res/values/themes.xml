@@ -4,8 +4,8 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#e1bee7</item>
-        <item name="colorPrimaryVariant">#af8eb5</item>
+        <item name="colorPrimary">#ffc952</item>
+        <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

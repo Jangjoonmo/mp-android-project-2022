@@ -17,40 +17,44 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_home);
 
-        Intent intent = new Intent(getApplicationContext(), TestTimeTable.class);
-        startActivity(intent);
 
 
-//        Button button1 = findViewById(R.id.class_manage);
-//        button1.setOnClickListener(view -> {
-//            Intent intent = new Intent(getApplicationContext(), TeacherClassManagementActivity.class);
-//            startActivity(intent);
-//        });
-//
-//        Button button2 = findViewById(R.id.student);
-//        button2.setOnClickListener(view -> {
-//            Intent intent = new Intent(getApplicationContext(), TeacherStudentManagementActivity.class);
-//            startActivity(intent);
-//        });
-//
-//        Button button3 = findViewById(R.id.posting);
-//        button3.setOnClickListener(view -> {
-//            Intent intent = new Intent(getApplicationContext(), BoardListActivity.class);
-//            startActivity(intent);
-//        });
-//
-//        Button button4 = findViewById(R.id.meal);
-//        button4.setOnClickListener(view -> {
-//            Intent intent = new Intent(getApplicationContext(), MealActivity.class);
-//            startActivity(intent);
-//        });
-//
-//        String meal;
-//
-//        Intent intent= getIntent();
-//        meal = intent.getStringExtra("meal");
-//        System.out.println("테스트 : " + meal);
-//        TextView meal_notice = (TextView) findViewById(R.id.meal_notice);
-//        meal_notice.setText(meal);
+        Button button1 = findViewById(R.id.class_manage);
+        button1.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), TeacherClassManagementActivity.class);
+            startActivity(intent);
+        });
+
+        Button button2 = findViewById(R.id.student);
+        button2.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), TeacherStudentManagementActivity.class);
+            startActivity(intent);
+        });
+
+        Button button3 = findViewById(R.id.posting);
+        button3.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), BoardListActivity.class);
+            startActivity(intent);
+        });
+
+        Button button4 = findViewById(R.id.meal);
+        button4.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), MealActivity.class);
+            startActivity(intent);
+        });
+
+        Button button5 = findViewById(R.id.board_button);
+        button5.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), callActivity.class);
+            startActivity(intent);
+        });
+
+        String meal;
+
+        Intent intent= getIntent();
+        meal = intent.getStringExtra("meal");
+        System.out.println("테스트 : " + meal);
+        TextView meal_notice = (TextView) findViewById(R.id.meal_notice);
+        meal_notice.setText(meal);
     }
 }
