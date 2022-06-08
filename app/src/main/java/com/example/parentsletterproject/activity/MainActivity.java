@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.parentsletterproject.R;
 
@@ -41,5 +42,13 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), MealActivity.class);
             startActivity(intent);
         });
+
+        String meal;
+
+        Intent intent= getIntent();
+        meal = intent.getStringExtra("meal");
+        System.out.println("테스트 : " + meal);
+        TextView meal_notice = (TextView) findViewById(R.id.meal_notice);
+        meal_notice.setText(meal);
     }
 }

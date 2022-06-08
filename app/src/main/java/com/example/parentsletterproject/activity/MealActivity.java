@@ -1,5 +1,6 @@
 package com.example.parentsletterproject.activity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -115,6 +116,9 @@ public class MealActivity extends AppCompatActivity {
             textView1.setText(list.get(0).toString());
             textView2.setText(list.get(1).toString());
             textView3.setText(list.get(2).toString());
+
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra("meal", list.get(0).toString());
 
 
         }
