@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button button5 = findViewById(R.id.time_table);
         button5.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), TestTimeTable.class);
+            Intent intent = new Intent(getApplicationContext(), EditTimeTableMain.class);
             startActivity(intent);
         });
 
