@@ -11,4 +11,21 @@
     <string name="put_id_of_teacher">담임 교사의 ID를 입력하세요</string>
     <string name="put_name_of_student">추가할 원생의 이름을 입력하세요</string>
     <string name="put_name_of_teacher">담임 교사의 이름을 입력하세요</string>
+
+    <string-array name="header_title">
+        <item></item>
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+    </string-array>
+
+    <string-array name="days">
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+    </string-array>
 </resources>

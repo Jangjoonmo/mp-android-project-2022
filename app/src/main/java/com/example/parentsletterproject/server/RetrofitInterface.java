@@ -40,4 +40,15 @@ public interface RetrofitInterface {
     @GET("post/{postNum}")
     Call<Board> getBoard(@Path("postNum") int postNum);
 
+
+    // API for kids
+
+    @PUT("kids/register")
+    Call<Kids> putKids(@Query("kidsName") String kidsName, @Query("classId") String classId);
+
+    @DELETE("kids/delete")
+    Call<ResponseBody> deleteKids(@Query("kidsName") String kidsName);
+
+    @GET("kids/all")
+    Call<List<Kids>> getKidsList();
 }

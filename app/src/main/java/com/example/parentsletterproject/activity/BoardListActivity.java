@@ -85,7 +85,10 @@ public class BoardListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(BoardListActivity.this, BoardRegisterActivity.class);
                 startActivity(intent);
+                finish();
             }
+
+
         });
 
     }

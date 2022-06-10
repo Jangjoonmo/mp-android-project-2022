@@ -50,6 +50,7 @@ public class BoardRegisterActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Board> call, Response<Board> response) {
                         Log.d("Retrofit PUT", "삽입 성공");
+                        finish();
                     }
 
                     @Override

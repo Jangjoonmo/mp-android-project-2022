@@ -63,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
               }
 
               sql = "SELECT password FROM user WHERE id = '"+ userID + "'";
+              cursor = database.rawQuery(sql, null);
               cursor.moveToNext();
               if (!userPass.equals(cursor.getString(0))){//비밀번호가 틀렸을 경우
                   Toast.makeText(LoginActivity.this, "비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show();
@@ -70,9 +71,23 @@ public class LoginActivity extends AppCompatActivity {
               }
               else{//로그인 성공
                   Toast.makeText(LoginActivity.this, "로그인 성공.", Toast.LENGTH_SHORT).show();
-                  Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                  startActivity(intent);
-                  finish();
+                  {//선생인지 학부모인지
+                      sql = "SELECT is_teacher FROM user WHERE id = '"+ userID + "'";
+                      cursor = database.rawQuery(sql, null);
+
+                      cursor.moveToNext();
+
+                      if(Boolean.parseBoolean(cursor.getString(0))){
+                          Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                          startActivity(intent);
+                          finish();
+                      }else
+                      {
+                          Intent intent = new Intent(getApplicationContext(), ParentsHomeActivity.class);
+                          startActivity(intent);
+                          finish();
+                      }
+                  }
               }
               cursor.close();
 

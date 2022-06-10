@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.parentsletterproject.R;
 
-public class callActivity extends AppCompatActivity{
+public class CallActivity extends AppCompatActivity{
     EditText edit_tel;
     Button btn_tel;
 

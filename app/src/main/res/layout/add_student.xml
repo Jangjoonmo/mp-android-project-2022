@@ -23,24 +23,43 @@
         android:text="@string/put_name_of_student"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <TextView
+        android:id="@+id/textview_add_student_class_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edittext_add_student_name"
+        android:layout_marginTop="11dp"
+        android:text="추가할 원생의 반을 입력하세요"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
     <EditText
-        android:id="@+id/edittext_add_teacher_id"
+        android:id="@+id/edittext_add_student_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textview_add_student_name"
         android:layout_marginTop="1dp"
         android:layout_marginBottom="10dp"
         android:ems="10"
-        android:inputType="textEmailAddress"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/edittext_add_class_id_for"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview_add_student_class_id"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="10dp"
+        android:ems="10"
         android:minHeight="48dp" />
 
     <Button
-        android:id="@+id/add_class_submit"
+        android:id="@+id/add_student_submit"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edittext_add_teacher_id"
-        android:layout_marginTop="10dp"
+        android:layout_below="@+id/edittext_add_class_id_for"
+        android:layout_marginTop="7dp"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/button_background"
         android:text="@string/add_button" />
 
 </RelativeLayout>

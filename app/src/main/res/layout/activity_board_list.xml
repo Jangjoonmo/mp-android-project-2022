@@ -35,7 +35,7 @@
         android:layout_height="62dp"
         android:background="@color/main_color"
         android:text="알림장 등록"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

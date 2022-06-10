@@ -78,6 +78,7 @@
         android:layout_below="@+id/edittext_add_teacher_name"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/button_background"
         android:text="@string/add_button" />
 
 </RelativeLayout>

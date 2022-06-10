@@ -38,16 +38,26 @@
         <activity
             android:name=".activity.TeacherAttendanceActivity"
             android:exported="false" />
-
+        <activity android:name=".activity.CallActivity"
+            android:exported="false"/>
         <activity
             android:name=".activity.LoginActivity"
-            android:exported="false"/>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.RegisterActivity"
             android:exported="false"/>
-        <activity android:name=".activity.TestTimeTable"/>
-        <activity android:name=".activity.EditTimeTableMain"/>
-        <activity android:name=".activity.EditTimeTableActivity"/>
+        <activity
+            android:name=".activity.TestTimeTable"/>
+        <activity
+            android:name=".activity.EditTimeTableMain"/>
+        <activity
+            android:name=".activity.EditTimeTableActivity"/>
         <activity
             android:name=".activity.MealActivity"
             android:exported="false"/>
@@ -62,13 +72,8 @@
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"
+        />
 
     </application>
 

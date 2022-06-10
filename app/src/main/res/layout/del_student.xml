@@ -7,30 +7,30 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp" >
     <TextView
-        android:id="@+id/del_class_logo"
+        android:id="@+id/del_student_logo"
         android:layout_width="221dp"
         android:layout_height="54dp"
         android:layout_marginBottom="16dp"
-        android:text="반 삭제"
+        android:text="원생 삭제"
         android:textSize="35sp" />
 
     <EditText
-        android:id="@+id/class_name_text"
+        android:id="@+id/student_name_text"
         android:layout_width="311dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/del_class_logo"
+        android:layout_below="@+id/del_student_logo"
         android:layout_marginTop="10dp"
-        android:contentDescription="@string/del_class"
+        android:contentDescription="원생 삭제"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:visibility="visible" />
 
     <Button
-        android:id="@+id/del_class_submit"
+        android:id="@+id/del_student_submit"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/class_name_text"
+        android:layout_below="@+id/student_name_text"
         android:layout_marginTop="12dp"
         android:background="@drawable/button_background"
         android:text="삭제" />

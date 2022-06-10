@@ -22,7 +22,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/class_id"
+                android:id="@+id/kids_class_id"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="16dp"
@@ -45,7 +45,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/class_name"
+                    android:id="@+id/student_name_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -53,13 +53,6 @@
                     android:textSize="18sp"
                     tools:text="test" />
 
-                <TextView
-                    android:id="@+id/teacher_in_charge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:textSize="12sp"
-                    tools:text="test" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

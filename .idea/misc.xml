@@ -19,10 +19,8 @@
         <entry key="..\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/item.xml" value="0.4" />
         <entry key="..\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/item_for_recycler.xml" value="0.28125" />
         <entry key="..\:/Users/Bae/AndroidStudioProjects/ParentsLetterProject/app/src/main/res/layout/listview_item.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_board_register.xml" value="0.23324275362318841" />
         <entry key="..\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_login.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_meal.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_parents_attendance.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_parents_home.xml" value="0.264" />
         <entry key="..\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/layout/activity_teacher_attendence.xml" value="0.22826086956521738" />
@@ -34,26 +32,44 @@
         <entry key="..\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/xml/netwirj_config.xml" value="0.1838768115942029" />
         <entry key="..\:/Users/whtnd/AndroidStudioProjects/mp-android-project-2022/app/src/main/res/xml/network_config.xml" value="0.10648148148148148" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.241" />
+        <entry key="app/src/main/res/drawable/button_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/edge.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_kitty.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.241" />
-        <entry key="app/src/main/res/layout/activity_board_detail.xml" value="0.2441123188405797" />
-        <entry key="app/src/main/res/layout/activity_board_list.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/text_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/text_background2.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_board_detail.xml" value="0.2626929462819859" />
+        <entry key="app/src/main/res/layout/activity_board_list.xml" value="0.16148223876953124" />
         <entry key="app/src/main/res/layout/activity_board_register.xml" value="0.1875" />
+        <entry key="app/src/main/res/layout/activity_call.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_class_deletion.xml" value="0.26507466634114585" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.15625" />
+        <entry key="app/src/main/res/layout/activity_edit_time_table.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_edit_time_table_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.29554138183593753" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.17135416666666667" />
+        <entry key="app/src/main/res/layout/activity_meal.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_parents_attendance.xml" value="0.1875" />
-        <entry key="app/src/main/res/layout/activity_parents_home.xml" value="0.1875" />
+        <entry key="app/src/main/res/layout/activity_parents_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.19693145751953128" />
+        <entry key="app/src/main/res/layout/activity_teacher_attendence.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_teacher_class_management.xml" value="0.15625" />
-        <entry key="app/src/main/res/layout/activity_teacher_home.xml" value="0.15625" />
+        <entry key="app/src/main/res/layout/activity_teacher_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_teacher_management_list.xml" value="0.1875" />
-        <entry key="app/src/main/res/layout/activity_teacher_student_management.xml" value="0.15625" />
+        <entry key="app/src/main/res/layout/activity_teacher_student_management.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_test_time_table.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/add_class.xml" value="0.15625" />
-        <entry key="app/src/main/res/layout/add_student.xml" value="0.15625" />
+        <entry key="app/src/main/res/layout/add_student.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/board_recycler.xml" value="0.3443526170798898" />
         <entry key="app/src/main/res/layout/del_class.xml" value="0.3818817138671875" />
+        <entry key="app/src/main/res/layout/del_student.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/edit_appbar.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.11944444444444445" />
         <entry key="app/src/main/res/layout/item_for_recycler.xml" value="0.15625" />
+        <entry key="app/src/main/res/layout/kids_recycler.xml" value="0.1644021739130435" />
         <entry key="app/src/main/res/layout/meal.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/spin_dropdown.xml" value="0.1" />
         <entry key="app/src/main/res/layout/spinner_item.xml" value="0.15425531914893617" />
+        <entry key="app/src/main/res/layout/time_box.xml" value="0.1" />
       </map>
     </option>
   </component>

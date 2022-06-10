@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -12,6 +12,6 @@
     </style>
 
     <style name="urgentButton" parent="Widget.AppCompat.Button.Colored">
-        <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:colorPrimaryDark">@color/colorAccent</item>
     </style>
 </resources>
