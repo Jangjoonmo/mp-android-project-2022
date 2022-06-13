@@ -29,7 +29,7 @@
         app:layout_constraintVertical_bias="0.327" />
 
     <Button
-        android:id="@+id/board_button"
+        android:id="@+id/call_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="알림장"
