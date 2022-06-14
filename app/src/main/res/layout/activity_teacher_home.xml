@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".activity.TeacherHomeActivity">
 
     <ImageView
@@ -19,37 +20,21 @@
 
     <Button
         android:id="@+id/student"
-        android:layout_width="190dp"
+        android:layout_width="180dp"
         android:layout_height="55dp"
+        android:layout_marginStart="12dp"
         android:background="@drawable/button_background"
         android:text="학생관리"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.022"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.058"
+        app:layout_constraintVertical_bias="0.036"
         tools:ignore="TextContrastCheck" />
 
     <Button
-        android:id="@+id/class_manage"
-        android:layout_width="190dp"
-        android:layout_height="55dp"
-        android:background="@drawable/button_background"
-        android:text="반관리"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.625"
-        app:layout_constraintStart_toEndOf="@+id/student"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.059" />
-
-    <Button
-        android:id="@+id/board_button"
+        android:id="@+id/call_button"
         android:layout_width="385dp"
         android:layout_height="55dp"
         android:background="@drawable/button_background"
@@ -58,10 +43,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/student"
-        app:layout_constraintVertical_bias="0.027"
+        app:layout_constraintVertical_bias="0.028"
         tools:ignore="TextContrastCheck" />
 
     <Button
@@ -74,10 +58,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/board_button"
-        app:layout_constraintVertical_bias="0.034"
+        app:layout_constraintTop_toBottomOf="@+id/call_button"
+        app:layout_constraintVertical_bias="0.036"
         tools:ignore="TextContrastCheck" />
 
     <LinearLayout
@@ -108,31 +91,32 @@
             android:layout_height="92dp"
             android:layout_gravity="center|center_horizontal|center_vertical"
             android:background="@drawable/text_background"
-            android:text="TextView"
+            android:text="2022-06-09"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textSize="16sp" />
+
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="385dp"
         android:layout_height="217dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="7dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintHorizontal_bias="0.625"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.2">
+        app:layout_constraintVertical_bias="0.168">
 
         <Button
             android:id="@+id/meal"
             android:layout_width="385dp"
             android:layout_height="55dp"
             android:background="@drawable/text_background2"
-            android:text="2022년 6월 03일"
+            android:text="2022년 6월 09일"
             android:textSize="20sp"
             tools:ignore="TextContrastCheck,DuplicateClickableBoundsCheck" />
 
@@ -141,9 +125,26 @@
             android:layout_width="385dp"
             android:layout_height="161dp"
             android:background="@drawable/text_background"
-            android:text="TextView"
+            android:text="찹쌀밥      사골떡국 1.5.6.13.     시금치나물무침      닭꼬치 5.6.12.13.     배추겉절이(완제) 9.13.     우유 (희망자)2.     포춘쿠키 1.2.4.5.6.13."
             android:textAlignment="center"
             android:textSize="16sp" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/class_manage"
+        android:layout_width="180dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/button_background"
+        android:text="반관리"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintStart_toEndOf="@+id/student"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.036" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,116 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ParentsHomeActivity"
+    android:background="#FFFFFF"
+    tools:context=".activity.TeacherHomeActivity">
 
-
-    >
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="400dp"
-        android:layout_height="142dp"
-        android:orientation="horizontal"
-        app:barrierMargin="@dimen/material_emphasis_medium"
+    <Button
+        android:id="@+id/schedule"
+        android:layout_width="385dp"
+        android:layout_height="55dp"
+        android:background="@drawable/button_background"
+        android:text="시간표"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintHorizontal_bias="0.615"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.027">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="172dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/imjawong" />
-
-        <LinearLayout
-            android:layout_width="190dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="137dp"
-                android:layout_height="68dp"
-                android:gravity="center"
-                android:text="김 아 주"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="137dp"
-                android:layout_height="76dp"
-                android:gravity="center"
-                android:text="새 싹 반"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="196dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="등원"
-            android:textSize="20sp" />
-
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="400dp"
-        android:layout_height="55dp"
-        android:layout_weight="1"
-        android:background="@drawable/button_background"
-        android:text="선생님과 연락하기"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.023"
-        tools:ignore="TextContrastCheck" />
-
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="400dp"
-        android:layout_height="55dp"
-        android:background="@drawable/button_background"
-        android:text="체육 활동 중"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.026"
+        app:layout_constraintVertical_bias="0.196"
         tools:ignore="TextContrastCheck" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="400dp"
+        android:layout_width="385dp"
         android:layout_height="148dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button7"
+        app:layout_constraintTop_toBottomOf="@+id/schedule"
         app:layout_constraintVertical_bias="0.059">
 
         <Button
-            android:id="@+id/posting"
-            android:layout_width="400dp"
+            android:id="@+id/post"
+            android:layout_width="385dp"
             android:layout_height="55dp"
             android:background="@drawable/text_background2"
             android:text="알림장"
@@ -123,11 +47,11 @@
 
         <TextView
             android:id="@+id/notice_text"
-            android:layout_width="match_parent"
+            android:layout_width="385dp"
             android:layout_height="92dp"
-            android:background="@drawable/text_background"
             android:layout_gravity="center|center_horizontal|center_vertical"
-            android:text="TextView"
+            android:background="@drawable/text_background"
+            android:text="2022-06-09"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textSize="16sp" />
@@ -135,7 +59,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="400dp"
+        android:layout_width="385dp"
         android:layout_height="217dp"
         android:layout_marginTop="8dp"
         android:orientation="vertical"
@@ -147,22 +71,33 @@
         app:layout_constraintVertical_bias="0.2">
 
         <Button
-            android:id="@+id/meal"
-            android:layout_width="match_parent"
+            android:id="@+id/meal1"
+            android:layout_width="385dp"
             android:layout_height="55dp"
             android:background="@drawable/text_background2"
-            android:text="2022년 6월 03일"
+            android:text="2022년 6월 09일"
             android:textSize="20sp"
             tools:ignore="TextContrastCheck,DuplicateClickableBoundsCheck" />
 
         <TextView
             android:id="@+id/meal_notice"
-            android:layout_width="match_parent"
+            android:layout_width="385dp"
             android:layout_height="161dp"
             android:background="@drawable/text_background"
-            android:text="TextView"
+            android:text="찹쌀밥      사골떡국 1.5.6.13.     시금치나물무침      닭꼬치 5.6.12.13.     배추겉절이(완제) 9.13.     우유 (희망자)2.     포춘쿠키 1.2.4.5.6.13."
             android:textAlignment="center"
             android:textSize="16sp" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="385dp"
+        android:layout_height="136dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.008"
+        app:srcCompat="@drawable/kinderbook" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

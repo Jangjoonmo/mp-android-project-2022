@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="97dp"
-        android:background="#EF6BD2"
+        android:background="@color/main_color"
         android:text="확인"
         app:layout_constraintBaseline_toBaselineOf="@+id/join_id"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -86,7 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="71dp"
-        android:background="#EF6BD2"
+        android:background="@color/main_color"
         android:text="취소"
         app:layout_constraintStart_toEndOf="@+id/join_button"
         app:layout_constraintTop_toBottomOf="@+id/join_pwck" />
@@ -97,7 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="96dp"
-        android:background="#EF6BD2"
+        android:background="@color/main_color"
         android:text="가입"
         app:layout_constraintBaseline_toBaselineOf="@+id/join_delete"
         app:layout_constraintStart_toStartOf="parent" />
